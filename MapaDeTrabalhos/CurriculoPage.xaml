@@ -1,0 +1,41 @@
+﻿<Page
+    x:Class="MapaDeTrabalhos.CurriculoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MapaDeTrabalhos"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="640*"/>
+            <ColumnDefinition Width="640*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="Titulo" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="Cadastro de Currículo" VerticalAlignment="Center" FontSize="40"/>
+        
+        <TextBlock x:Name="Formacao" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="Formação Acadêmica" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
+        <StackPanel x:Name="Sp_formacao"  HorizontalAlignment="Center" Height="140" Grid.Row="3" Grid.RowSpan="2" VerticalAlignment="Center" Width="640">
+            <Button x:Name="AdicionarFormacao" Content="Adicionar formação" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AdicionarFormacao_Click"/>
+            
+        </StackPanel>
+        <TextBlock x:Name="Experiencia" HorizontalAlignment="Center" Grid.Row="5" TextWrapping="Wrap" Text="Formação Acadêmica" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
+
+
+
+
+    </Grid>
+</Page>

@@ -1,0 +1,59 @@
+﻿<Page
+    x:Class="MapaDeTrabalhos.CadastroPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MapaDeTrabalhos"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140*"/>
+            <ColumnDefinition Width="140*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60*"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="Título" Grid.Column="0" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Cadastro de Usuário" VerticalAlignment="Center" FontSize="50" Grid.ColumnSpan="3"/>
+
+        <TextBlock x:Name="Usuario" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Text="Dados do Usuário" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
+        <TextBox x:Name="Tb_nome" HorizontalAlignment="Left" Grid.Row="2" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Nome:"  Width="550" />
+        <TextBox x:Name="Tb_dataNascimento" HorizontalAlignment="Left" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Data de Nascimento:"  Width="550" />
+        <RadioButton x:Name="Rb_masc" Content="Masculino" Grid.Column="0" HorizontalAlignment="Center" Margin="0,0,250,0" Grid.Row="4" VerticalAlignment="Center" FontSize="30" Width="200"/>
+        <RadioButton x:Name="Rb_femi" Content="Feminino" Grid.Column="0" HorizontalAlignment="Center" Margin="250,0,0,0" Grid.Row="4" VerticalAlignment="Center" FontSize="30" Width="200"/>
+        <TextBox x:Name="Tb_email" HorizontalAlignment="Left" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Email:"  Width="550" />
+        <TextBox x:Name="Tb_telefone" HorizontalAlignment="Left" Grid.Row="6" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Telefone para contato:"  Width="550" />
+        <TextBox x:Name="Tb_celular" HorizontalAlignment="Left" Grid.Row="7" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Telefone celular para contato:"  Width="550" />
+        <Image x:Name="image" HorizontalAlignment="Center" Height="110" Grid.Row="8" Grid.RowSpan="2" VerticalAlignment="Center" Width="100"/>
+
+
+        <TextBlock x:Name="Endereco" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" Text="Dados de Endereço" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
+        <TextBox x:Name="Tb_rua" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Nome da rua:"  Width="550" />
+        <TextBox x:Name="Tb_numero" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Numero:"  Width="550" />
+        <TextBox x:Name="Tb_bairro" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="1" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Bairro:"  Width="550" />
+        <TextBox x:Name="Tb_cidade" HorizontalAlignment="Left" Grid.Row="5" Grid.Column="1" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Cidade:"  Width="550" />
+        <ComboBox x:Name="Cb_estados" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Width="550" Height="50" PlaceholderText="Estado" FontSize="30"/>
+
+        <TextBlock x:Name="Acesso" HorizontalAlignment="Center"  Grid.Row="7" Grid.Column="1" TextWrapping="Wrap" Text="Dados para Acesso ao Sistema" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
+        <TextBox x:Name="Tb_usuario" HorizontalAlignment="Left" Grid.Row="8" Grid.Column="1" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Usuário:"  Width="550" />
+        <PasswordBox x:Name="Pb_senha" HorizontalAlignment="Left" Grid.Row="9" Grid.Column="1"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Senha:"  Width="550" />
+
+        <Button x:Name="Salvar" Content="Salvar" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" FontSize="30" Click="Salvar_Click"></Button>
+
+
+
+
+
+    </Grid>
+</Page>
