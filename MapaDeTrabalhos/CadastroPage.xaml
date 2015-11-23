@@ -30,8 +30,11 @@
         <TextBlock x:Name="Usuario" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Text="Dados do Usuário" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
         <TextBox x:Name="Tb_nome" HorizontalAlignment="Left" Grid.Row="2" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Nome:"  Width="550" />
         <TextBox x:Name="Tb_dataNascimento" HorizontalAlignment="Left" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Data de Nascimento:"  Width="550" />
-        <RadioButton x:Name="Rb_masc" Content="Masculino" Grid.Column="0" HorizontalAlignment="Center" Margin="0,0,250,0" Grid.Row="4" VerticalAlignment="Center" FontSize="30" Width="200"/>
-        <RadioButton x:Name="Rb_femi" Content="Feminino" Grid.Column="0" HorizontalAlignment="Center" Margin="250,0,0,0" Grid.Row="4" VerticalAlignment="Center" FontSize="30" Width="200"/>
+        <StackPanel HorizontalAlignment="Left" Height="60" Grid.Row="4" VerticalAlignment="Center" Width="550" Orientation="Horizontal">
+            <RadioButton x:Name="Rb_masc" Content="Masculino"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="200" GroupName="Sexo"/>
+            <RadioButton x:Name="Rb_femi" Content="Feminino"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="200" GroupName="Sexo"/>
+        </StackPanel>
+        
         <TextBox x:Name="Tb_email" HorizontalAlignment="Left" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Email:"  Width="550" />
         <TextBox x:Name="Tb_telefone" HorizontalAlignment="Left" Grid.Row="6" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Telefone para contato:"  Width="550" />
         <TextBox x:Name="Tb_celular" HorizontalAlignment="Left" Grid.Row="7" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Telefone celular para contato:"  Width="550" />
@@ -50,6 +53,7 @@
         <PasswordBox x:Name="Pb_senha" HorizontalAlignment="Left" Grid.Row="9" Grid.Column="1"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Senha:"  Width="550" />
 
         <Button x:Name="Salvar" Content="Salvar" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" FontSize="30" Click="Salvar_Click"></Button>
+        
 
 
 

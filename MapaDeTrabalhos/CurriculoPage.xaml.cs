@@ -30,11 +30,15 @@ namespace MapaDeTrabalhos
 
        
 
-        private async void AdicionarFormacao_Click(object sender, RoutedEventArgs e)
+        private void AdicionarFormacao_Click(object sender, RoutedEventArgs e)
         {
            
 
         }
 
+        private void Salvar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
