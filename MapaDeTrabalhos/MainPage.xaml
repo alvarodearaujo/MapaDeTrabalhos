@@ -19,10 +19,10 @@
             <RowDefinition Height="124*"/>
         </Grid.RowDefinitions>
         <TextBlock x:Name="Titulo" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Mapa de Trabalhos" VerticalAlignment="Center" Height="153" Width="639" FontSize="66.667" TextAlignment="Center" Margin="321,5,320,5"/>
-        <TextBox x:Name="Tb_login" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" PlaceholderText="Digite seu Login." FontSize="30"  Width="368" Margin="456,6"/>
-        <TextBox x:Name="Tb_senha" HorizontalAlignment="Center"  Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="368" PlaceholderText="Digite sua Senha." FontSize="30" Margin="456,10,456,9"/>
-        <Button x:Name="Logar" Content="Logar" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" FontSize="30" Margin="592,22" Click="Logar_Click"/>
-        <Button x:Name="Cadastrar" Content="Cadastrar-se" HorizontalAlignment="Center" Grid.Row="6" VerticalAlignment="Center" FontSize="30" Click="Cadastrar_Click" />
+        <TextBox x:Name="Tb_login" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" PlaceholderText="Digite seu Login." FontSize="30"  Width="368" />
+        <PasswordBox x:Name="Tb_senha" HorizontalAlignment="Center"  Grid.Row="3" VerticalAlignment="Center" Width="368" PlaceholderText="Digite sua Senha." FontSize="30" />
+        <Button x:Name="Logar" Content="Logar" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Width="250" FontSize="30" Click="Logar_Click"/>
+        <Button x:Name="Cadastrar" Content="Cadastrar-se" HorizontalAlignment="Center" Grid.Row="5" Grid.RowSpan="2" VerticalAlignment="Center" FontSize="30" Click="Cadastrar_Click" />
 
     </Grid>
 </Page>

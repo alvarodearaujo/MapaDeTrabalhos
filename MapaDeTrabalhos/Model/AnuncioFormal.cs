@@ -8,5 +8,6 @@ namespace MapaDeTrabalhos.Model
 {
     class AnuncioFormal
     {
+        public string PessoaId { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.Mobile.Service;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MapaDeTrabalhos.Model
+namespace mapadetrabalhomobileserviceService.DataObjects
 {
-    class Endereco
+    public class Endereco : Microsoft.WindowsAzure.Mobile.Service.EntityData
     {
-        
-        public int Id { get; set; }
-
         public string PessoaId { get; set; }
+
+        [ForeignKey("PessoaId")]
+        public virtual Pessoa pessoa { get; set; }
 
         public string Rua { get; set; }
 

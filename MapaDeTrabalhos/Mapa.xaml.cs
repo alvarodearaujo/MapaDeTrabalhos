@@ -36,39 +36,40 @@ namespace MapaDeTrabalhos
 
         }
 
-        //Já inicia com a posição programada
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // Specify a known location
-            BasicGeoposition cityPosition = new BasicGeoposition() { Latitude = -7.913488, Longitude = -34.913746 };
+            // Make the funcion to take the address of the user.
+
+
+            // Specify the location address
+            string addressToGeocode = "Rua oitenta e dois, caetés 3, abreu e lima - Pernambuco";
+
+            // Nearby location to use as a query hint.
+            BasicGeoposition queryHint = new BasicGeoposition();
+            queryHint.Latitude = -8.05665;
+            queryHint.Longitude = -34.898441;
+            Geopoint hintPoint = new Geopoint(queryHint);
+
+            // Geocode the specified address, using the specified reference point
+            // as a query hint. Return no more than 3 results.
+            MapLocationFinderResult result =   await MapLocationFinder.FindLocationsAsync(addressToGeocode, hintPoint, 3);
+
+            //Setting position default to Derby - Recife
+            BasicGeoposition cityPosition = new BasicGeoposition() { Latitude = -8.05665, Longitude = -34.898441 };
             Geopoint cityCenter = new Geopoint(cityPosition);
+            // If the query returns results, display the coordinates
+            // of the first result.
+            if (result.Status == MapLocationFinderStatus.Success)
+            {
+                cityPosition = new BasicGeoposition() { Latitude = result.Locations[0].Point.Position.Latitude, Longitude = result.Locations[0].Point.Position.Longitude};
+                cityCenter = new Geopoint(cityPosition);
+            }
 
             // Set map location
             MapControl.Center = cityCenter;
             MapControl.ZoomLevel = 14;
             MapControl.LandmarksVisible = true;
         }
-
-        //protected async override void OnNavigatedTo(NavigationEventArgs e)
-        //{
-        //    // Specify a known location
-        //    BasicGeoposition cityPosition = new BasicGeoposition() { Latitude = -7.913488, Longitude = -34.913746 };
-        //    Geopoint gp = new Geopoint(cityPosition);
-        //    IAsyncOperation<MapLocationFinderResult> finder = MapLocationFinder.FindLocationsAsync("Rua oitenta e dois, Abreu e Lima, Pernambuco", gp);
-        //    MapLocationFinderResult result = finder.GetResults();
-        //    IReadOnlyList<MapLocation> mapLocations = result.Locations;
-        //    MapLocation ml = mapLocations.ElementAt(0);
-        //    double lat = ml.Point.Position.Latitude;
-        //    double longitude = ml.Point.Position.Longitude;
-
-        //    BasicGeoposition newPosition = new BasicGeoposition() { Latitude = lat, Longitude = longitude };
-        //    Geopoint cityCenter = new Geopoint(newPosition);
-
-        //    // Set map location
-        //    MapControl.Center = cityCenter;
-        //    MapControl.ZoomLevel = 14;
-        //    MapControl.LandmarksVisible = true;
-        //}
 
 
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.Mobile.Service;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,12 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MapaDeTrabalhos.Model
+namespace mapadetrabalhomobileserviceService.DataObjects
 {
-    class Pessoa
+    public class Pessoa : Microsoft.WindowsAzure.Mobile.Service.EntityData
     {
-        public int Id { get; set; }
-
+     
         public string nomeOuRazaoSocial { get; set; }
 
         public string cnpj { get; set; }
@@ -23,6 +23,12 @@ namespace MapaDeTrabalhos.Model
         public string celular { get; set; }
 
         public Boolean isPessoaFisica { get; set; }
+
+      
+        public Endereco endereco { get; set; }
+
+        public Usuario usuario { get; set; }
+
 
     }
 }

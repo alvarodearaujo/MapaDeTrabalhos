@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MapaDeTrabalhos.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,10 +23,11 @@ namespace MapaDeTrabalhos
     /// </summary>
     public sealed partial class CadastroPage : Page
     {
+        private Pessoa pessoa;
         public CadastroPage()
         {
             this.InitializeComponent();
-            
+            pessoa = new Pessoa();
         }
 
         private void Salvar_Click(object sender, RoutedEventArgs e)
