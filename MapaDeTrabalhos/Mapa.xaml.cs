@@ -37,38 +37,38 @@ namespace MapaDeTrabalhos
         }
 
         //Já inicia com a posição programada
-        //protected async override void OnNavigatedTo(NavigationEventArgs e)
-        //{
-        //    // Specify a known location
-        //    BasicGeoposition cityPosition = new BasicGeoposition() { Latitude = -7.913488, Longitude = -34.913746 };
-        //    Geopoint cityCenter = new Geopoint(cityPosition);
-
-        //    // Set map location
-        //    MapControl.Center = cityCenter;
-        //    MapControl.ZoomLevel = 14;
-        //    MapControl.LandmarksVisible = true;
-        //}
-
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             // Specify a known location
             BasicGeoposition cityPosition = new BasicGeoposition() { Latitude = -7.913488, Longitude = -34.913746 };
-            Geopoint gp = new Geopoint(cityPosition);
-            IAsyncOperation<MapLocationFinderResult> finder = MapLocationFinder.FindLocationsAsync("Rua oitenta e dois, Abreu e Lima, Pernambuco", gp);
-            MapLocationFinderResult result = finder.GetResults();
-            IReadOnlyList<MapLocation> mapLocations = result.Locations;
-            MapLocation ml = mapLocations.ElementAt(0);
-            double lat = ml.Point.Position.Latitude;
-            double longitude = ml.Point.Position.Longitude;
-
-            BasicGeoposition newPosition = new BasicGeoposition() { Latitude = lat, Longitude = longitude };
-            Geopoint cityCenter = new Geopoint(newPosition);
+            Geopoint cityCenter = new Geopoint(cityPosition);
 
             // Set map location
             MapControl.Center = cityCenter;
             MapControl.ZoomLevel = 14;
             MapControl.LandmarksVisible = true;
         }
+
+        //protected async override void OnNavigatedTo(NavigationEventArgs e)
+        //{
+        //    // Specify a known location
+        //    BasicGeoposition cityPosition = new BasicGeoposition() { Latitude = -7.913488, Longitude = -34.913746 };
+        //    Geopoint gp = new Geopoint(cityPosition);
+        //    IAsyncOperation<MapLocationFinderResult> finder = MapLocationFinder.FindLocationsAsync("Rua oitenta e dois, Abreu e Lima, Pernambuco", gp);
+        //    MapLocationFinderResult result = finder.GetResults();
+        //    IReadOnlyList<MapLocation> mapLocations = result.Locations;
+        //    MapLocation ml = mapLocations.ElementAt(0);
+        //    double lat = ml.Point.Position.Latitude;
+        //    double longitude = ml.Point.Position.Longitude;
+
+        //    BasicGeoposition newPosition = new BasicGeoposition() { Latitude = lat, Longitude = longitude };
+        //    Geopoint cityCenter = new Geopoint(newPosition);
+
+        //    // Set map location
+        //    MapControl.Center = cityCenter;
+        //    MapControl.ZoomLevel = 14;
+        //    MapControl.LandmarksVisible = true;
+        //}
 
 
 
