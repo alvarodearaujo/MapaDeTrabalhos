@@ -41,7 +41,9 @@
             <RadioButton x:Name="Rb_masc" Content="Masculino"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="200" GroupName="Sexo" IsChecked="True"/>
             <RadioButton x:Name="Rb_femi" Content="Feminino"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="200" GroupName="Sexo"/>
         </StackPanel>
-        
+
+
+        <TextBox x:Name="Tb_site" HorizontalAlignment="Left" Grid.Row="6" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Data de Nascimento:"  Width="550" Visibility="Collapsed"/>
         <TextBox x:Name="Tb_dataNascimento" HorizontalAlignment="Left" Grid.Row="7" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Data de Nascimento:"  Width="550" InputScope="CurrencyAmountAndSymbol"/>
         <TextBox x:Name="Tb_email" HorizontalAlignment="Left" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Email:"  Width="550" InputScope="EmailSmtpAddress"/>
         <TextBox x:Name="Tb_telefone" HorizontalAlignment="Left" Grid.Row="8" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Telefone para contato:"  Width="550" InputScope="NameOrPhoneNumber"/>

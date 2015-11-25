@@ -37,15 +37,33 @@ namespace MapaDeTrabalhos
         private void Rb_fisica_Checked(object sender, RoutedEventArgs e)
         {
             //fazer a mascara de CPF
+            if(Sp_sexo!= null)
+            {
+                Sp_sexo.Visibility = Visibility.Visible;
+                Tb_dataNascimento.PlaceholderText = "Data de nascimento:";
+                Tb_nome.PlaceholderText = "Nome:";
+                Tb_cpfOrCnpj.PlaceholderText = "CPF:";
+                Tb_site.Visibility = Visibility.Collapsed;
+            }
             
-            Sp_sexo.Visibility = Visibility.Visible;
 
         }
 
         private void Rb_juridica_Checked(object sender, RoutedEventArgs e)
         {
-            //fazer a mascara de CNPJ
-            Sp_sexo.Visibility = Visibility.Collapsed;
+            
+            if (Sp_sexo != null)
+            {
+                Sp_sexo.Visibility = Visibility.Collapsed;
+                Tb_dataNascimento.PlaceholderText = "Data de Fundação:";
+                Tb_nome.PlaceholderText = "Razão social:";
+                Tb_cpfOrCnpj.PlaceholderText = "CNPJ:";
+                Tb_site.Visibility = Visibility.Visible;
+                //Fazer a Ideia do CNPJ
+            }
+
+
+
         }
     }
 }
