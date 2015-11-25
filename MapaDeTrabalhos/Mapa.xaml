@@ -8,8 +8,8 @@
     xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
     mc:Ignorable="d">
 
-    <Grid x:Name="mainGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
-        <Maps:MapControl x:Name="MapControl1" ZoomInteractionMode="GestureAndControl" TiltInteractionMode="GestureAndControl" MapServiceToken="MRloZpnmUHMi3Pxfxqiu~3GxKNXkE0kCpOtyIm7Znmg~AsDsy7g_IcxGbAj66qCMZNDWLCFUDu0ktXOLTmW9CvaZzD9iAAgCGVuIB7WjzUsA" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+    <Grid x:Name="mainGrid">
+        <Maps:MapControl x:Name="MapControl" ZoomInteractionMode="GestureAndControl" TiltInteractionMode="GestureAndControl" MapServiceToken="MRloZpnmUHMi3Pxfxqiu~3GxKNXkE0kCpOtyIm7Znmg~AsDsy7g_IcxGbAj66qCMZNDWLCFUDu0ktXOLTmW9CvaZzD9iAAgCGVuIB7WjzUsA" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
 
     </Grid>
 </Page>

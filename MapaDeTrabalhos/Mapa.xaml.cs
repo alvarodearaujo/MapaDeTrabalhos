@@ -14,6 +14,9 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.Devices.Geolocation;
+using Windows.UI.Core;
+using Windows.Services.Maps;
+
 
 
 
@@ -30,36 +33,44 @@ namespace MapaDeTrabalhos
         public Mapa()
         {
             this.InitializeComponent();
-            
+
+        }
+
+        //Já inicia com a posição programada
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            // Specify a known location
+            BasicGeoposition cityPosition = new BasicGeoposition() { Latitude = -7.913488, Longitude = -34.913746 };
+            Geopoint cityCenter = new Geopoint(cityPosition);
+
+            // Set map location
+            MapControl.Center = cityCenter;
+            MapControl.ZoomLevel = 14;
+            MapControl.LandmarksVisible = true;
         }
 
         //protected async override void OnNavigatedTo(NavigationEventArgs e)
         //{
+        //    // Specify a known location
+        //    BasicGeoposition cityPosition = new BasicGeoposition() { Latitude = -7.913488, Longitude = -34.913746 };
+        //    Geopoint gp = new Geopoint(cityPosition);
+        //    IAsyncOperation<MapLocationFinderResult> finder = MapLocationFinder.FindLocationsAsync("Rua oitenta e dois, Abreu e Lima, Pernambuco", gp);
+        //    MapLocationFinderResult result = finder.GetResults();
+        //    IReadOnlyList<MapLocation> mapLocations = result.Locations;
+        //    MapLocation ml = mapLocations.ElementAt(0);
+        //    double lat = ml.Point.Position.Latitude;
+        //    double longitude = ml.Point.Position.Longitude;
 
-        //    var accessStatus = await Geolocator.RequestAccessAsync();
-        //    switch (accessStatus)
-        //    {
-        //        case GeolocationAccessStatus.Allowed:
+        //    BasicGeoposition newPosition = new BasicGeoposition() { Latitude = lat, Longitude = longitude };
+        //    Geopoint cityCenter = new Geopoint(newPosition);
 
-        //            // Get the current location
-        //            Geolocator geolocator = new Geolocator();
-        //            Geoposition pos = await geolocator.GetGeopositionAsync();
-        //            Geopoint myLocation = pos.Coordinate.Point;
-
-        //            // Set map location
-        //            MapControl1.Center = myLocation;
-        //            MapControl1.ZoomLevel = 12;
-        //            MapControl1.LandmarksVisible = true;
-        //            break;
-
-        //        case GeolocationAccessStatus.Denied:
-        //            // Handle when access to location is denied
-        //            break;
-
-        //        case GeolocationAccessStatus.Unspecified:
-        //            // Handle when an unspecified error occurs
-        //            break;
-        //    }
+        //    // Set map location
+        //    MapControl.Center = cityCenter;
+        //    MapControl.ZoomLevel = 14;
+        //    MapControl.LandmarksVisible = true;
         //}
+
+
+
     }
 }
