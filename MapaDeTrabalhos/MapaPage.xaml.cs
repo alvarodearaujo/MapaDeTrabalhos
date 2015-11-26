@@ -16,6 +16,8 @@ using Windows.UI.Xaml.Controls.Maps;
 using Windows.Devices.Geolocation;
 using Windows.UI.Core;
 using Windows.Services.Maps;
+using MapaDeTrabalhos.viewModel;
+using MapaDeTrabalhos.Model;
 
 
 
@@ -27,12 +29,14 @@ namespace MapaDeTrabalhos
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Mapa : Page
+    public sealed partial class MapaPage : Page
     {
+        PontosNoMapaManeger poiManager;        
 
-        public Mapa()
+        public MapaPage()
         {
             this.InitializeComponent();
+            poiManager = new PontosNoMapaManeger();
 
         }
 
@@ -69,8 +73,21 @@ namespace MapaDeTrabalhos
             MapControl.Center = cityCenter;
             MapControl.ZoomLevel = 14;
             MapControl.LandmarksVisible = true;
+
+            //Marcando os pontos no mapa
+            MapItems.ItemsSource = poiManager.FetchPOIs(MapControl.Center.Position);
+
         }
 
+        private async void mapItemButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+
+            var buttonSender = sender as Button;
+            var result = await AnuncioDialog.ShowAsync();
+
+            //fazer o tratamento para quando o cara quiser indicar-se a vaga.
+        }
+        
 
 
     }

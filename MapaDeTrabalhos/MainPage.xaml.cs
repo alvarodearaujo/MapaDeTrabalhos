@@ -34,7 +34,7 @@ namespace MapaDeTrabalhos
 
         private void Logar_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Mapa));
+            Frame.Navigate(typeof(MapaPage));
             //fazer a parada pra validar o login e direcionar a página principal.
         }
     }

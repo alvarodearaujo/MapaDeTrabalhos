@@ -30,19 +30,20 @@
         <TextBlock x:Name="Formacao" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="Formação Acadêmica" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
         <StackPanel x:Name="Sp_formacao"  HorizontalAlignment="Center" Height="140" Grid.Row="3" Grid.RowSpan="2" VerticalAlignment="Center" Width="640">
             <Button x:Name="AdicionarFormacao" Content="Adicionar Formação" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AdicionarFormacao_Click"/>
+            <ListView x:Name="Lv_formacao" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="105"/>
 
         </StackPanel>
 
         <TextBlock x:Name="Experiencia" HorizontalAlignment="Center" Grid.Row="5" TextWrapping="Wrap" Text="Formação Acadêmica" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
         <StackPanel x:Name="Sp_experiencia"  HorizontalAlignment="Center" Height="140" Grid.Row="6" Grid.RowSpan="2" VerticalAlignment="Center" Width="640">
-            <Button x:Name="AdicionarExperiencia" Content="Adicionar Experiência" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AdicionarFormacao_Click"/>
-
+            <Button x:Name="AdicionarExperiencia" Content="Adicionar Experiência" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AdicionarExperiencia_Click"/>
+            <ListView x:Name="Lv_experiencia" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="105"/>
         </StackPanel>
-        
+
         <TextBlock x:Name="Idioma" HorizontalAlignment="Center" Grid.Row="8" TextWrapping="Wrap" Text="Idiomas" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
         <StackPanel x:Name="Sp_idioma"  HorizontalAlignment="Center" Height="140" Grid.Row="9" Grid.RowSpan="2" VerticalAlignment="Center" Width="640">
-            <Button x:Name="AdicionarIdioma" Content="Adicionar Idioma" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AdicionarFormacao_Click"/>
-
+            <Button x:Name="AdicionarIdioma" Content="Adicionar Idioma" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AdicionarIdioma_Click"/>
+            <ListView x:Name="Lv_idioma" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="105"/>
         </StackPanel>
 
         <TextBlock x:Name="InformacoesComplementares" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="Informações Complementares" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
@@ -82,10 +83,219 @@
             <TextBlock Text="  à  " TextAlignment="Left" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"></TextBlock>
             <TextBox x:Name="maiorValorSalario" FontSize="20" VerticalAlignment="Center" Width="30"></TextBox>
         </StackPanel>
-        
+
         <Button x:Name="Salvar" Content="Salvar" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="9" Grid.RowSpan="2" VerticalAlignment="Center" FontSize="30" Click="Salvar_Click"/>
 
+        <ContentDialog x:Name="FormacaoDialog"
+                        VerticalAlignment="Stretch"
+                        Title="Título do Anuncio"
+                        PrimaryButtonText="Incluir"
+                        SecondaryButtonText="Cancelar"
+                        MaxWidth="{Binding ActualWidth, ElementName=pageRoot}">
+            <StackPanel>
+                <StackPanel x:Name="Sp_nivelCurso" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="Nível do Curso: "  FontStyle="Italic"></TextBlock>
+                    <ComboBox Width="400" Height="50" x:Name="Cb_NivelFormacao">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="Selecione" x:Name="defaultFormacao"/>
+                            <ComboBoxItem Content="Ensino Fundamental (1° Grau)"/>
+                            <ComboBoxItem Content="Curso Extra-Curricular / Profissionalizante" />
+                            <ComboBoxItem Content="Ensino Médio (2° Grau)" />
+                            <ComboBoxItem Content="Curso Técnico"  />
+                            <ComboBoxItem Content="Ensino Superior"  />
+                            <ComboBoxItem Content="Pós Graduação / Especialização / MBA"  />
+                            <ComboBoxItem Content="Pós Graduação / Mestrado"  />
+                            <ComboBoxItem Content="Pós Graduação / Doutorado"  />
+                        </ComboBox.Items>
+                    </ComboBox>
+                </StackPanel>
 
+                <StackPanel x:Name="Sp_nomeCurso" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="Nome do curso: "  FontStyle="Italic"></TextBlock>
+                    <ComboBox Width="400" Height="50" x:Name="Cb_NomeDoCurso">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="Tem que fazer o bind para quando selecionar cada item acima"/>
+                        </ComboBox.Items>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel x:Name="Sp_estadoCurso" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="Estado: "  FontStyle="Italic"></TextBlock>
+                    <RadioButton x:Name="Rb_Concluido" Content="Concluido"  HorizontalAlignment="Center" VerticalAlignment="Center" GroupName="estado" IsChecked="True" />
+                    <RadioButton x:Name="Rb_Cursando" Content="Cursando"  HorizontalAlignment="Center" VerticalAlignment="Center" GroupName="estado" IsChecked="True" />
+                    <RadioButton x:Name="Rb_Trancado" Content="Trancado"  HorizontalAlignment="Center" VerticalAlignment="Center" GroupName="estado" IsChecked="True" />
+                </StackPanel>
+
+                <StackPanel x:Name="Sp_datasCurso" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="Datas: " FontStyle="Italic"></TextBlock>
+                    <TextBlock Text="Inicio"></TextBlock>
+                    <TextBox x:Name="mesInicial"></TextBox>
+                    <TextBlock Text="/"></TextBlock>
+                    <TextBox x:Name="anoInicial"></TextBox>
+
+                    <TextBlock Text="Termino"></TextBlock>
+                    <TextBox x:Name="mesFinal"></TextBox>
+                    <TextBlock Text="/"></TextBlock>
+                    <TextBox x:Name="anoFinal"></TextBox>
+                </StackPanel>
+
+                <StackPanel x:Name="Sp_pais" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="País: " FontStyle="Italic"></TextBlock>
+                    <ComboBox Width="400" Height="50" x:Name="Cb_Pais">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="Brasil" x:Name="defaultPais"/>
+                            <ComboBoxItem Content="Canadá"/>
+                            <ComboBoxItem Content="Argentina" />
+                            <ComboBoxItem Content="EUA" />
+                            <ComboBoxItem Content="Méximo"  />
+                            <ComboBoxItem Content="Paraguai"  />
+                            <ComboBoxItem Content="Suíça"  />
+                            <ComboBoxItem Content="França"  />
+                            <ComboBoxItem Content="Inglaterra"  />
+                        </ComboBox.Items>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel x:Name="Sp_estado" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="Estado: " FontStyle="Italic"></TextBlock>
+                    <ComboBox Width="400" Height="50" x:Name="Cb_Estados">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="Fazer o bind dos estados para carregar os estados todos"/>
+                        </ComboBox.Items>
+                    </ComboBox>
+                </StackPanel>
+
+
+            </StackPanel>
+        </ContentDialog>
+
+        <ContentDialog x:Name="ExperienciaDialog"
+                        VerticalAlignment="Stretch"
+                        Title="Título do Anuncio"
+                        PrimaryButtonText="Incluir"
+                        SecondaryButtonText="Cancelar"
+                        MaxWidth="{Binding ActualWidth, ElementName=pageRoot}">
+            <StackPanel>
+                <StackPanel x:Name="Sp_nomeCargo" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="Indique seu cargo: " FontStyle="Italic"></TextBlock>
+                    <TextBox x:Name="Tb_nomeCargo"></TextBox>
+                </StackPanel>
+
+                <StackPanel x:Name="Sp_nivelCargo" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="Nível do cargo: " FontStyle="Italic"></TextBlock>
+                    <ComboBox Width="400" Height="50" x:Name="Cb_NivelCargo">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="Selecione" x:Name="defaultNivelCargo"/>
+                            <ComboBoxItem Content="Estagiário"/>
+                            <ComboBoxItem Content="Operacional" />
+                            <ComboBoxItem Content="Auxíliar" />
+                            <ComboBoxItem Content="Assistente"  />
+                            <ComboBoxItem Content="Treinee"  />
+                            <ComboBoxItem Content="Analista"  />
+                            <ComboBoxItem Content="Encarregado"  />
+                            <ComboBoxItem Content="Supervisor"  />
+                            <ComboBoxItem Content="Consultor"  />
+                            <ComboBoxItem Content="Especialista"  />
+                            <ComboBoxItem Content="Coordenador"  />
+                            <ComboBoxItem Content="Gerente"  />
+                            <ComboBoxItem Content="Diretor"  />
+                        </ComboBox.Items>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel x:Name="Sp_area" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="Area: " FontStyle="Italic"></TextBlock>
+                    <ComboBox Width="400" Height="50" x:Name="Cb_area">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="Selecione" x:Name="defaultNivelArea"/>
+                            <ComboBoxItem Content="TI" />
+                            <ComboBoxItem Content="Agricultura" />
+                            <ComboBoxItem Content="Outras ai" />
+                        </ComboBox.Items>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel x:Name="Sp_datasExperiencia" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="Datas: " FontStyle="Italic"></TextBlock>
+                    <TextBlock Text="Inicio"></TextBlock>
+                    <TextBox x:Name="mesInicialExperiencia"></TextBox>
+                    <TextBlock Text="/"></TextBlock>
+                    <TextBox x:Name="anoInicialExperiencia"></TextBox>
+
+                    <TextBlock Text="Termino"></TextBlock>
+                    <TextBox x:Name="mesFinalExperiencia"></TextBox>
+                    <TextBlock Text="/"></TextBlock>
+                    <TextBox x:Name="anoFinalExperiencia"></TextBox>
+
+                    <CheckBox Content="Atual"></CheckBox>
+                </StackPanel>
+
+                <StackPanel x:Name="Sp_descAtividade" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="Descrição da Atividade: " FontStyle="Italic"></TextBlock>
+                    <RichEditBox x:Name="Tb_descAtividade" TextWrapping="Wrap"></RichEditBox>
+                </StackPanel>
+
+
+                <StackPanel x:Name="Sp_nomeEmpresa" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="Nome da empresa: " FontStyle="Italic"></TextBlock>
+                    <TextBox x:Name="Tb_nomeEmpresa"></TextBox>
+                </StackPanel>
+
+                <StackPanel x:Name="Sp_paisExperiencia" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="País: " FontStyle="Italic"></TextBlock>
+                    <ComboBox Width="400" Height="50" x:Name="Cb_PaisExperiencia">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="Brasil" x:Name="defaultPaisExperiencia"/>
+                            <ComboBoxItem Content="Canadá"/>
+                            <ComboBoxItem Content="Argentina" />
+                            <ComboBoxItem Content="EUA" />
+                            <ComboBoxItem Content="Méximo"  />
+                            <ComboBoxItem Content="Paraguai"  />
+                            <ComboBoxItem Content="Suíça"  />
+                            <ComboBoxItem Content="França"  />
+                            <ComboBoxItem Content="Inglaterra"  />
+                        </ComboBox.Items>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel x:Name="Sp_estadoExperiencia" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="Estado: " FontStyle="Italic"></TextBlock>
+                    <ComboBox Width="400" Height="50" x:Name="Cb_EstadosExperiencia">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="Fazer o bind dos estados para carregar os estados todos"/>
+                        </ComboBox.Items>
+                    </ComboBox>
+                </StackPanel>
+
+
+            </StackPanel>
+        </ContentDialog>
+
+        <ContentDialog x:Name="IdiomaDialog"
+                        VerticalAlignment="Stretch"
+                        Title="Adicionar Idioma"
+                        PrimaryButtonText="Incluir"
+                        SecondaryButtonText="Cancelar"
+                        MaxWidth="{Binding ActualWidth, ElementName=pageRoot}">
+            <StackPanel>
+                <ComboBox Width="400" Height="50" x:Name="Cb_Idiomas">
+                    <ComboBox.Items>
+                        <ComboBoxItem Content="Inglês"/>
+                        <ComboBoxItem Content="Espanhol" />
+                        <ComboBoxItem Content="Francês" />
+                        <ComboBoxItem Content="Outro" x:Name="outros" />
+                    </ComboBox.Items>
+                </ComboBox>
+                <ComboBox  Width="400" Height="50" x:Name="Cb_NivelIdiomas">
+                    <ComboBox.Items>
+                        <ComboBoxItem Content="Básico"/>
+                        <ComboBoxItem Content="Intermediário" />
+                        <ComboBoxItem Content="Avançado" />
+                        <ComboBoxItem Content="Fluente" />
+                    </ComboBox.Items>
+                </ComboBox>
+            </StackPanel>
+        </ContentDialog>
 
     </Grid>
 </Page>

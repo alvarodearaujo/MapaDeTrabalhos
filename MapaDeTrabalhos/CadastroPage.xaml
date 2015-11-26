@@ -63,9 +63,20 @@
         <PasswordBox x:Name="Pb_senha" HorizontalAlignment="Left" Grid.Row="9" Grid.Column="1"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Senha:"  Width="550" />
 
         <Button x:Name="Salvar" Content="Salvar" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" FontSize="30" Click="Salvar_Click"></Button>
-        
 
 
+
+        <ContentDialog x:Name="CadastroDialog"
+                        VerticalAlignment="Stretch"
+                        Title="Cadastro realizado com sucesso, deseja criar um currículo?"
+                        PrimaryButtonText="Criar agora"
+                        SecondaryButtonText="Criar mais tarde"
+                        MaxWidth="{Binding ActualWidth, ElementName=pageRoot}">
+            <StackPanel>
+                <TextBlock x:Name="Tb_Descricao" Text="Caso deseje indicar-se posteriormente a vagas, será necessário possuir um currículo cadastrado." TextWrapping="Wrap" />
+            </StackPanel>
+
+        </ContentDialog>
 
 
 

@@ -1,0 +1,51 @@
+﻿<Page
+    x:Class="MapaDeTrabalhos.MapaPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MapaDeTrabalhos"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
+    mc:Ignorable="d">
+
+    <Grid x:Name="mainGrid">
+        <Maps:MapControl x:Name="MapControl" ZoomInteractionMode="GestureAndControl" TiltInteractionMode="GestureAndControl" MapServiceToken="MRloZpnmUHMi3Pxfxqiu~3GxKNXkE0kCpOtyIm7Znmg~AsDsy7g_IcxGbAj66qCMZNDWLCFUDu0ktXOLTmW9CvaZzD9iAAgCGVuIB7WjzUsA" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+            <Maps:MapItemsControl x:Name="MapItems">
+                <Maps:MapItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button  x:Name="mapItemButton" Click="mapItemButton_Click" Background="Transparent">
+                            <StackPanel>
+                                <Border Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                                    <TextBlock Text="{Binding DisplayName}"/>
+                                </Border>
+                                <Image Source="{Binding ImageSourceUri}"
+                                               Maps:MapControl.Location="{Binding Location}" 
+                                               >
+                                    <Image.Transitions>
+                                        <TransitionCollection>
+                                            <EntranceThemeTransition/>
+                                        </TransitionCollection>
+                                    </Image.Transitions>
+                                </Image>
+                            </StackPanel>
+                        </Button>
+                    </DataTemplate>
+                </Maps:MapItemsControl.ItemTemplate>
+            </Maps:MapItemsControl>
+        </Maps:MapControl>
+
+        <ContentDialog x:Name="AnuncioDialog"
+                        VerticalAlignment="Stretch"
+                        Title="Título do Anuncio"
+                        PrimaryButtonText="Indicar-se"
+                        SecondaryButtonText="Voltar"
+                        MaxWidth="{Binding ActualWidth, ElementName=pageRoot}">
+            <StackPanel>
+                <TextBlock x:Name="Tb_DescricaoAnuncio" Text="Descrição do Anuncio." TextWrapping="Wrap" />
+                <TextBlock x:Name="Tb_ValorAnuncio" Text="Valor do Anuncio." TextWrapping="Wrap" />
+                <TextBlock x:Name="Tb_RequesitosAnuncio" Text="Requesitos do Anuncio. alkfjsalkfjsalkfjlsakjflask jfaslkfj alskfj aslkfjalsfkj aslkfjaslkfj alskjfals fkjsalkfj aslk laksjf laksjf laksjfals kfjaklsfjaklsj klasjflkas jflkasjflkasjf" TextWrapping="Wrap" />
+            </StackPanel>
+
+        </ContentDialog>
+    </Grid>
+</Page>

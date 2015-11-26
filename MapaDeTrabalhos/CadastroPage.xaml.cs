@@ -30,11 +30,24 @@ namespace MapaDeTrabalhos
             pessoa = new Pessoa();
         }
 
-        private void Salvar_Click(object sender, RoutedEventArgs e)
+        private async void Salvar_Click(object sender, RoutedEventArgs e)
         {
             //Fazer o processo pra validar os campos de cadastro e salvar no banco.
+
+            var result = await CadastroDialog.ShowAsync();
+            string resutado = "" + result;
+            if (resutado.Equals("Primary"))
+            {
+                Frame.Navigate(typeof(CurriculoPage));
+            }
+            else
+            {
+                Frame.Navigate(typeof(MapaPage));
+            }
+            
+            
         }
-      
+
 
         private void Rb_fisica_Checked(object sender, RoutedEventArgs e)
         {

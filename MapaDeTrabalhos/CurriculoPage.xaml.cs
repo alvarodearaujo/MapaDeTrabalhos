@@ -28,17 +28,26 @@ namespace MapaDeTrabalhos
             this.InitializeComponent();
         }
 
-       
-
-        private void AdicionarFormacao_Click(object sender, RoutedEventArgs e)
-        {
-           
-
-        }
-
         private void Salvar_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+
+        private async void AdicionarFormacao_Click(object sender, RoutedEventArgs e)
+        {
+            var result = await FormacaoDialog.ShowAsync();
+
+        }
+
+        private async void AdicionarExperiencia_Click(object sender, RoutedEventArgs e)
+        {
+            var result = await ExperienciaDialog.ShowAsync();
+        }
+
+        private async void AdicionarIdioma_Click(object sender, RoutedEventArgs e)
+        {
+            var result = await IdiomaDialog.ShowAsync();
         }
     }
 }
