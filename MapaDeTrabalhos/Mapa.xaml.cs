@@ -39,6 +39,19 @@ namespace MapaDeTrabalhos
         //Já inicia com a posição programada
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            //TENTA ALGO PARECIDO COM ISSO. (By Velasques)
+            //BasicGeoposition cityposition = new BasicGeoposition() { Latitude = -7.913488, Longitude = 34.913746 };
+            //Geopoint gp = new Geopoint(cityposition);
+
+            //IAsyncOperation<MapLocationFinderResult> finder = MapLocationFinder.FindLocationsAsync("Rua oitenta e dois, Abreu e Lima, Pernambuco",gp);
+            //finder.AsTask().Start();
+            //MapLocationFinderResult var = finder.GetResults();
+            //IReadOnlyList<MapLocation> x = var.Locations;
+            //double p1 = x[1].Point.Position.Latitude;
+            //double p2 = x[1].Point.Position.Longitude;
+            
+            
+            
             // Specify a known location
             BasicGeoposition cityPosition = new BasicGeoposition() { Latitude = -7.913488, Longitude = -34.913746 };
             Geopoint cityCenter = new Geopoint(cityPosition);
