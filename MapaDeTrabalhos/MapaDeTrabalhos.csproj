@@ -102,9 +102,13 @@
     <Compile Include="CadastroPage.xaml.cs">
       <DependentUpon>CadastroPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\BindableBase.cs" />
+    <Compile Include="Common\ByteArrayImageConvert.cs" />
+    <Compile Include="Common\ProgressVisibleConvert.cs" />
     <Compile Include="CurriculoPage.xaml.cs">
       <DependentUpon>CurriculoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Functions.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

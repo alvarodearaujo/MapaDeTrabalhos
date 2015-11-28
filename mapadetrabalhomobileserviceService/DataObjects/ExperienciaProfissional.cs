@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.Mobile.Service;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Web;
 
 namespace mapadetrabalhomobileserviceService.DataObjects
 {
-    public class ExperienciaProfissional
+    public class ExperienciaProfissional : EntityData
     {
         public string CurriculoId { get; set; }
 

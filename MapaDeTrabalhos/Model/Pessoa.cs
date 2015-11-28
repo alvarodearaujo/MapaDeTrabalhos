@@ -13,12 +13,17 @@ namespace MapaDeTrabalhos.Model
     {
         public string Id { get; set; }
 
+        [JsonProperty(PropertyName = "foto")]
+        public byte[] Foto { get; set; }
 
         [JsonProperty(PropertyName = "nome")]
         public string nomeOuRazaoSocial { get; set; }
 
         [JsonProperty(PropertyName = "cpfOuCnpj")]
         public string cpfOuCnpj { get; set; }
+
+        [JsonProperty(PropertyName = "data")]
+        public string data { get; set; }
 
         [JsonProperty(PropertyName = "telefone")]
         public string telefone { get; set; }
@@ -38,12 +43,10 @@ namespace MapaDeTrabalhos.Model
         [JsonProperty(PropertyName = "usuario")]
         public Usuario usuario { get; set; }
 
-        [JsonProperty(PropertyName = "latitude")]
-        public double latitude { get; set; }
+        [JsonProperty(PropertyName = "site")]
+        public string site { get; set; }
 
-        [JsonProperty(PropertyName = "longitude")]
-        public double longitude { get; set; }
-
-
+        [JsonProperty(PropertyName = "sexo")]
+        public string sexo { get; set; }
     }
 }

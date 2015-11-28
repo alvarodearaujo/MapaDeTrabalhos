@@ -28,5 +28,7 @@ namespace mapadetrabalhomobileserviceService.DataObjects
         public string valorOuSalario { get; set; }
 
         public Boolean isFormal { get; set; }
+
+        public Boolean isAberto { get; set; }
     }
 }

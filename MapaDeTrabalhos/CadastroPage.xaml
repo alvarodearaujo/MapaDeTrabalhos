@@ -30,16 +30,16 @@
         <TextBlock x:Name="Usuario" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Text="Dados do Usuário" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
 
         <StackPanel x:Name="Sp_tipoPessoa" HorizontalAlignment="Left" Height="60" Grid.Row="2" VerticalAlignment="Center" Width="550" Orientation="Horizontal">
-            <RadioButton x:Name="Rb_fisica" Content="Pessoa Física"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="250" GroupName="tP_Pessoa" IsChecked="True" Checked="Rb_fisica_Checked"/>
-            <RadioButton x:Name="Rb_juridica" Content="Pessoa Juridica"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="250" GroupName="tP_Pessoa" Checked="Rb_juridica_Checked"/>
+            <RadioButton x:Name="Rb_fisica" Content="Pessoa Física"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="250" GroupName="tP_Pessoa" IsChecked="True" Checked="Rb_fisica_Checked" />
+            <RadioButton x:Name="Rb_juridica" Content="Pessoa Juridica"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="250" GroupName="tP_Pessoa" Checked="Rb_juridica_Checked" />
         </StackPanel>
         
         <TextBox x:Name="Tb_nome" HorizontalAlignment="Left" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Nome:"  Width="550" />
         <TextBox x:Name="Tb_cpfOrCnpj" HorizontalAlignment="Left" Grid.Row="4" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="CPF:"  Width="550" />
         
         <StackPanel x:Name="Sp_sexo" HorizontalAlignment="Left" Height="60" Grid.Row="6" VerticalAlignment="Center" Width="550" Orientation="Horizontal" Visibility="Visible" >
-            <RadioButton x:Name="Rb_masc" Content="Masculino"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="200" GroupName="Sexo" IsChecked="True"/>
-            <RadioButton x:Name="Rb_femi" Content="Feminino"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="200" GroupName="Sexo"/>
+            <RadioButton x:Name="Rb_masc" Content="Masculino"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="200" GroupName="Sexo" IsChecked="True" Checked="Rb_masc_Checked"/>
+            <RadioButton x:Name="Rb_femi" Content="Feminino"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="200" GroupName="Sexo"  Checked="Rb_femi_Checked"/>
         </StackPanel>
 
 
@@ -56,7 +56,37 @@
         <TextBox x:Name="Tb_numero" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Numero:"  Width="550" />
         <TextBox x:Name="Tb_bairro" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="1" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Bairro:"  Width="550" />
         <TextBox x:Name="Tb_cidade" HorizontalAlignment="Left" Grid.Row="5" Grid.Column="1" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Cidade:"  Width="550" />
-        <ComboBox x:Name="Cb_estados" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Width="550" Height="50" PlaceholderText="Estado" FontSize="30"/>
+        <ComboBox x:Name="Cb_estados" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Width="550" Height="50" PlaceholderText="Estado" FontSize="30" SelectionChanged="Cb_estados_SelectionChanged" >
+            <ComboBox.Items>
+                <ComboBoxItem Content="Acre"/>
+                <ComboBoxItem Content="Alagoas"/>
+                <ComboBoxItem Content="Amapá"/>
+                <ComboBoxItem Content="Amazonas"/>
+                <ComboBoxItem Content="Bahia"/>
+                <ComboBoxItem Content="Ceará"/>
+                <ComboBoxItem Content="Distrito Federal"/>
+                <ComboBoxItem Content="Espírito Santo"/>
+                <ComboBoxItem Content="Goiás"/>
+                <ComboBoxItem Content= "Maranhão"/>
+                <ComboBoxItem Content="Mato Grosso"/>
+                <ComboBoxItem Content="Mato Grosso do Sul"/>
+                <ComboBoxItem Content="Minas Gerais"/>
+                <ComboBoxItem Content="Pará"/>
+                <ComboBoxItem Content="Paraíba"/>
+                <ComboBoxItem Content="Paraná"/>
+                <ComboBoxItem Content="Pernambuco"/>
+                <ComboBoxItem Content="Piauí"/>
+                <ComboBoxItem Content="Rio de Janeiro"/>
+                <ComboBoxItem Content="Rio Grande do Norte"/>
+                <ComboBoxItem Content="Rio Grande do Sul"/>
+                <ComboBoxItem Content="Rondônia"/>
+                <ComboBoxItem Content="Roraima"/>
+                <ComboBoxItem Content="Santa Catarina"/>
+                <ComboBoxItem Content="São Paulo"/>
+                <ComboBoxItem Content="Sergipe"/>
+                <ComboBoxItem Content="Tocantins"/>
+            </ComboBox.Items>
+        </ComboBox>
 
         <TextBlock x:Name="Acesso" HorizontalAlignment="Center"  Grid.Row="7" Grid.Column="1" TextWrapping="Wrap" Text="Dados para Acesso ao Sistema" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
         <TextBox x:Name="Tb_usuario" HorizontalAlignment="Left" Grid.Row="8" Grid.Column="1" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Usuário:"  Width="550" />

@@ -188,7 +188,11 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AnuncioController.cs" />
+    <Compile Include="Controllers\CurriculoController.cs" />
     <Compile Include="Controllers\EnderecoController.cs" />
+    <Compile Include="Controllers\ExperienciaProfissionalController.cs" />
+    <Compile Include="Controllers\FormacaoAcademicaController.cs" />
+    <Compile Include="Controllers\IdiomaController.cs" />
     <Compile Include="Controllers\PessoaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DataObjects\Anuncio.cs" />

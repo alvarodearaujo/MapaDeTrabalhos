@@ -16,24 +16,25 @@ namespace mapadetrabalhomobileserviceService.DataObjects
 
         public string cpfOuCnpj { get; set; }
 
+        public string data { get; set; }
+
         public string telefone { get; set; }
 
         public string email { get; set; }
+
+        public string site { get; set; }
+
+        public string sexo { get; set; }
 
         public string celular { get; set; }
 
         public Boolean isPessoaFisica { get; set; }
 
-      
         public Endereco endereco { get; set; }
 
         public Usuario usuario { get; set; }
 
-        public double latitude { get; set; }
-
-        public double longitude { get; set; }
-
-
+        public byte[] Foto { get; set; }
 
     }
 }

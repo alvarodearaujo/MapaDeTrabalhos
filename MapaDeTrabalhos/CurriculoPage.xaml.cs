@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -12,6 +14,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -23,6 +26,10 @@ namespace MapaDeTrabalhos
     /// </summary>
     public sealed partial class CurriculoPage : Page
     {
+        public byte[] CurrentImage { get; set; }
+
+        MessageDialog dialog = new MessageDialog("");
+
         public CurriculoPage()
         {
             this.InitializeComponent();
@@ -111,6 +118,38 @@ namespace MapaDeTrabalhos
                 Sp_outroIdioma.Visibility = Visibility.Collapsed;
             }
 
+        }
+
+        private async void image_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            try
+            {
+                FileOpenPicker fop = new FileOpenPicker();
+                fop.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+
+                fop.FileTypeFilter.Add(".jpg");
+                fop.FileTypeFilter.Add(".jpeg");
+                fop.FileTypeFilter.Add(".png");
+                fop.FileTypeFilter.Add(".gif");
+
+                var file = await fop.PickSingleFileAsync();
+                if (file != null)
+                {
+                    var stream = await file.OpenAsync(FileAccessMode.Read);
+
+                    BitmapImage bp = new BitmapImage();
+                    bp.SetSource(stream);
+                    imgPhoto.ImageSource = bp;
+                    CurrentImage = await Functions.ConvertStorageFileToArrayBytes(file);
+                    //PhotoName = file.Name;
+                }
+            }
+            catch (Exception ex)
+            {
+                dialog.Title = "Erro";
+                dialog.Content = ex.Message.ToString();
+                await dialog.ShowAsync();
+            }
         }
     }
 }

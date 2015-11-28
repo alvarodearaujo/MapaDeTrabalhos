@@ -13,6 +13,9 @@ namespace MapaDeTrabalhos.Model
     {
         public string Id{ get; set; }
 
+        [JsonProperty(PropertyName = "PessoaId")]
+        public string PessoaId { get; set; }
+
         [JsonProperty(PropertyName = "Login")]
         public string Login { get; set; }
 

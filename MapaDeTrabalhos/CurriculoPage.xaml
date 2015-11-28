@@ -3,9 +3,11 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MapaDeTrabalhos"
+    xmlns:converter="using:MapaDeTrabalhos.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
@@ -76,15 +78,20 @@
             <RadioButton x:Name="Rb_mudarNao" Content="Nao" />
         </StackPanel>
 
-        <TextBlock x:Name="ObjetivosProfissionais" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="7" TextWrapping="Wrap" Text="Objetivos Profissionais" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
-        <StackPanel x:Name="Sp_salario" Grid.Column="1" HorizontalAlignment="Right" Height="60"  Grid.Row="8" Grid.RowSpan="1" VerticalAlignment="Center" Width="640" Orientation="Horizontal">
+        <StackPanel x:Name="Sp_salario" Grid.Column="1" HorizontalAlignment="Right" Height="60"  Grid.Row="7" Grid.RowSpan="1" VerticalAlignment="Center" Width="640" Orientation="Horizontal">
             <TextBlock Text="Pretensão salarial mensal entre: " TextAlignment="Left" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"></TextBlock>
             <TextBox x:Name="menorValorSalario" FontSize="20" VerticalAlignment="Center" Width="30"></TextBox>
             <TextBlock Text="  à  " TextAlignment="Left" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"></TextBlock>
             <TextBox x:Name="maiorValorSalario" FontSize="20" VerticalAlignment="Center" Width="30"></TextBox>
         </StackPanel>
 
-        <Button x:Name="Salvar" Content="Salvar" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="9" Grid.RowSpan="2" VerticalAlignment="Center" FontSize="30" Click="Salvar_Click"/>
+        <Border HorizontalAlignment="Center" Width="120" Height="140" CornerRadius="60" Tapped="image_Tapped" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2">
+            <Border.Background>
+                <ImageBrush x:Name="imgPhoto" Stretch="UniformToFill" ImageSource="{Binding Foto,  FallbackValue='Assets/default.gif'}" />
+            </Border.Background>
+        </Border>
+        
+        <Button x:Name="Salvar" Content="Salvar" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="10" Grid.RowSpan="2" VerticalAlignment="Center" FontSize="30" Click="Salvar_Click"/>
 
         <ContentDialog x:Name="FormacaoDialog"
                         VerticalAlignment="Stretch"
@@ -97,7 +104,6 @@
                     <TextBlock Text="Nível do Curso: "  FontStyle="Italic" VerticalAlignment="Center" FontSize="15" Margin="2"></TextBlock>
                     <ComboBox Width="400" Height="50" x:Name="Cb_NivelFormacao" HorizontalAlignment="Stretch">
                         <ComboBox.Items>
-                            <ComboBoxItem Content="Selecione" x:Name="defaultFormacao"/>
                             <ComboBoxItem Content="Ensino Fundamental (1° Grau)"/>
                             <ComboBoxItem Content="Curso Extra-Curricular / Profissionalizante" />
                             <ComboBoxItem Content="Ensino Médio (2° Grau)" />
@@ -112,7 +118,7 @@
 
                 <StackPanel x:Name="Sp_nomeCurso" HorizontalAlignment="Stretch" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
                     <TextBlock Text="Nome do curso: "  FontStyle="Italic" VerticalAlignment="Center" FontSize="15" Margin="2"></TextBlock>
-                    <ComboBox x:Name="Cb_NomeDoCurso" Width="400" Height="50" HorizontalAlignment="Stretch">
+                    <ComboBox x:Name="Cb_NomeDoCurso" Width="400" Height="50" HorizontalAlignment="Stretch" >
                         <ComboBox.Items>
                             <ComboBoxItem Content="Tem que fazer o bind para quando selecionar cada item acima"/>
                         </ComboBox.Items>
@@ -306,6 +312,7 @@
                 </StackPanel>
             </StackPanel>
         </ContentDialog>
+        
 
     </Grid>
 </Page>

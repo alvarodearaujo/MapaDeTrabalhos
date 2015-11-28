@@ -25,5 +25,9 @@ namespace mapadetrabalhomobileserviceService.DataObjects
         public string cidade { get; set; }
 
         public string estado { get; set; }
+
+        public double latitude { get; set; }
+
+        public double longitude { get; set; }
     }
 }
