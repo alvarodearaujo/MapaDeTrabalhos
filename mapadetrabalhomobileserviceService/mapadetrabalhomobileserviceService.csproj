@@ -194,7 +194,11 @@
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DataObjects\AnuncioFormal.cs" />
     <Compile Include="DataObjects\AnuncioInformal.cs" />
+    <Compile Include="DataObjects\Curriculo.cs" />
     <Compile Include="DataObjects\Endereco.cs" />
+    <Compile Include="DataObjects\ExperienciaProfissional.cs" />
+    <Compile Include="DataObjects\FormacaoAcademica.cs" />
+    <Compile Include="DataObjects\Idioma.cs" />
     <Compile Include="DataObjects\Pessoa.cs" />
     <Compile Include="DataObjects\Usuario.cs" />
     <Compile Include="Models\mapadetrabalhomobileserviceContext.cs" />

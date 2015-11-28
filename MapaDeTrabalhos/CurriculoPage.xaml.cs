@@ -49,5 +49,68 @@ namespace MapaDeTrabalhos
         {
             var result = await IdiomaDialog.ShowAsync();
         }
+
+        private void Rb_Concluido_Checked(object sender, RoutedEventArgs e)
+        {
+            if (mesFinal != null)
+            {
+                mesFinal.IsEnabled = true;
+                anoFinal.IsEnabled = true;
+            }
+
+        }
+
+        private void Rb_Cursando_Checked(object sender, RoutedEventArgs e)
+        {
+            if (mesFinal != null)
+            {
+                mesFinal.IsEnabled = false;
+                anoFinal.IsEnabled = false;
+            }
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (mesFinalExperiencia != null)
+            {
+                mesFinalExperiencia.IsEnabled = false;
+                anoFinalExperiencia.IsEnabled = false;
+            }
+        }
+
+        private void CheckBox_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (mesFinalExperiencia != null)
+            {
+                if (mesFinalExperiencia.IsEnabled == true)
+                {
+                    mesFinalExperiencia.IsEnabled = false;
+                    anoFinalExperiencia.IsEnabled = false;
+                }
+                else
+                {
+                    mesFinalExperiencia.IsEnabled = true;
+                    anoFinalExperiencia.IsEnabled = true;
+                }
+            }
+        }
+
+
+        private void Cb_Idiomas_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cb = ((ComboBox)sender);
+            ComboBoxItem item = cb.SelectedItem as ComboBoxItem;
+            string valorSelecionado = item.Content.ToString();
+
+            if (valorSelecionado.Equals("Outro"))
+            {
+                Sp_outroIdioma.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Sp_outroIdioma.Visibility = Visibility.Collapsed;
+            }
+
+        }
     }
 }

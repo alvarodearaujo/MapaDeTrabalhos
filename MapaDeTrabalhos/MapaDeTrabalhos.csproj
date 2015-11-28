@@ -113,7 +113,11 @@
     </Compile>
     <Compile Include="Model\AnuncioFormal.cs" />
     <Compile Include="Model\AnuncioInformal.cs" />
+    <Compile Include="Model\Curriculo.cs" />
     <Compile Include="Model\Endereco.cs" />
+    <Compile Include="Model\ExperienciaProfissional.cs" />
+    <Compile Include="Model\FormacaoAcademica.cs" />
+    <Compile Include="Model\Idioma.cs" />
     <Compile Include="Model\Pessoa.cs" />
     <Compile Include="Model\PontoNoMapa.cs" />
     <Compile Include="Model\Usuario.cs" />
