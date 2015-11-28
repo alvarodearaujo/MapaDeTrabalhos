@@ -39,7 +39,7 @@ namespace mapadetrabalhomobileserviceService.Models
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
         }
 
-        public System.Data.Entity.DbSet<AnuncioFormal> AnuncioFormals { get; set; }
+        public System.Data.Entity.DbSet<Anuncio> AnuncioFormals { get; set; }
 
         public System.Data.Entity.DbSet<AnuncioInformal> AnuncioInformals { get; set; }
 
@@ -48,6 +48,8 @@ namespace mapadetrabalhomobileserviceService.Models
         public System.Data.Entity.DbSet<Pessoa> Pessoas { get; set; }
 
         public System.Data.Entity.DbSet<Usuario> Usuarios { get; set; }
+
+        public System.Data.Entity.DbSet<mapadetrabalhomobileserviceService.DataObjects.Anuncio> Anuncios { get; set; }
     }
 
 }

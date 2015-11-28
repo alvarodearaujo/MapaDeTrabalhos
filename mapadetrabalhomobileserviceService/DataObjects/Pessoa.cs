@@ -14,7 +14,7 @@ namespace mapadetrabalhomobileserviceService.DataObjects
      
         public string nomeOuRazaoSocial { get; set; }
 
-        public string cnpj { get; set; }
+        public string cpfOuCnpj { get; set; }
 
         public string telefone { get; set; }
 
@@ -28,6 +28,11 @@ namespace mapadetrabalhomobileserviceService.DataObjects
         public Endereco endereco { get; set; }
 
         public Usuario usuario { get; set; }
+
+        public double latitude { get; set; }
+
+        public double longitude { get; set; }
+
 
 
     }

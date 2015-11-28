@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,13 +11,12 @@ namespace MapaDeTrabalhos.Model
 {
     class Usuario
     {
-       
-        public int Id { get; set; }
-      
-        public string PessoaId{ get; set; }
+        public string Id{ get; set; }
 
+        [JsonProperty(PropertyName = "Login")]
         public string Login { get; set; }
 
+        [JsonProperty(PropertyName = "Senha")]
         public string Senha { get; set; }
     }
 }

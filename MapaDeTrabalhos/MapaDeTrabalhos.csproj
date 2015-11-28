@@ -111,8 +111,7 @@
     <Compile Include="MapaPage.xaml.cs">
       <DependentUpon>MapaPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\AnuncioFormal.cs" />
-    <Compile Include="Model\AnuncioInformal.cs" />
+    <Compile Include="Model\Anuncio.cs" />
     <Compile Include="Model\Curriculo.cs" />
     <Compile Include="Model\Endereco.cs" />
     <Compile Include="Model\ExperienciaProfissional.cs" />
@@ -131,6 +130,7 @@
     <None Include="MapaDeTrabalhos_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\default.gif" />
     <Content Include="Assets\MapMarcation.png" />
     <Content Include="Assets\MapMarcation2.png" />
     <Content Include="Properties\Default.rd.xml" />
@@ -163,6 +163,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

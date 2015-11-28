@@ -187,13 +187,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AnuncioFormalController.cs" />
-    <Compile Include="Controllers\AnuncioInformalController.cs" />
+    <Compile Include="Controllers\AnuncioController.cs" />
     <Compile Include="Controllers\EnderecoController.cs" />
     <Compile Include="Controllers\PessoaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
-    <Compile Include="DataObjects\AnuncioFormal.cs" />
-    <Compile Include="DataObjects\AnuncioInformal.cs" />
+    <Compile Include="DataObjects\Anuncio.cs" />
     <Compile Include="DataObjects\Curriculo.cs" />
     <Compile Include="DataObjects\Endereco.cs" />
     <Compile Include="DataObjects\ExperienciaProfissional.cs" />
