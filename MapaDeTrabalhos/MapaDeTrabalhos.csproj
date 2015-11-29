@@ -135,6 +135,7 @@
     <None Include="MapaDeTrabalhos_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\BackGround.png" />
     <Content Include="Assets\default.gif" />
     <Content Include="Assets\MapMarcation.png" />
     <Content Include="Assets\MapMarcation2.png" />

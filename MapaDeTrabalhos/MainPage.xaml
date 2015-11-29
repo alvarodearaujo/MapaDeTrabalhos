@@ -7,7 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="-5,18,5,-18">
+    <Grid Margin="-5,18,5,-18">
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/BackGround.png"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="163*"/>
             <RowDefinition Height="68*"/>
@@ -18,7 +21,6 @@
             <RowDefinition Height="75*"/>
             <RowDefinition Height="124*"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="Titulo" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Mapa de Trabalhos" VerticalAlignment="Center" Height="153" Width="639" FontSize="66.667" TextAlignment="Center" Margin="321,5,320,5"/>
         <TextBox x:Name="Tb_login" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" PlaceholderText="Digite seu Login." FontSize="30"  Width="368" />
         <PasswordBox x:Name="Tb_senha" HorizontalAlignment="Center"  Grid.Row="3" VerticalAlignment="Center" Width="368" PlaceholderText="Digite sua Senha." FontSize="30" />
         <Button x:Name="Logar" Content="Logar" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Width="250" FontSize="30" Click="Logar_Click"/>
