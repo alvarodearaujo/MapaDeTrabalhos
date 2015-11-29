@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    
+
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
@@ -51,7 +51,7 @@
         <TextBlock x:Name="InformacoesComplementares" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="Informações Complementares" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
         <StackPanel x:Name="Sp_habilitacao"  Grid.Column="1" HorizontalAlignment="Right" Height="60"  Grid.Row="3" Grid.RowSpan="1" VerticalAlignment="Center" Width="640" Orientation="Horizontal">
             <TextBlock Text="Habilitação:" TextAlignment="Left" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-            <CheckBox x:Name="HabilitacaoA" Content="A" FontSize="20" Width="46" Height="32" Margin="0,14" ></CheckBox>
+            <CheckBox x:Name="HabilitacaoA" Content="A" FontSize="20" Width="46" Height="32" Margin="0,14"></CheckBox>
             <CheckBox x:Name="HabilitacaoB" Content="B" FontSize="20" Width="10"></CheckBox>
             <CheckBox x:Name="HabilitacaoC" Content="C" FontSize="20" Width="10"></CheckBox>
             <CheckBox x:Name="HabilitacaoD" Content="D" FontSize="20" Width="10"></CheckBox>
@@ -68,14 +68,14 @@
 
         <StackPanel x:Name="Sp_viajar" Grid.Column="1" HorizontalAlignment="Right" Height="60"  Grid.Row="5" Grid.RowSpan="1" VerticalAlignment="Center" Width="640" Orientation="Horizontal">
             <TextBlock Text="Disponibilidade para viajar? " TextAlignment="Left" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-            <RadioButton x:Name="Rb_viajarSim" Content="Sim" />
-            <RadioButton x:Name="Rb_viajarNao" Content="Nao" />
+            <RadioButton x:Name="Rb_viajarSim" Content="Sim" Click="Rb_viajarSim_Click" />
+            <RadioButton x:Name="Rb_viajarNao" Content="Nao" Click="Rb_viajarNao_Click" />
         </StackPanel>
 
         <StackPanel x:Name="Sp_mudarResidencia" Grid.Column="1" HorizontalAlignment="Right" Height="60"  Grid.Row="6" Grid.RowSpan="1" VerticalAlignment="Center" Width="640" Orientation="Horizontal">
             <TextBlock Text="Disponibilidade para mudar de residência? " TextAlignment="Left" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-            <RadioButton x:Name="Rb_mudarSim" Content="Sim" />
-            <RadioButton x:Name="Rb_mudarNao" Content="Nao" />
+            <RadioButton x:Name="Rb_mudarSim" Content="Sim" Click="Rb_mudarSim_Click" />
+            <RadioButton x:Name="Rb_mudarNao" Content="Nao" Click="Rb_mudarNao_Click" />
         </StackPanel>
 
         <StackPanel x:Name="Sp_salario" Grid.Column="1" HorizontalAlignment="Right" Height="60"  Grid.Row="7" Grid.RowSpan="1" VerticalAlignment="Center" Width="640" Orientation="Horizontal">
@@ -85,12 +85,12 @@
             <TextBox x:Name="maiorValorSalario" FontSize="20" VerticalAlignment="Center" Width="30"></TextBox>
         </StackPanel>
 
-        <Border HorizontalAlignment="Center" Width="120" Height="140" CornerRadius="60" Tapped="image_Tapped" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2">
+        <Border HorizontalAlignment="Center" Width="141" CornerRadius="60" Tapped="image_Tapped" Grid.Column="1" Grid.Row="8" RenderTransformOrigin="0.338,1.014" Grid.RowSpan="2">
             <Border.Background>
                 <ImageBrush x:Name="imgPhoto" Stretch="UniformToFill" ImageSource="{Binding Foto,  FallbackValue='Assets/default.gif'}" />
             </Border.Background>
         </Border>
-        
+
         <Button x:Name="Salvar" Content="Salvar" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="10" Grid.RowSpan="2" VerticalAlignment="Center" FontSize="30" Click="Salvar_Click"/>
 
         <ContentDialog x:Name="FormacaoDialog"
@@ -102,7 +102,7 @@
             <StackPanel>
                 <StackPanel x:Name="Sp_nivelCurso" HorizontalAlignment="Stretch" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
                     <TextBlock Text="Nível do Curso: "  FontStyle="Italic" VerticalAlignment="Center" FontSize="15" Margin="2"></TextBlock>
-                    <ComboBox Width="400" Height="50" x:Name="Cb_NivelFormacao" HorizontalAlignment="Stretch">
+                    <ComboBox Width="400" Height="50" x:Name="Cb_NivelFormacao" HorizontalAlignment="Stretch" SelectionChanged="Cb_NivelFormacao_SelectionChanged" >
                         <ComboBox.Items>
                             <ComboBoxItem Content="Ensino Fundamental (1° Grau)"/>
                             <ComboBoxItem Content="Curso Extra-Curricular / Profissionalizante" />
@@ -118,7 +118,7 @@
 
                 <StackPanel x:Name="Sp_nomeCurso" HorizontalAlignment="Stretch" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
                     <TextBlock Text="Nome do curso: "  FontStyle="Italic" VerticalAlignment="Center" FontSize="15" Margin="2"></TextBlock>
-                    <ComboBox x:Name="Cb_NomeDoCurso" Width="400" Height="50" HorizontalAlignment="Stretch" >
+                    <ComboBox x:Name="Cb_NomeDoCurso" Width="400" Height="50" HorizontalAlignment="Stretch" SelectionChanged="Cb_NomeDoCurso_SelectionChanged" >
                         <ComboBox.Items>
                             <ComboBoxItem Content="Tem que fazer o bind para quando selecionar cada item acima"/>
                         </ComboBox.Items>
@@ -129,7 +129,7 @@
                     <TextBlock Text="Estado: "  FontStyle="Italic" VerticalAlignment="Center" FontSize="15" Margin="2"></TextBlock>
                     <RadioButton x:Name="Rb_Concluido" Content="Concluido"  HorizontalAlignment="Center" VerticalAlignment="Center" GroupName="estado" IsChecked="True" Checked="Rb_Concluido_Checked" />
                     <RadioButton x:Name="Rb_Cursando" Content="Cursando"  HorizontalAlignment="Center" VerticalAlignment="Center" GroupName="estado" Checked="Rb_Cursando_Checked" />
-                    <RadioButton x:Name="Rb_Trancado" Content="Trancado"  HorizontalAlignment="Center" VerticalAlignment="Center" GroupName="estado" Checked="Rb_Cursando_Checked" />
+                    <RadioButton x:Name="Rb_Trancado" Content="Trancado"  HorizontalAlignment="Center" VerticalAlignment="Center" GroupName="estado" Checked="Rb_Trancado_Checked" />
                 </StackPanel>
 
                 <StackPanel x:Name="Sp_datasCurso" HorizontalAlignment="Stretch" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
@@ -147,30 +147,240 @@
 
                 <StackPanel x:Name="Sp_pais" HorizontalAlignment="Stretch" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
                     <TextBlock Text="País: " FontStyle="Italic" VerticalAlignment="Center" FontSize="15" Margin="2"></TextBlock>
-                    <ComboBox Width="400" Height="50" x:Name="Cb_Pais">
+                    <ComboBox Width="400" Height="50" x:Name="Cb_Pais" SelectionChanged="Cb_Pais_SelectionChanged">
                         <ComboBox.Items>
-                            <ComboBoxItem Content="Brasil" x:Name="defaultPais"/>
+                            <ComboBoxItem Content="Afeganistão"/>
+                            <ComboBoxItem Content="África do Sul"/>
+                            <ComboBoxItem Content="Albânia"/>
+                            <ComboBoxItem Content="Alemanha"/>
+                            <ComboBoxItem Content="Andorra"/>
+                            <ComboBoxItem Content="Angola"/>
+                            <ComboBoxItem Content="Antígua e Barbuda"/>
+                            <ComboBoxItem Content="Arábia Saudita"/>
+                            <ComboBoxItem Content="Argélia"/>
+                            <ComboBoxItem Content="Argentina"/>
+                            <ComboBoxItem Content="Armênia"/>
+                            <ComboBoxItem Content="Austrália"/>
+                            <ComboBoxItem Content="Áustria"/>
+                            <ComboBoxItem Content="Azerbaijão"/>
+                            <ComboBoxItem Content="Bahamas"/>
+                            <ComboBoxItem Content="Bangladesh"/>
+                            <ComboBoxItem Content="Barbados"/>
+                            <ComboBoxItem Content="Barein"/>
+                            <ComboBoxItem Content="Belarus"/>
+                            <ComboBoxItem Content="Bélgica"/>
+                            <ComboBoxItem Content="Belize"/>
+                            <ComboBoxItem Content="Benin"/>
+                            <ComboBoxItem Content="Bolívia"/>
+                            <ComboBoxItem Content="Bósnia Herzegovina"/>
+                            <ComboBoxItem Content="Botswana"/>
+                            <ComboBoxItem Content="Brasil" IsSelected="True"/>
+                            <ComboBoxItem Content="Brunei"/>
+                            <ComboBoxItem Content="Bulgária"/>
+                            <ComboBoxItem Content="Burkina Faso"/>
+                            <ComboBoxItem Content="Burundi"/>
+                            <ComboBoxItem Content="Butão"/>
+                            <ComboBoxItem Content="Cabo verde"/>
+                            <ComboBoxItem Content="Camarões"/>
+                            <ComboBoxItem Content="Camboja"/>
                             <ComboBoxItem Content="Canadá"/>
-                            <ComboBoxItem Content="Argentina" />
-                            <ComboBoxItem Content="EUA" />
-                            <ComboBoxItem Content="Méximo"  />
-                            <ComboBoxItem Content="Paraguai"  />
-                            <ComboBoxItem Content="Suíça"  />
-                            <ComboBoxItem Content="França"  />
-                            <ComboBoxItem Content="Inglaterra"  />
+                            <ComboBoxItem Content="Caribe"/>
+                            <ComboBoxItem Content="Catar"/>
+                            <ComboBoxItem Content="Cazaquistão"/>
+                            <ComboBoxItem Content="Chade"/>
+                            <ComboBoxItem Content="Chile"/>
+                            <ComboBoxItem Content="China"/>
+                            <ComboBoxItem Content="Chipre"/>
+                            <ComboBoxItem Content="Colômbia"/>
+                            <ComboBoxItem Content="Comores"/>
+                            <ComboBoxItem Content="Congo"/>
+                            <ComboBoxItem Content="Coreia do Norte"/>
+                            <ComboBoxItem Content="Coreia do Sul"/>
+                            <ComboBoxItem Content="Costa do Marfim"/>
+                            <ComboBoxItem Content="Costa Rica"/>
+                            <ComboBoxItem Content="Croácia"/>
+                            <ComboBoxItem Content="Cuba"/>
+                            <ComboBoxItem Content="Dinamarca"/>
+                            <ComboBoxItem Content="Djibuti"/>
+                            <ComboBoxItem Content="Dominica"/>
+                            <ComboBoxItem Content="Egito"/>
+                            <ComboBoxItem Content="El Salvador"/>
+                            <ComboBoxItem Content="Emirados Árabes Unidos"/>
+                            <ComboBoxItem Content="Equador"/>
+                            <ComboBoxItem Content="Eritreia"/>
+                            <ComboBoxItem Content="Eslováquia"/>
+                            <ComboBoxItem Content="Eslovênia"/>
+                            <ComboBoxItem Content="Espanha"/>
+                            <ComboBoxItem Content="Estados Unidos"/>
+                            <ComboBoxItem Content="Estônia"/>
+                            <ComboBoxItem Content="Etiópia"/>
+                            <ComboBoxItem Content="Federação dos Estados da Micronésia"/>
+                            <ComboBoxItem Content="Fiji"/>
+                            <ComboBoxItem Content="Filipinas"/>
+                            <ComboBoxItem Content="Finlândia"/>
+                            <ComboBoxItem Content="Francia"/>
+                            <ComboBoxItem Content="Gabão"/>
+                            <ComboBoxItem Content="Gâmbia"/>
+                            <ComboBoxItem Content="Gana"/>
+                            <ComboBoxItem Content="Geórgia"/>
+                            <ComboBoxItem Content="Granada"/>
+                            <ComboBoxItem Content="Grécia"/>
+                            <ComboBoxItem Content="Guatemala"/>
+                            <ComboBoxItem Content="Guiana"/>
+                            <ComboBoxItem Content="Guiana francesa"/>
+                            <ComboBoxItem Content="Guinea Equatorial"/>
+                            <ComboBoxItem Content="Guiné-Bissau"/>
+                            <ComboBoxItem Content="Haiti"/>
+                            <ComboBoxItem Content="Holanda"/>
+                            <ComboBoxItem Content="Honduras"/>
+                            <ComboBoxItem Content="Hungria"/>
+                            <ComboBoxItem Content="Iemen"/>
+                            <ComboBoxItem Content="Ilhas Marshall"/>
+                            <ComboBoxItem Content="Ilhas Salomão"/>
+                            <ComboBoxItem Content="Índia"/>
+                            <ComboBoxItem Content="Indonésia"/>
+                            <ComboBoxItem Content="Irã"/>
+                            <ComboBoxItem Content="Iraque"/>
+                            <ComboBoxItem Content="Irlanda"/>
+                            <ComboBoxItem Content="Islândia"/>
+                            <ComboBoxItem Content="Israel"/>
+                            <ComboBoxItem Content="Itália"/>
+                            <ComboBoxItem Content="Jamaica"/>
+                            <ComboBoxItem Content="Japão"/>
+                            <ComboBoxItem Content="Jordânia"/>
+                            <ComboBoxItem Content="Kiribati"/>
+                            <ComboBoxItem Content="Kuwait"/>
+                            <ComboBoxItem Content="Kyrgyzstan"/>
+                            <ComboBoxItem Content="Laos"/>
+                            <ComboBoxItem Content="Latvia"/>
+                            <ComboBoxItem Content="Líbano"/>
+                            <ComboBoxItem Content="Libéria"/>
+                            <ComboBoxItem Content="Líbia"/>
+                            <ComboBoxItem Content="Liechtenstein"/>
+                            <ComboBoxItem Content="Lituânia"/>
+                            <ComboBoxItem Content="Luxemburgo"/>
+                            <ComboBoxItem Content="Malásia"/>
+                            <ComboBoxItem Content="Malawi"/>
+                            <ComboBoxItem Content="Maldivas"/>
+                            <ComboBoxItem Content="Mali"/>
+                            <ComboBoxItem Content="Malta"/>
+                            <ComboBoxItem Content="Marrocos"/>
+                            <ComboBoxItem Content="Maurício"/>
+                            <ComboBoxItem Content="Mauritânia"/>
+                            <ComboBoxItem Content="México"/>
+                            <ComboBoxItem Content="Mianmar"/>
+                            <ComboBoxItem Content="Moçambique"/>
+                            <ComboBoxItem Content="Moldova"/>
+                            <ComboBoxItem Content="Mongólia"/>
+                            <ComboBoxItem Content="Montenegro"/>
+                            <ComboBoxItem Content="Namíbia"/>
+                            <ComboBoxItem Content="Nauru"/>
+                            <ComboBoxItem Content="Nepal"/>
+                            <ComboBoxItem Content="Nicarágua"/>
+                            <ComboBoxItem Content="Níger"/>
+                            <ComboBoxItem Content="Nigéria"/>
+                            <ComboBoxItem Content="Noruega"/>
+                            <ComboBoxItem Content="Nova Zelândia"/>
+                            <ComboBoxItem Content="Omã"/>
+                            <ComboBoxItem Content="Palau"/>
+                            <ComboBoxItem Content="Panamá"/>
+                            <ComboBoxItem Content="Papua Nova Guiné"/>
+                            <ComboBoxItem Content="Paquistão"/>
+                            <ComboBoxItem Content="Paraguai"/>
+                            <ComboBoxItem Content="Peru"/>
+                            <ComboBoxItem Content="Polônia"/>
+                            <ComboBoxItem Content="Porto Rico"/>
+                            <ComboBoxItem Content="Portugal"/>
+                            <ComboBoxItem Content="Principado de Mônaco"/>
+                            <ComboBoxItem Content="Quênia"/>
+                            <ComboBoxItem Content="Quirguistão"/>
+                            <ComboBoxItem Content="Reino Unido"/>
+                            <ComboBoxItem Content="República Centro Africana"/>
+                            <ComboBoxItem Content="República Checa"/>
+                            <ComboBoxItem Content="República Democrática do Congo"/>
+                            <ComboBoxItem Content="República Dominicana"/>
+                            <ComboBoxItem Content="Romênia"/>
+                            <ComboBoxItem Content="Ruanda"/>
+                            <ComboBoxItem Content="Rússia"/>
+                            <ComboBoxItem Content="Samoa"/>
+                            <ComboBoxItem Content="San Marino"/>
+                            <ComboBoxItem Content="Santa Lúcia"/>
+                            <ComboBoxItem Content="São Cristóvão e Névis"/>
+                            <ComboBoxItem Content="São Tomé e Príncipe"/>
+                            <ComboBoxItem Content="São Vicente"/>
+                            <ComboBoxItem Content="Senegal"/>
+                            <ComboBoxItem Content="Serra Leoa"/>
+                            <ComboBoxItem Content="Sérvia"/>
+                            <ComboBoxItem Content="Seychelles"/>
+                            <ComboBoxItem Content="Singapura"/>
+                            <ComboBoxItem Content="Síria"/>
+                            <ComboBoxItem Content="Somália"/>
+                            <ComboBoxItem Content="Sri Lanka"/>
+                            <ComboBoxItem Content="Suazilândia"/>
+                            <ComboBoxItem Content="Sudão"/>
+                            <ComboBoxItem Content="Sudão do Sul"/>
+                            <ComboBoxItem Content="Suécia"/>
+                            <ComboBoxItem Content="Suíça"/>
+                            <ComboBoxItem Content="Suriname"/>
+                            <ComboBoxItem Content="Tailândia"/>
+                            <ComboBoxItem Content="Tajidquistão"/>
+                            <ComboBoxItem Content="Tanzânia"/>
+                            <ComboBoxItem Content="Timor Leste"/>
+                            <ComboBoxItem Content="Togo"/>
+                            <ComboBoxItem Content="Tonga"/>
+                            <ComboBoxItem Content="Trinidad Tobago"/>
+                            <ComboBoxItem Content="Tunísia"/>
+                            <ComboBoxItem Content="Turcomenistão"/>
+                            <ComboBoxItem Content="Turquia"/>
+                            <ComboBoxItem Content="Tuvalu"/>
+                            <ComboBoxItem Content="Ucrânia"/>
+                            <ComboBoxItem Content="Uganda"/>
+                            <ComboBoxItem Content="União da Sérvia e Montenegro"/>
+                            <ComboBoxItem Content="Uruguai"/>
+                            <ComboBoxItem Content="Uzbequistão"/>
+                            <ComboBoxItem Content="Vanuatu"/>
+                            <ComboBoxItem Content="Venezuela"/>
+                            <ComboBoxItem Content="Vietnã"/>
+                            <ComboBoxItem Content="Zâmbia"/>
+                            <ComboBoxItem Content="Zimbábue"/>
                         </ComboBox.Items>
                     </ComboBox>
                 </StackPanel>
 
                 <StackPanel x:Name="Sp_estado" HorizontalAlignment="Stretch" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
                     <TextBlock Text="Estado: " FontStyle="Italic" VerticalAlignment="Center" FontSize="15" Margin="2"></TextBlock>
-                    <ComboBox Width="400" Height="50"  x:Name="Cb_Estados" HorizontalAlignment="Stretch">
+                    <ComboBox Width="400" Height="50"  x:Name="Cb_Estados" HorizontalAlignment="Stretch" SelectionChanged="Cb_Estados_SelectionChanged" >
                         <ComboBox.Items>
-                            <ComboBoxItem Content="Fazer o bind dos estados para carregar os estados todos"/>
+                            <ComboBoxItem Content="Acre"/>
+                            <ComboBoxItem Content="Alagoas"/>
+                            <ComboBoxItem Content="Amapá"/>
+                            <ComboBoxItem Content="Amazonas"/>
+                            <ComboBoxItem Content="Bahia"/>
+                            <ComboBoxItem Content="Ceará"/>
+                            <ComboBoxItem Content="Distrito Federal"/>
+                            <ComboBoxItem Content="Espírito Santo"/>
+                            <ComboBoxItem Content="Goiás"/>
+                            <ComboBoxItem Content= "Maranhão"/>
+                            <ComboBoxItem Content="Mato Grosso"/>
+                            <ComboBoxItem Content="Mato Grosso do Sul"/>
+                            <ComboBoxItem Content="Minas Gerais"/>
+                            <ComboBoxItem Content="Pará"/>
+                            <ComboBoxItem Content="Paraíba"/>
+                            <ComboBoxItem Content="Paraná"/>
+                            <ComboBoxItem Content="Pernambuco"/>
+                            <ComboBoxItem Content="Piauí"/>
+                            <ComboBoxItem Content="Rio de Janeiro"/>
+                            <ComboBoxItem Content="Rio Grande do Norte"/>
+                            <ComboBoxItem Content="Rio Grande do Sul"/>
+                            <ComboBoxItem Content="Rondônia"/>
+                            <ComboBoxItem Content="Roraima"/>
+                            <ComboBoxItem Content="Santa Catarina"/>
+                            <ComboBoxItem Content="São Paulo"/>
+                            <ComboBoxItem Content="Sergipe"/>
+                            <ComboBoxItem Content="Tocantins"/>
                         </ComboBox.Items>
                     </ComboBox>
                 </StackPanel>
-
 
             </StackPanel>
         </ContentDialog>
@@ -188,8 +398,8 @@
                 </StackPanel>
 
                 <StackPanel x:Name="Sp_nivelCargo" HorizontalAlignment="Stretch" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
-                    <TextBlock Text="Nível do cargo: " FontStyle="Italic"  VerticalAlignment="Center" FontSize="15" Margin="2"></TextBlock>
-                    <ComboBox Width="400" Height="50" x:Name="Cb_NivelCargo">
+                    <TextBlock Text="Nível do cargo: " FontStyle="Italic"  VerticalAlignment="Center" FontSize="15" Margin="2" ></TextBlock>
+                    <ComboBox Width="400" Height="50" x:Name="Cb_NivelCargo" SelectionChanged="Cb_NivelCargo_SelectionChanged" >
                         <ComboBox.Items>
                             <ComboBoxItem Content="Selecione" x:Name="defaultNivelCargo"/>
                             <ComboBoxItem Content="Estagiário"/>
@@ -211,12 +421,130 @@
 
                 <StackPanel x:Name="Sp_area" HorizontalAlignment="Stretch" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
                     <TextBlock Text="Area: " FontStyle="Italic"  VerticalAlignment="Center" FontSize="15" Margin="2"></TextBlock>
-                    <ComboBox Width="400" Height="50" x:Name="Cb_area">
+                    <ComboBox Width="400" Height="50" x:Name="Cb_area" SelectionChanged="Cb_area_SelectionChanged" >
                         <ComboBox.Items>
-                            <ComboBoxItem Content="Selecione" x:Name="defaultNivelArea"/>
-                            <ComboBoxItem Content="TI" />
-                            <ComboBoxItem Content="Agricultura" />
-                            <ComboBoxItem Content="Outras ai" />
+                            <ComboBoxItem Content="Administração - Comércio exterior" />
+                            <ComboBoxItem Content="Administração e direção de empresas" />
+                            <ComboBoxItem Content="Administração hoteleira" />
+                            <ComboBoxItem Content="Administração - Marketing" />
+                            <ComboBoxItem Content="Administração turística" />
+                            <ComboBoxItem Content="Agronomia" />
+                            <ComboBoxItem Content="Antropologia social e cultural" />
+                            <ComboBoxItem Content="Arqueologia" />
+                            <ComboBoxItem Content="Arquitetura e urbanismo" />
+                            <ComboBoxItem Content="Arquivologia" />
+                            <ComboBoxItem Content="Auditoria e censura jurada de contas" />
+                            <ComboBoxItem Content="Aviação comercial. Piloto comercial" />
+                            <ComboBoxItem Content="Biblioteconomia e documentação" />
+                            <ComboBoxItem Content="Biologia" />
+                            <ComboBoxItem Content="Bioquímica" />
+                            <ComboBoxItem Content="Ciências ambientais" />
+                            <ComboBoxItem Content="Ciências atuariais e financeiras" />
+                            <ComboBoxItem Content="Ciências contábeis" />
+                            <ComboBoxItem Content="Ciências da computação" />
+                            <ComboBoxItem Content="Ciências do trabalho" />
+                            <ComboBoxItem Content="Ciências econômicas e empresariais" />
+                            <ComboBoxItem Content="Ciências religiosas" />
+                            <ComboBoxItem Content="Ciências sanitárias" />
+                            <ComboBoxItem Content="Ciências sociais e políticas" />
+                            <ComboBoxItem Content="Ciências sociais e políticas" />
+                            <ComboBoxItem Content="Cinema" />
+                            <ComboBoxItem Content="Comunicação audiovisual" />
+                            <ComboBoxItem Content="Comunicação social - Jornalismo" />
+                            <ComboBoxItem Content="Comunicação social - Publicidade e propaganda" />
+                            <ComboBoxItem Content="Comunicação social - Relações públicas" />
+                            <ComboBoxItem Content="Dança" />
+                            <ComboBoxItem Content="Desenho gráfico" />
+                            <ComboBoxItem Content="Desenho industrial" />
+                            <ComboBoxItem Content="Direito" />
+                            <ComboBoxItem Content="Direito ambiental" />
+                            <ComboBoxItem Content="Direito internacional" />
+                            <ComboBoxItem Content="Economia" />
+                            <ComboBoxItem Content="Educação artística - Artes cênicas" />
+                            <ComboBoxItem Content="Educação artística - Artes plásticas" />
+                            <ComboBoxItem Content="Educação artística - Desenho" />
+                            <ComboBoxItem Content="Educação física" />
+                            <ComboBoxItem Content="Educação social" />
+                            <ComboBoxItem Content="Enfermagem e obstetrícia" />
+                            <ComboBoxItem Content="Engenharia aeronáutica" />
+                            <ComboBoxItem Content="Engenharia agronômica" />
+                            <ComboBoxItem Content="Engenharia ambiental" />
+                            <ComboBoxItem Content="Engenharia cartográfica" />
+                            <ComboBoxItem Content="Engenharia civil" />
+                            <ComboBoxItem Content="Engenharia de alimentos" />
+                            <ComboBoxItem Content="Engenharia de computação" />
+                            <ComboBoxItem Content="Engenharia de produção/industrial" />
+                            <ComboBoxItem Content="Engenharia de telecomunicações" />
+                            <ComboBoxItem Content="Engenharia elétrica/eletrônica" />
+                            <ComboBoxItem Content="Engenharia mecânica/mecatrônica" />
+                            <ComboBoxItem Content="Engenharia organizacional" />
+                            <ComboBoxItem Content="Engenharia química" />
+                            <ComboBoxItem Content="Engenharia técnica agrícola" />
+                            <ComboBoxItem Content="Engenharia técnica de desenho industrial" />
+                            <ComboBoxItem Content="Engenharia técnica de obras públicas" />
+                            <ComboBoxItem Content="Enologia e viticultura" />
+                            <ComboBoxItem Content="Esporte e turismo" />
+                            <ComboBoxItem Content="Estatística" />
+                            <ComboBoxItem Content="Estudos da Ásia Oriental" />
+                            <ComboBoxItem Content="Estudos internacionais e inter-culturais" />
+                            <ComboBoxItem Content="Filosofia" />
+                            <ComboBoxItem Content="Física" />
+                            <ComboBoxItem Content="Fisioterapia" />
+                            <ComboBoxItem Content="Fonoaudiologia" />
+                            <ComboBoxItem Content="Fotografia e criação digital" />
+                            <ComboBoxItem Content="Geografia" />
+                            <ComboBoxItem Content="Gestão e administração pública" />
+                            <ComboBoxItem Content="História" />
+                            <ComboBoxItem Content="História da arte" />
+                            <ComboBoxItem Content="História e ciências da música" />
+                            <ComboBoxItem Content="Indústria farmacêutica" />
+                            <ComboBoxItem Content="Investigação privada" />
+                            <ComboBoxItem Content="Letras - Alemão " />
+                            <ComboBoxItem Content="Letras - Árabe" />
+                            <ComboBoxItem Content="Letras clássicas" />
+                            <ComboBoxItem Content="Letras - Espanhol" />
+                            <ComboBoxItem Content="Letras - Francês" />
+                            <ComboBoxItem Content="Letras - Inglês" />
+                            <ComboBoxItem Content="Letras - Italiano" />
+                            <ComboBoxItem Content="Letras - Línguas e culturas românicas" />
+                            <ComboBoxItem Content="Letras - Literatura e língua portuguesa" />
+                            <ComboBoxItem Content="Lingüística" />
+                            <ComboBoxItem Content="Logística" />
+                            <ComboBoxItem Content="Máquinas navais" />
+                            <ComboBoxItem Content="Matemática" />
+                            <ComboBoxItem Content="Medicina" />
+                            <ComboBoxItem Content="Meteorologia e climatologia" />
+                            <ComboBoxItem Content="Náutica e transporte marítimo" />
+                            <ComboBoxItem Content="Nutrição humana e dietética" />
+                            <ComboBoxItem Content="Oceanografia" />
+                            <ComboBoxItem Content="Odontologia" />
+                            <ComboBoxItem Content="Outras Engenharias" />
+                            <ComboBoxItem Content="Paisagismo" />
+                            <ComboBoxItem Content="Pedagogia" />
+                            <ComboBoxItem Content="Pedagogia - Educação infantil" />
+                            <ComboBoxItem Content="Pedagogia - Educação Música" />
+                            <ComboBoxItem Content="Pedagogia - Educação primária" />
+                            <ComboBoxItem Content="Pedagogia - Educação secundária" />
+                            <ComboBoxItem Content="Pedagogia especial" />
+                            <ComboBoxItem Content="Pedagogia - Língua estrangeira" />
+                            <ComboBoxItem Content="Piloto de transporte linha aérea" />
+                            <ComboBoxItem Content="Prevenção e segurança do trabalho" />
+                            <ComboBoxItem Content="Prevenção e segurança integral" />
+                            <ComboBoxItem Content="Psicologia" />
+                            <ComboBoxItem Content="Psicopedagogia" />
+                            <ComboBoxItem Content="Química" />
+                            <ComboBoxItem Content="Recursos Humanos" />
+                            <ComboBoxItem Content="Secretariado executivo e bilíngue" />
+                            <ComboBoxItem Content="Serviço social" />
+                            <ComboBoxItem Content="Sociologia" />
+                            <ComboBoxItem Content="Teatro" />
+                            <ComboBoxItem Content="Tecnologia ambiental" />
+                            <ComboBoxItem Content="Tecnologia da informação" />
+                            <ComboBoxItem Content="Terapia ocupacional" />
+                            <ComboBoxItem Content="Tradução e interpretação" />
+                            <ComboBoxItem Content="Turismo" />
+                            <ComboBoxItem Content="Veterinária" />
+                            <ComboBoxItem Content="Zootécnia" />
                         </ComboBox.Items>
                     </ComboBox>
                 </StackPanel>
@@ -233,7 +561,7 @@
                     <TextBlock Text="/"  VerticalAlignment="Center" FontSize="15" Margin="2"></TextBlock>
                     <TextBox x:Name="anoFinalExperiencia"></TextBox>
 
-                    <CheckBox x:Name="Cb_atual" Content="Atual" Margin="2" FontSize="15" Tapped="CheckBox_Tapped"  ></CheckBox>
+                    <CheckBox x:Name="Cb_atual" Content="Atual" Margin="2" FontSize="15" Checked="CheckBox_Checked"  ></CheckBox>
                 </StackPanel>
 
                 <StackPanel x:Name="Sp_descAtividade" HorizontalAlignment="Stretch" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
@@ -249,26 +577,237 @@
 
                 <StackPanel x:Name="Sp_paisExperiencia" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
                     <TextBlock Text="País: " FontStyle="Italic"  VerticalAlignment="Center" FontSize="15" Margin="2"></TextBlock>
-                    <ComboBox Width="400" Height="50" x:Name="Cb_PaisExperiencia">
+                    <ComboBox Width="400" Height="50" x:Name="Cb_PaisExperiencia" SelectionChanged="Cb_PaisExperiencia_SelectionChanged" >
                         <ComboBox.Items>
-                            <ComboBoxItem Content="Brasil" x:Name="defaultPaisExperiencia"/>
+                            <ComboBoxItem Content="Afeganistão"/>
+                            <ComboBoxItem Content="África do Sul"/>
+                            <ComboBoxItem Content="Albânia"/>
+                            <ComboBoxItem Content="Alemanha"/>
+                            <ComboBoxItem Content="Andorra"/>
+                            <ComboBoxItem Content="Angola"/>
+                            <ComboBoxItem Content="Antígua e Barbuda"/>
+                            <ComboBoxItem Content="Arábia Saudita"/>
+                            <ComboBoxItem Content="Argélia"/>
+                            <ComboBoxItem Content="Argentina"/>
+                            <ComboBoxItem Content="Armênia"/>
+                            <ComboBoxItem Content="Austrália"/>
+                            <ComboBoxItem Content="Áustria"/>
+                            <ComboBoxItem Content="Azerbaijão"/>
+                            <ComboBoxItem Content="Bahamas"/>
+                            <ComboBoxItem Content="Bangladesh"/>
+                            <ComboBoxItem Content="Barbados"/>
+                            <ComboBoxItem Content="Barein"/>
+                            <ComboBoxItem Content="Belarus"/>
+                            <ComboBoxItem Content="Bélgica"/>
+                            <ComboBoxItem Content="Belize"/>
+                            <ComboBoxItem Content="Benin"/>
+                            <ComboBoxItem Content="Bolívia"/>
+                            <ComboBoxItem Content="Bósnia Herzegovina"/>
+                            <ComboBoxItem Content="Botswana"/>
+                            <ComboBoxItem Content="Brasil" IsSelected="True"/>
+                            <ComboBoxItem Content="Brunei"/>
+                            <ComboBoxItem Content="Bulgária"/>
+                            <ComboBoxItem Content="Burkina Faso"/>
+                            <ComboBoxItem Content="Burundi"/>
+                            <ComboBoxItem Content="Butão"/>
+                            <ComboBoxItem Content="Cabo verde"/>
+                            <ComboBoxItem Content="Camarões"/>
+                            <ComboBoxItem Content="Camboja"/>
                             <ComboBoxItem Content="Canadá"/>
-                            <ComboBoxItem Content="Argentina" />
-                            <ComboBoxItem Content="EUA" />
-                            <ComboBoxItem Content="Méximo"  />
-                            <ComboBoxItem Content="Paraguai"  />
-                            <ComboBoxItem Content="Suíça"  />
-                            <ComboBoxItem Content="França"  />
-                            <ComboBoxItem Content="Inglaterra"  />
+                            <ComboBoxItem Content="Caribe"/>
+                            <ComboBoxItem Content="Catar"/>
+                            <ComboBoxItem Content="Cazaquistão"/>
+                            <ComboBoxItem Content="Chade"/>
+                            <ComboBoxItem Content="Chile"/>
+                            <ComboBoxItem Content="China"/>
+                            <ComboBoxItem Content="Chipre"/>
+                            <ComboBoxItem Content="Colômbia"/>
+                            <ComboBoxItem Content="Comores"/>
+                            <ComboBoxItem Content="Congo"/>
+                            <ComboBoxItem Content="Coreia do Norte"/>
+                            <ComboBoxItem Content="Coreia do Sul"/>
+                            <ComboBoxItem Content="Costa do Marfim"/>
+                            <ComboBoxItem Content="Costa Rica"/>
+                            <ComboBoxItem Content="Croácia"/>
+                            <ComboBoxItem Content="Cuba"/>
+                            <ComboBoxItem Content="Dinamarca"/>
+                            <ComboBoxItem Content="Djibuti"/>
+                            <ComboBoxItem Content="Dominica"/>
+                            <ComboBoxItem Content="Egito"/>
+                            <ComboBoxItem Content="El Salvador"/>
+                            <ComboBoxItem Content="Emirados Árabes Unidos"/>
+                            <ComboBoxItem Content="Equador"/>
+                            <ComboBoxItem Content="Eritreia"/>
+                            <ComboBoxItem Content="Eslováquia"/>
+                            <ComboBoxItem Content="Eslovênia"/>
+                            <ComboBoxItem Content="Espanha"/>
+                            <ComboBoxItem Content="Estados Unidos"/>
+                            <ComboBoxItem Content="Estônia"/>
+                            <ComboBoxItem Content="Etiópia"/>
+                            <ComboBoxItem Content="Federação dos Estados da Micronésia"/>
+                            <ComboBoxItem Content="Fiji"/>
+                            <ComboBoxItem Content="Filipinas"/>
+                            <ComboBoxItem Content="Finlândia"/>
+                            <ComboBoxItem Content="Francia"/>
+                            <ComboBoxItem Content="Gabão"/>
+                            <ComboBoxItem Content="Gâmbia"/>
+                            <ComboBoxItem Content="Gana"/>
+                            <ComboBoxItem Content="Geórgia"/>
+                            <ComboBoxItem Content="Granada"/>
+                            <ComboBoxItem Content="Grécia"/>
+                            <ComboBoxItem Content="Guatemala"/>
+                            <ComboBoxItem Content="Guiana"/>
+                            <ComboBoxItem Content="Guiana francesa"/>
+                            <ComboBoxItem Content="Guinea Equatorial"/>
+                            <ComboBoxItem Content="Guiné-Bissau"/>
+                            <ComboBoxItem Content="Haiti"/>
+                            <ComboBoxItem Content="Holanda"/>
+                            <ComboBoxItem Content="Honduras"/>
+                            <ComboBoxItem Content="Hungria"/>
+                            <ComboBoxItem Content="Iemen"/>
+                            <ComboBoxItem Content="Ilhas Marshall"/>
+                            <ComboBoxItem Content="Ilhas Salomão"/>
+                            <ComboBoxItem Content="Índia"/>
+                            <ComboBoxItem Content="Indonésia"/>
+                            <ComboBoxItem Content="Irã"/>
+                            <ComboBoxItem Content="Iraque"/>
+                            <ComboBoxItem Content="Irlanda"/>
+                            <ComboBoxItem Content="Islândia"/>
+                            <ComboBoxItem Content="Israel"/>
+                            <ComboBoxItem Content="Itália"/>
+                            <ComboBoxItem Content="Jamaica"/>
+                            <ComboBoxItem Content="Japão"/>
+                            <ComboBoxItem Content="Jordânia"/>
+                            <ComboBoxItem Content="Kiribati"/>
+                            <ComboBoxItem Content="Kuwait"/>
+                            <ComboBoxItem Content="Kyrgyzstan"/>
+                            <ComboBoxItem Content="Laos"/>
+                            <ComboBoxItem Content="Latvia"/>
+                            <ComboBoxItem Content="Líbano"/>
+                            <ComboBoxItem Content="Libéria"/>
+                            <ComboBoxItem Content="Líbia"/>
+                            <ComboBoxItem Content="Liechtenstein"/>
+                            <ComboBoxItem Content="Lituânia"/>
+                            <ComboBoxItem Content="Luxemburgo"/>
+                            <ComboBoxItem Content="Malásia"/>
+                            <ComboBoxItem Content="Malawi"/>
+                            <ComboBoxItem Content="Maldivas"/>
+                            <ComboBoxItem Content="Mali"/>
+                            <ComboBoxItem Content="Malta"/>
+                            <ComboBoxItem Content="Marrocos"/>
+                            <ComboBoxItem Content="Maurício"/>
+                            <ComboBoxItem Content="Mauritânia"/>
+                            <ComboBoxItem Content="México"/>
+                            <ComboBoxItem Content="Mianmar"/>
+                            <ComboBoxItem Content="Moçambique"/>
+                            <ComboBoxItem Content="Moldova"/>
+                            <ComboBoxItem Content="Mongólia"/>
+                            <ComboBoxItem Content="Montenegro"/>
+                            <ComboBoxItem Content="Namíbia"/>
+                            <ComboBoxItem Content="Nauru"/>
+                            <ComboBoxItem Content="Nepal"/>
+                            <ComboBoxItem Content="Nicarágua"/>
+                            <ComboBoxItem Content="Níger"/>
+                            <ComboBoxItem Content="Nigéria"/>
+                            <ComboBoxItem Content="Noruega"/>
+                            <ComboBoxItem Content="Nova Zelândia"/>
+                            <ComboBoxItem Content="Omã"/>
+                            <ComboBoxItem Content="Palau"/>
+                            <ComboBoxItem Content="Panamá"/>
+                            <ComboBoxItem Content="Papua Nova Guiné"/>
+                            <ComboBoxItem Content="Paquistão"/>
+                            <ComboBoxItem Content="Paraguai"/>
+                            <ComboBoxItem Content="Peru"/>
+                            <ComboBoxItem Content="Polônia"/>
+                            <ComboBoxItem Content="Porto Rico"/>
+                            <ComboBoxItem Content="Portugal"/>
+                            <ComboBoxItem Content="Principado de Mônaco"/>
+                            <ComboBoxItem Content="Quênia"/>
+                            <ComboBoxItem Content="Quirguistão"/>
+                            <ComboBoxItem Content="Reino Unido"/>
+                            <ComboBoxItem Content="República Centro Africana"/>
+                            <ComboBoxItem Content="República Checa"/>
+                            <ComboBoxItem Content="República Democrática do Congo"/>
+                            <ComboBoxItem Content="República Dominicana"/>
+                            <ComboBoxItem Content="Romênia"/>
+                            <ComboBoxItem Content="Ruanda"/>
+                            <ComboBoxItem Content="Rússia"/>
+                            <ComboBoxItem Content="Samoa"/>
+                            <ComboBoxItem Content="San Marino"/>
+                            <ComboBoxItem Content="Santa Lúcia"/>
+                            <ComboBoxItem Content="São Cristóvão e Névis"/>
+                            <ComboBoxItem Content="São Tomé e Príncipe"/>
+                            <ComboBoxItem Content="São Vicente"/>
+                            <ComboBoxItem Content="Senegal"/>
+                            <ComboBoxItem Content="Serra Leoa"/>
+                            <ComboBoxItem Content="Sérvia"/>
+                            <ComboBoxItem Content="Seychelles"/>
+                            <ComboBoxItem Content="Singapura"/>
+                            <ComboBoxItem Content="Síria"/>
+                            <ComboBoxItem Content="Somália"/>
+                            <ComboBoxItem Content="Sri Lanka"/>
+                            <ComboBoxItem Content="Suazilândia"/>
+                            <ComboBoxItem Content="Sudão"/>
+                            <ComboBoxItem Content="Sudão do Sul"/>
+                            <ComboBoxItem Content="Suécia"/>
+                            <ComboBoxItem Content="Suíça"/>
+                            <ComboBoxItem Content="Suriname"/>
+                            <ComboBoxItem Content="Tailândia"/>
+                            <ComboBoxItem Content="Tajidquistão"/>
+                            <ComboBoxItem Content="Tanzânia"/>
+                            <ComboBoxItem Content="Timor Leste"/>
+                            <ComboBoxItem Content="Togo"/>
+                            <ComboBoxItem Content="Tonga"/>
+                            <ComboBoxItem Content="Trinidad Tobago"/>
+                            <ComboBoxItem Content="Tunísia"/>
+                            <ComboBoxItem Content="Turcomenistão"/>
+                            <ComboBoxItem Content="Turquia"/>
+                            <ComboBoxItem Content="Tuvalu"/>
+                            <ComboBoxItem Content="Ucrânia"/>
+                            <ComboBoxItem Content="Uganda"/>
+                            <ComboBoxItem Content="União da Sérvia e Montenegro"/>
+                            <ComboBoxItem Content="Uruguai"/>
+                            <ComboBoxItem Content="Uzbequistão"/>
+                            <ComboBoxItem Content="Vanuatu"/>
+                            <ComboBoxItem Content="Venezuela"/>
+                            <ComboBoxItem Content="Vietnã"/>
+                            <ComboBoxItem Content="Zâmbia"/>
+                            <ComboBoxItem Content="Zimbábue"/>
                         </ComboBox.Items>
                     </ComboBox>
                 </StackPanel>
 
                 <StackPanel x:Name="Sp_estadoExperiencia" HorizontalAlignment="Stretch" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
                     <TextBlock Text="Estado: " FontStyle="Italic"  VerticalAlignment="Center" FontSize="15" Margin="2"></TextBlock>
-                    <ComboBox Width="400" Height="50" x:Name="Cb_EstadosExperiencia">
+                    <ComboBox Width="400" Height="50" x:Name="Cb_EstadosExperiencia" SelectionChanged="Cb_EstadosExperiencia_SelectionChanged" >
                         <ComboBox.Items>
-                            <ComboBoxItem Content="Fazer o bind dos estados para carregar os estados todos"/>
+                            <ComboBoxItem Content="Acre"/>
+                            <ComboBoxItem Content="Alagoas"/>
+                            <ComboBoxItem Content="Amapá"/>
+                            <ComboBoxItem Content="Amazonas"/>
+                            <ComboBoxItem Content="Bahia"/>
+                            <ComboBoxItem Content="Ceará"/>
+                            <ComboBoxItem Content="Distrito Federal"/>
+                            <ComboBoxItem Content="Espírito Santo"/>
+                            <ComboBoxItem Content="Goiás"/>
+                            <ComboBoxItem Content= "Maranhão"/>
+                            <ComboBoxItem Content="Mato Grosso"/>
+                            <ComboBoxItem Content="Mato Grosso do Sul"/>
+                            <ComboBoxItem Content="Minas Gerais"/>
+                            <ComboBoxItem Content="Pará"/>
+                            <ComboBoxItem Content="Paraíba"/>
+                            <ComboBoxItem Content="Paraná"/>
+                            <ComboBoxItem Content="Pernambuco"/>
+                            <ComboBoxItem Content="Piauí"/>
+                            <ComboBoxItem Content="Rio de Janeiro"/>
+                            <ComboBoxItem Content="Rio Grande do Norte"/>
+                            <ComboBoxItem Content="Rio Grande do Sul"/>
+                            <ComboBoxItem Content="Rondônia"/>
+                            <ComboBoxItem Content="Roraima"/>
+                            <ComboBoxItem Content="Santa Catarina"/>
+                            <ComboBoxItem Content="São Paulo"/>
+                            <ComboBoxItem Content="Sergipe"/>
+                            <ComboBoxItem Content="Tocantins"/>
                         </ComboBox.Items>
                     </ComboBox>
                 </StackPanel>
@@ -296,12 +835,12 @@
                     </ComboBox>
                 </StackPanel>
                 <StackPanel x:Name="Sp_outroIdioma" HorizontalAlignment="Stretch" VerticalAlignment="Center" Orientation="Horizontal" Margin="2" Visibility="Collapsed">
-                     <TextBlock Text="Idioma: " FontStyle="Italic"  VerticalAlignment="Center" FontSize="15" Margin="2"></TextBlock>
+                    <TextBlock Text="Idioma: " FontStyle="Italic"  VerticalAlignment="Center" FontSize="15" Margin="2"></TextBlock>
                     <TextBox x:Name="Tb_nomeIdioma" HorizontalAlignment="Stretch" Width="400" Height="30" FontSize="15"></TextBox>
                 </StackPanel>
                 <StackPanel x:Name="Sp_nivelIdioma" HorizontalAlignment="Stretch" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
                     <TextBlock Text="Nível: " FontStyle="Italic"  VerticalAlignment="Center" FontSize="15" Margin="2"></TextBlock>
-                    <ComboBox  Width="400" Height="50" x:Name="Cb_NivelIdiomas">
+                    <ComboBox  Width="400" Height="50" x:Name="Cb_NivelIdiomas" SelectionChanged="Cb_NivelIdiomas_SelectionChanged" >
                         <ComboBox.Items>
                             <ComboBoxItem Content="Básico"/>
                             <ComboBoxItem Content="Intermediário" />
@@ -312,7 +851,7 @@
                 </StackPanel>
             </StackPanel>
         </ContentDialog>
-        
+
 
     </Grid>
 </Page>

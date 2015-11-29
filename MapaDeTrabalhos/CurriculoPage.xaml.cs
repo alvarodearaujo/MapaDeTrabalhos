@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MapaDeTrabalhos.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,35 +27,146 @@ namespace MapaDeTrabalhos
     /// </summary>
     public sealed partial class CurriculoPage : Page
     {
-        public byte[] CurrentImage { get; set; }
+        private byte[] CurrentImage { get; set; }
+
+        private Curriculo curriculo;
+        string statusCurso = "";
+        string statusExperiencia = "";
+        FormacaoAcademica form = new FormacaoAcademica();
+        ExperienciaProfissional expe = new ExperienciaProfissional();
+        Idioma idi = new Idioma();
+
 
         MessageDialog dialog = new MessageDialog("");
 
         public CurriculoPage()
         {
             this.InitializeComponent();
+            curriculo = new Curriculo();
         }
 
         private void Salvar_Click(object sender, RoutedEventArgs e)
         {
+            //Fazer as validações 
+            curriculo.valorMaiorSalario = maiorValorSalario.Text;
+            curriculo.valorMenorSalario = menorValorSalario.Text;
 
+            if (HabilitacaoA.IsChecked == true)
+            {
+                curriculo.habilitacao.Add("A");
+            }
+            else if (HabilitacaoB.IsChecked == true)
+            {
+                curriculo.habilitacao.Add("B");
+            }
+            else if (HabilitacaoC.IsChecked == true)
+            {
+                curriculo.habilitacao.Add("C");
+            }
+            else if (HabilitacaoD.IsChecked == true)
+            {
+                curriculo.habilitacao.Add("D");
+
+            }
+            else if (HabilitacaoE.IsChecked == true)
+            {
+                curriculo.habilitacao.Add("E");
+            }
+
+            if (Caminhao.IsChecked == true)
+            {
+                curriculo.veiculoProprio.Add("Caminhão");
+            }
+            else if (Carro.IsChecked == true)
+            {
+                curriculo.veiculoProprio.Add("Carro");
+            }
+            else if (Moto.IsChecked == true)
+            {
+                curriculo.veiculoProprio.Add("Moto");
+            }
+            else if (Outros.IsChecked == true)
+            {
+                curriculo.veiculoProprio.Add("Outro veículo");
+            }
+
+            //Fazer a função de salvar no banco
+
+            Frame.Navigate(typeof(MapaPage));
         }
+
+
+
+
 
 
         private async void AdicionarFormacao_Click(object sender, RoutedEventArgs e)
         {
             var result = await FormacaoDialog.ShowAsync();
 
+            string resutado = "" + result;
+            if (resutado.Equals("Primary"))
+            {
+                // vai fazer as validações dos campos
+
+                if (statusCurso.Equals("Cursando"))
+                {
+                    form.isCursando = true;
+
+                }
+                else if (statusCurso.Equals("Concluido"))
+                {
+                    form.isCursando = false;
+                }
+                else
+                {
+                    form.isTrancado = true;
+                }
+                form.anoFinal = anoFinal.Text;
+                form.anoInicial = anoInicial.Text;
+                form.mesFinal = mesFinal.Text;
+                form.mesInicial = mesInicial.Text;
+
+                // Fazer o processo de salvar no Banco
+                form = new FormacaoAcademica();
+            }
         }
 
         private async void AdicionarExperiencia_Click(object sender, RoutedEventArgs e)
         {
             var result = await ExperienciaDialog.ShowAsync();
+            string resutado = "" + result;
+            if (resutado.Equals("Primary"))
+            {
+                //Fazer as validaçoes
+                expe = new ExperienciaProfissional();
+                expe.nomeEmpresa = Tb_nomeEmpresa.Text;
+                expe.nomeFuncao = Tb_nomeCargo.Text;
+                expe.anoFinal = anoFinalExperiencia.Text;
+                expe.anoInicial = anoFinalExperiencia.Text;
+                expe.mesInicial = mesInicialExperiencia.Text;
+                expe.mesFinal = mesFinal.Text;
+
+                //fazer o processo pra salvar no BD
+                expe = new ExperienciaProfissional();
+            }
         }
 
         private async void AdicionarIdioma_Click(object sender, RoutedEventArgs e)
         {
+            //Validar os campos
             var result = await IdiomaDialog.ShowAsync();
+            string resutado = "" + result;
+            if (resutado.Equals("Primary"))
+            {
+                if (idi.nomeIdioma.Equals("Outro"))
+                {
+                    idi.nomeIdioma = Tb_nomeIdioma.Text;
+                }
+                //Fazer a parada pra salvar no banco
+
+                idi = new Idioma();
+            }
         }
 
         private void Rb_Concluido_Checked(object sender, RoutedEventArgs e)
@@ -63,6 +175,7 @@ namespace MapaDeTrabalhos
             {
                 mesFinal.IsEnabled = true;
                 anoFinal.IsEnabled = true;
+                statusCurso = "Concluido";
             }
 
         }
@@ -73,6 +186,17 @@ namespace MapaDeTrabalhos
             {
                 mesFinal.IsEnabled = false;
                 anoFinal.IsEnabled = false;
+                statusCurso = "Cursando";
+            }
+        }
+
+        private void Rb_Trancado_Checked(object sender, RoutedEventArgs e)
+        {
+            if (mesFinal != null)
+            {
+                mesFinal.IsEnabled = false;
+                anoFinal.IsEnabled = false;
+                statusCurso = "Trancado";
             }
         }
 
@@ -80,8 +204,17 @@ namespace MapaDeTrabalhos
         {
             if (mesFinalExperiencia != null)
             {
-                mesFinalExperiencia.IsEnabled = false;
-                anoFinalExperiencia.IsEnabled = false;
+                if (Cb_atual.IsChecked == true)
+                {
+                    mesFinalExperiencia.IsEnabled = false;
+                    anoFinalExperiencia.IsEnabled = false;
+                    statusExperiencia = "Nao";
+                }
+                else
+                {
+                    statusExperiencia = "Sim";
+                }
+
             }
         }
 
@@ -103,23 +236,7 @@ namespace MapaDeTrabalhos
         }
 
 
-        private void Cb_Idiomas_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = ((ComboBox)sender);
-            ComboBoxItem item = cb.SelectedItem as ComboBoxItem;
-            string valorSelecionado = item.Content.ToString();
-
-            if (valorSelecionado.Equals("Outro"))
-            {
-                Sp_outroIdioma.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                Sp_outroIdioma.Visibility = Visibility.Collapsed;
-            }
-
-        }
-
+   
         private async void image_Tapped(object sender, TappedRoutedEventArgs e)
         {
             try
@@ -150,6 +267,144 @@ namespace MapaDeTrabalhos
                 dialog.Content = ex.Message.ToString();
                 await dialog.ShowAsync();
             }
+        }
+
+        private void Cb_PaisExperiencia_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cb = ((ComboBox)sender);
+            ComboBoxItem item = cb.SelectedItem as ComboBoxItem;
+            string valorSelecionado = item.Content.ToString();
+
+            if (Sp_estadoExperiencia != null)
+            {
+                if (valorSelecionado.Equals("Brasil"))
+                {
+                    Sp_estadoExperiencia.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    Sp_estadoExperiencia.Visibility = Visibility.Collapsed;
+                }
+            }
+            expe.pais = valorSelecionado;
+
+        }
+
+        private void Cb_Pais_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cb = ((ComboBox)sender);
+            ComboBoxItem item = cb.SelectedItem as ComboBoxItem;
+            string valorSelecionado = item.Content.ToString();
+
+            if (Sp_estado != null)
+            {
+                if (valorSelecionado.Equals("Brasil"))
+                {
+                    Sp_estado.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    Sp_estado.Visibility = Visibility.Collapsed;
+                }
+            }
+            form.pais = valorSelecionado;
+        }
+
+        private void Cb_NivelFormacao_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cb = ((ComboBox)sender);
+            ComboBoxItem item = cb.SelectedItem as ComboBoxItem;
+            string valorSelecionado = item.Content.ToString();
+            form.nivelCurso = valorSelecionado;
+        }
+
+        private void Cb_NomeDoCurso_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cb = ((ComboBox)sender);
+            ComboBoxItem item = cb.SelectedItem as ComboBoxItem;
+            string valorSelecionado = item.Content.ToString();
+            form.nomeCurso = valorSelecionado;
+        }
+
+        private void Cb_Estados_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cb = ((ComboBox)sender);
+            ComboBoxItem item = cb.SelectedItem as ComboBoxItem;
+            string valorSelecionado = item.Content.ToString();
+            form.estado = valorSelecionado;
+        }
+
+
+
+        private void Cb_NivelCargo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cb = ((ComboBox)sender);
+            ComboBoxItem item = cb.SelectedItem as ComboBoxItem;
+            string valorSelecionado = item.Content.ToString();
+            expe.nivelFuncao = valorSelecionado;
+        }
+
+        private void Cb_area_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cb = ((ComboBox)sender);
+            ComboBoxItem item = cb.SelectedItem as ComboBoxItem;
+            string valorSelecionado = item.Content.ToString();
+            expe.area = valorSelecionado;
+        }
+
+        private void Cb_EstadosExperiencia_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cb = ((ComboBox)sender);
+            ComboBoxItem item = cb.SelectedItem as ComboBoxItem;
+            string valorSelecionado = item.Content.ToString();
+            expe.estado = valorSelecionado;
+        }
+
+        private void Cb_Idiomas_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cb = ((ComboBox)sender);
+            ComboBoxItem item = cb.SelectedItem as ComboBoxItem;
+            string valorSelecionado = item.Content.ToString();
+
+            if (valorSelecionado.Equals("Outro"))
+            {
+                Sp_outroIdioma.Visibility = Visibility.Visible;
+                idi.nomeIdioma = "Outro";
+            }
+            else
+            {
+                Sp_outroIdioma.Visibility = Visibility.Collapsed;
+                idi.nomeIdioma = valorSelecionado;
+            }
+
+        }
+
+        private void Cb_NivelIdiomas_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cb = ((ComboBox)sender);
+            ComboBoxItem item = cb.SelectedItem as ComboBoxItem;
+            string valorSelecionado = item.Content.ToString();
+            idi.nivelIdioma = valorSelecionado;
+        }
+
+        private void Rb_viajarSim_Click(object sender, RoutedEventArgs e)
+        {
+            curriculo.IsDisponivelViajar = true;
+        }
+
+        private void Rb_viajarNao_Click(object sender, RoutedEventArgs e)
+        {
+            curriculo.IsDisponivelViajar = false;
+        }
+
+        private void Rb_mudarSim_Click(object sender, RoutedEventArgs e)
+        {
+            curriculo.IsDisponivelMudarResidencia = true;
+        }
+
+        private void Rb_mudarNao_Click(object sender, RoutedEventArgs e)
+        {
+            curriculo.IsDisponivelMudarResidencia = false;
         }
     }
 }

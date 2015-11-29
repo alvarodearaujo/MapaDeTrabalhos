@@ -37,12 +37,6 @@ namespace MapaDeTrabalhos.Model
         [JsonProperty(PropertyName = "isPessoaFisica")]
         public Boolean isPessoaFisica { get; set; }
 
-        [JsonProperty(PropertyName = "endereco")]
-        public Endereco endereco { get; set; }
-
-        [JsonProperty(PropertyName = "usuario")]
-        public Usuario usuario { get; set; }
-
         [JsonProperty(PropertyName = "site")]
         public string site { get; set; }
 

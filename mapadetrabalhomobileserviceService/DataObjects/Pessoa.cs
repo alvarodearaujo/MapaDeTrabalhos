@@ -30,10 +30,6 @@ namespace mapadetrabalhomobileserviceService.DataObjects
 
         public Boolean isPessoaFisica { get; set; }
 
-        public Endereco endereco { get; set; }
-
-        public Usuario usuario { get; set; }
-
         public byte[] Foto { get; set; }
 
     }

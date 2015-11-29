@@ -28,12 +28,18 @@ namespace MapaDeTrabalhos
     {
         private Pessoa pessoa;
 
+        private Usuario usuario;
+
+        private Endereco endereco;
+
         private IMobileServiceTable<Pessoa> ContatoTable = App.MobileService.GetTable<Pessoa>();
 
         public CadastroPage()
         {
             this.InitializeComponent();
             pessoa = new Pessoa();
+            endereco = new Endereco();
+            usuario = new Usuario();
         }
 
         private async void Salvar_Click(object sender, RoutedEventArgs e)
@@ -54,45 +60,45 @@ namespace MapaDeTrabalhos
 
             pessoa.site = Tb_site.Text;
 
-            pessoa.usuario.Senha = Pb_senha.Password;
+            usuario.Senha = Pb_senha.Password;
 
-            pessoa.usuario.Login = Tb_usuario.Text;
+            usuario.Login = Tb_usuario.Text;
 
-            pessoa.endereco.Rua = Tb_rua.Text;
+            endereco.Rua = Tb_rua.Text;
 
-            pessoa.endereco.numero = Tb_numero.Text;
+            endereco.numero = Tb_numero.Text;
 
-            pessoa.endereco.bairro = Tb_bairro.Text;
+            endereco.bairro = Tb_bairro.Text;
             
-            pessoa.endereco.cidade = Tb_cidade.Text;
+            endereco.cidade = Tb_cidade.Text;
 
             //Pegando as posições geograficas 
 
-            string addressToGeocode = pessoa.endereco.Rua + ", " +pessoa.endereco.numero + ", " + pessoa.endereco.bairro + ", " + pessoa.endereco.cidade +" - " + pessoa.endereco.estado;
+            string addressToGeocode = endereco.Rua + ", " + endereco.numero + ", " + endereco.bairro + ", " + endereco.cidade +" - " + endereco.estado;
 
-            // Nearby location to use as a query hint.
-            BasicGeoposition queryHint = new BasicGeoposition();
-            queryHint.Latitude = -8.05665;
-            queryHint.Longitude = -34.898441;
-            Geopoint hintPoint = new Geopoint(queryHint);
+            //// Nearby location to use as a query hint.
+            //BasicGeoposition queryHint = new BasicGeoposition();
+            //queryHint.Latitude = -8.05665;
+            //queryHint.Longitude = -34.898441;
+            //Geopoint hintPoint = new Geopoint(queryHint);
 
-            // Geocode the specified address, using the specified reference point
-            // as a query hint. Return no more than 3 results.
-            MapLocationFinderResult result = await MapLocationFinder.FindLocationsAsync(addressToGeocode, hintPoint, 3);
+            //// Geocode the specified address, using the specified reference point
+            //// as a query hint. Return no more than 3 results.
+            //MapLocationFinderResult result = await MapLocationFinder.FindLocationsAsync(addressToGeocode, hintPoint, 3);
 
-            //Setting position default to Derby - Recife
-            BasicGeoposition cityPosition = new BasicGeoposition() { Latitude = -8.05665, Longitude = -34.898441 };
-            Geopoint cityCenter = new Geopoint(cityPosition);
-            // If the query returns results, display the coordinates
+            ////Setting position default to Derby - Recife
+            //BasicGeoposition cityPosition = new BasicGeoposition() { Latitude = -8.05665, Longitude = -34.898441 };
+            //Geopoint cityCenter = new Geopoint(cityPosition);
+            //// If the query returns results, display the coordinates
             // of the first result.
-            if (result.Status == MapLocationFinderStatus.Success)
-            {
-                pessoa.endereco.latitude = result.Locations[0].Point.Position.Latitude;
-                pessoa.endereco.longitude = result.Locations[0].Point.Position.Longitude;
-            }
+            //if (result.Status == MapLocationFinderStatus.Success)
+            //{
+            //    pessoa.endereco.latitude = result.Locations[0].Point.Position.Latitude;
+            //    pessoa.endereco.longitude = result.Locations[0].Point.Position.Longitude;
+            //}
 
-            //Salvando Pessoa
-            await App.MobileService.GetTable<Pessoa>().UpdateAsync(pessoa);
+            ////Salvando Pessoa
+            //await App.MobileService.GetTable<Pessoa>().UpdateAsync(pessoa);
 
             //Fazer as paradas para salvar endereço e usuário
 
@@ -153,14 +159,14 @@ namespace MapaDeTrabalhos
             ComboBox cb = ((ComboBox)sender);
             ComboBoxItem item = cb.SelectedItem as ComboBoxItem;
             string valorSelecionado = item.Content.ToString();
-            pessoa.endereco.estado = valorSelecionado;
+            endereco.estado = valorSelecionado;
 
         }
 
 
         private void Rb_masc_Checked(object sender, RoutedEventArgs e)
         {
-            if (Sp_sexo != null)
+            if (pessoa != null)
             {
                 this.pessoa.sexo = "Masculino";
             }
@@ -168,7 +174,7 @@ namespace MapaDeTrabalhos
 
         private void Rb_femi_Checked(object sender, RoutedEventArgs e)
         {
-            if (Sp_sexo != null)
+            if (pessoa != null)
             {
                 this.pessoa.sexo = "Feminino";
             }

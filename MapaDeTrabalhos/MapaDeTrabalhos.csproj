@@ -117,6 +117,7 @@
     </Compile>
     <Compile Include="Model\Anuncio.cs" />
     <Compile Include="Model\Curriculo.cs" />
+    <Compile Include="Model\Cursos.cs" />
     <Compile Include="Model\Endereco.cs" />
     <Compile Include="Model\ExperienciaProfissional.cs" />
     <Compile Include="Model\FormacaoAcademica.cs" />
