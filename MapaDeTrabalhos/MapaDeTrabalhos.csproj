@@ -118,8 +118,8 @@
     <Compile Include="MapaPage.xaml.cs">
       <DependentUpon>MapaPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Class1.cs" />
     <Compile Include="Model\Anuncio.cs" />
+    <Compile Include="Model\Curriculo.cs" />
     <Compile Include="Model\Cursos.cs" />
     <Compile Include="Model\Endereco.cs" />
     <Compile Include="Model\ExperienciaProfissional.cs" />

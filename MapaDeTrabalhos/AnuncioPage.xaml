@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="LightGray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -17,21 +17,148 @@
             <RowDefinition Height="244*"/>
             <RowDefinition Height="381*"/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="tB_titulo" HorizontalAlignment="Left" TextWrapping="Wrap" PlaceholderText="Título" Text="" VerticalAlignment="Top" Width="470" Margin="12,11,0,0" Height="32" Grid.Row="1"/>
-        <RichEditBox x:Name="tB_descricao" HorizontalAlignment="Left" Margin="12,12,0,0" Grid.Row="2" PlaceholderText="Descrição" VerticalAlignment="Top" Width="470" Height="278"/>
-        <RichEditBox x:Name="tB_exigencias" HorizontalAlignment="Left" Margin="12,12,0,0" Grid.Row="2" PlaceholderText="Exigências" VerticalAlignment="Top" Width="482" Height="278" Grid.Column="1"/>
-        <RichEditBox x:Name="tB_beneficios" Grid.Column="1" HorizontalAlignment="Left" Margin="12,11,0,0" PlaceholderText="Benefícios" VerticalAlignment="Top" Width="482" Height="210" Grid.Row="1"/>
-        <TextBox x:Name="tB_salario" HorizontalAlignment="Left" Margin="12,68,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" PlaceholderText="Salário/Valor" VerticalAlignment="Top" Height="32" Width="470"/>
-        <Button x:Name="btn_salvar" Content="Salvar" Grid.Column="1" HorizontalAlignment="Left" Margin="33,324,0,0" Grid.Row="2" VerticalAlignment="Top" Width="175" Height="32"/>
+        <TextBox x:Name="tB_titulo" HorizontalAlignment="Left" TextWrapping="Wrap" PlaceholderText="Título" Text="" VerticalAlignment="Top" Width="592" Margin="12,11,0,0" Height="32" Grid.Row="1"/>
+        <TextBox x:Name="tB_descricao" HorizontalAlignment="Left" Margin="12,12,0,0" Grid.Row="2" PlaceholderText="Descrição" VerticalAlignment="Top" Width="592" Height="278"/>
+        <TextBox x:Name="tB_exigencias" HorizontalAlignment="Left" Margin="12,12,0,0" Grid.Row="2" PlaceholderText="Exigências" VerticalAlignment="Top" Width="592" Height="278" Grid.Column="1"/>
+        <ComboBox Width="592" Height="32" x:Name="Cb_area" Grid.Row="1" Grid.Column="1" Margin="12,12,0,0" SelectionChanged="Cb_area_SelectionChanged" >
+            <ComboBox.Items>
+                <ComboBoxItem Content="Administração - Comércio exterior" />
+                <ComboBoxItem Content="Administração e direção de empresas" />
+                <ComboBoxItem Content="Administração hoteleira" />
+                <ComboBoxItem Content="Administração - Marketing" />
+                <ComboBoxItem Content="Administração turística" />
+                <ComboBoxItem Content="Agronomia" />
+                <ComboBoxItem Content="Antropologia social e cultural" />
+                <ComboBoxItem Content="Arqueologia" />
+                <ComboBoxItem Content="Arquitetura e urbanismo" />
+                <ComboBoxItem Content="Arquivologia" />
+                <ComboBoxItem Content="Auditoria e censura jurada de contas" />
+                <ComboBoxItem Content="Aviação comercial. Piloto comercial" />
+                <ComboBoxItem Content="Biblioteconomia e documentação" />
+                <ComboBoxItem Content="Biologia" />
+                <ComboBoxItem Content="Bioquímica" />
+                <ComboBoxItem Content="Ciências ambientais" />
+                <ComboBoxItem Content="Ciências atuariais e financeiras" />
+                <ComboBoxItem Content="Ciências contábeis" />
+                <ComboBoxItem Content="Ciências da computação" />
+                <ComboBoxItem Content="Ciências do trabalho" />
+                <ComboBoxItem Content="Ciências econômicas e empresariais" />
+                <ComboBoxItem Content="Ciências religiosas" />
+                <ComboBoxItem Content="Ciências sanitárias" />
+                <ComboBoxItem Content="Ciências sociais e políticas" />
+                <ComboBoxItem Content="Ciências sociais e políticas" />
+                <ComboBoxItem Content="Cinema" />
+                <ComboBoxItem Content="Comunicação audiovisual" />
+                <ComboBoxItem Content="Comunicação social - Jornalismo" />
+                <ComboBoxItem Content="Comunicação social - Publicidade e propaganda" />
+                <ComboBoxItem Content="Comunicação social - Relações públicas" />
+                <ComboBoxItem Content="Dança" />
+                <ComboBoxItem Content="Desenho gráfico" />
+                <ComboBoxItem Content="Desenho industrial" />
+                <ComboBoxItem Content="Direito" />
+                <ComboBoxItem Content="Direito ambiental" />
+                <ComboBoxItem Content="Direito internacional" />
+                <ComboBoxItem Content="Economia" />
+                <ComboBoxItem Content="Educação artística - Artes cênicas" />
+                <ComboBoxItem Content="Educação artística - Artes plásticas" />
+                <ComboBoxItem Content="Educação artística - Desenho" />
+                <ComboBoxItem Content="Educação física" />
+                <ComboBoxItem Content="Educação social" />
+                <ComboBoxItem Content="Enfermagem e obstetrícia" />
+                <ComboBoxItem Content="Engenharia aeronáutica" />
+                <ComboBoxItem Content="Engenharia agronômica" />
+                <ComboBoxItem Content="Engenharia ambiental" />
+                <ComboBoxItem Content="Engenharia cartográfica" />
+                <ComboBoxItem Content="Engenharia civil" />
+                <ComboBoxItem Content="Engenharia de alimentos" />
+                <ComboBoxItem Content="Engenharia de computação" />
+                <ComboBoxItem Content="Engenharia de produção/industrial" />
+                <ComboBoxItem Content="Engenharia de telecomunicações" />
+                <ComboBoxItem Content="Engenharia elétrica/eletrônica" />
+                <ComboBoxItem Content="Engenharia mecânica/mecatrônica" />
+                <ComboBoxItem Content="Engenharia organizacional" />
+                <ComboBoxItem Content="Engenharia química" />
+                <ComboBoxItem Content="Engenharia técnica agrícola" />
+                <ComboBoxItem Content="Engenharia técnica de desenho industrial" />
+                <ComboBoxItem Content="Engenharia técnica de obras públicas" />
+                <ComboBoxItem Content="Enologia e viticultura" />
+                <ComboBoxItem Content="Esporte e turismo" />
+                <ComboBoxItem Content="Estatística" />
+                <ComboBoxItem Content="Estudos da Ásia Oriental" />
+                <ComboBoxItem Content="Estudos internacionais e inter-culturais" />
+                <ComboBoxItem Content="Filosofia" />
+                <ComboBoxItem Content="Física" />
+                <ComboBoxItem Content="Fisioterapia" />
+                <ComboBoxItem Content="Fonoaudiologia" />
+                <ComboBoxItem Content="Fotografia e criação digital" />
+                <ComboBoxItem Content="Geografia" />
+                <ComboBoxItem Content="Gestão e administração pública" />
+                <ComboBoxItem Content="História" />
+                <ComboBoxItem Content="História da arte" />
+                <ComboBoxItem Content="História e ciências da música" />
+                <ComboBoxItem Content="Indústria farmacêutica" />
+                <ComboBoxItem Content="Investigação privada" />
+                <ComboBoxItem Content="Letras - Alemão " />
+                <ComboBoxItem Content="Letras - Árabe" />
+                <ComboBoxItem Content="Letras clássicas" />
+                <ComboBoxItem Content="Letras - Espanhol" />
+                <ComboBoxItem Content="Letras - Francês" />
+                <ComboBoxItem Content="Letras - Inglês" />
+                <ComboBoxItem Content="Letras - Italiano" />
+                <ComboBoxItem Content="Letras - Línguas e culturas românicas" />
+                <ComboBoxItem Content="Letras - Literatura e língua portuguesa" />
+                <ComboBoxItem Content="Lingüística" />
+                <ComboBoxItem Content="Logística" />
+                <ComboBoxItem Content="Máquinas navais" />
+                <ComboBoxItem Content="Matemática" />
+                <ComboBoxItem Content="Medicina" />
+                <ComboBoxItem Content="Meteorologia e climatologia" />
+                <ComboBoxItem Content="Náutica e transporte marítimo" />
+                <ComboBoxItem Content="Nutrição humana e dietética" />
+                <ComboBoxItem Content="Oceanografia" />
+                <ComboBoxItem Content="Odontologia" />
+                <ComboBoxItem Content="Outras Engenharias" />
+                <ComboBoxItem Content="Paisagismo" />
+                <ComboBoxItem Content="Pedagogia" />
+                <ComboBoxItem Content="Pedagogia - Educação infantil" />
+                <ComboBoxItem Content="Pedagogia - Educação Música" />
+                <ComboBoxItem Content="Pedagogia - Educação primária" />
+                <ComboBoxItem Content="Pedagogia - Educação secundária" />
+                <ComboBoxItem Content="Pedagogia especial" />
+                <ComboBoxItem Content="Pedagogia - Língua estrangeira" />
+                <ComboBoxItem Content="Piloto de transporte linha aérea" />
+                <ComboBoxItem Content="Prevenção e segurança do trabalho" />
+                <ComboBoxItem Content="Prevenção e segurança integral" />
+                <ComboBoxItem Content="Psicologia" />
+                <ComboBoxItem Content="Psicopedagogia" />
+                <ComboBoxItem Content="Química" />
+                <ComboBoxItem Content="Recursos Humanos" />
+                <ComboBoxItem Content="Secretariado executivo e bilíngue" />
+                <ComboBoxItem Content="Serviço social" />
+                <ComboBoxItem Content="Sociologia" />
+                <ComboBoxItem Content="Teatro" />
+                <ComboBoxItem Content="Tecnologia ambiental" />
+                <ComboBoxItem Content="Tecnologia da informação" />
+                <ComboBoxItem Content="Terapia ocupacional" />
+                <ComboBoxItem Content="Tradução e interpretação" />
+                <ComboBoxItem Content="Turismo" />
+                <ComboBoxItem Content="Veterinária" />
+                <ComboBoxItem Content="Zootécnia" />
+            </ComboBox.Items>
+        </ComboBox>
+        <TextBox x:Name="tB_beneficios" Grid.Column="1" HorizontalAlignment="Left" Margin="12,67,0,0" PlaceholderText="Benefícios" VerticalAlignment="Top" Width="592" Height="154" Grid.Row="1"/>
+        <TextBox x:Name="tB_salario" HorizontalAlignment="Left" Margin="12,68,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" PlaceholderText="Salário/Valor" VerticalAlignment="Top" Height="32" Width="592"/>
+        <Button x:Name="btn_salvar" Content="Salvar" Grid.Column="1" HorizontalAlignment="Left" Margin="33,324,0,0" Grid.Row="2" VerticalAlignment="Top" Width="175" Height="32" Click="btn_salvar_Click"/>
         <Button x:Name="btn_cancelar" Content="Cancelar" Grid.Column="1" HorizontalAlignment="Stretch" Margin="243,324,222,0" Grid.Row="2" VerticalAlignment="Top" Height="32"/>
-        <ComboBox x:Name="comboBox" PlaceholderText="Horario" HorizontalAlignment="Left" Margin="12,127,0,0" Grid.Row="1" VerticalAlignment="Top" Width="470" Height="32">
+        <ComboBox x:Name="cB_horario" PlaceholderText="Horario" HorizontalAlignment="Left" Margin="12,127,0,0" Grid.Row="1" VerticalAlignment="Top" Width="592" Height="32" SelectionChanged="cB_horario_SelectionChanged">
+            <ComboBoxItem Content="Integral"/>
             <ComboBoxItem Content="Manhã"/>
             <ComboBoxItem Content="Tarde"/>
             <ComboBoxItem Content="Noite"/>
         </ComboBox>
         <StackPanel Orientation="Horizontal" Margin="12,179,158,23" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
             <TextBlock x:Name="tB_tipo" HorizontalAlignment="Left" Margin="4,7,2,0" TextWrapping="Wrap" Text="Tipo:" VerticalAlignment="Top" Height="27"/>
-            <RadioButton x:Name="rB_forma1" Content="Formal" HorizontalAlignment="Left" Margin="2,2,2,0" VerticalAlignment="Top" GroupName="tb_forinfor"/>
+            <RadioButton x:Name="rB_formal" Content="Formal" HorizontalAlignment="Left" Margin="2,2,2,0" VerticalAlignment="Top" GroupName="tb_forinfor"/>
             <RadioButton x:Name="rB_informal" Content="Informal" HorizontalAlignment="Left" Margin="2,2,2,0" VerticalAlignment="Top" GroupName="tb_forinfor" Width="108"/>
         </StackPanel>
         <TextBlock x:Name="Título" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Cadastro de Anúncio" VerticalAlignment="Center" FontSize="50" Margin="20" Grid.Column="0" Grid.ColumnSpan="2" Width="461" Height="75"/>

@@ -30,5 +30,11 @@ namespace mapadetrabalhomobileserviceService.DataObjects
         public Boolean isFormal { get; set; }
 
         public Boolean isAberto { get; set; }
+
+        public string area { get; set; }
+
+        public double latitude { get; set; }
+
+        public double longitude { get; set; }
     }
 }
