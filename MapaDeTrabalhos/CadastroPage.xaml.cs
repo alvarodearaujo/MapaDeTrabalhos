@@ -32,7 +32,9 @@ namespace MapaDeTrabalhos
 
         private Endereco endereco;
 
-        private IMobileServiceTable<Pessoa> ContatoTable = App.MobileService.GetTable<Pessoa>();
+        private IMobileServiceTable<Pessoa> PessoaTable = App.MobileService.GetTable<Pessoa>();
+        private IMobileServiceTable<Usuario> UsuarioTable = App.MobileService.GetTable<Usuario>();
+        private IMobileServiceTable<Endereco> EnderecoTable = App.MobileService.GetTable<Endereco>();
 
         public CadastroPage()
         {
@@ -40,12 +42,20 @@ namespace MapaDeTrabalhos
             pessoa = new Pessoa();
             endereco = new Endereco();
             usuario = new Usuario();
+            this.Carregar();
+            
+        }
+
+        public async void Carregar()
+        {
+            var itens = await PessoaTable.ToCollectionAsync<Pessoa>();
+            List<Pessoa> pessoas = itens.ToList();
         }
 
         private async void Salvar_Click(object sender, RoutedEventArgs e)
         {
             ////Fazer o processo pra validar os campos de cadastro e salvar no banco.
-
+            
             pessoa.nomeOuRazaoSocial = Tb_nome.Text;
 
             pessoa.data = Tb_dataNascimento.Text;
@@ -98,7 +108,10 @@ namespace MapaDeTrabalhos
             //}
 
             ////Salvando Pessoa
-            //await App.MobileService.GetTable<Pessoa>().UpdateAsync(pessoa);
+            await PessoaTable.InsertAsync(pessoa);
+                  endereco.PessoaId = pessoa.Id;
+            await EnderecoTable.InsertAsync(endereco);
+            
 
             //Fazer as paradas para salvar endereço e usuário
 
