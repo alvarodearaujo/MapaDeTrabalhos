@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="MapaDeTrabalhos.AnuncioPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MapaDeTrabalhos"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95*"/>
+            <RowDefinition Height="244*"/>
+            <RowDefinition Height="381*"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="tB_titulo" HorizontalAlignment="Left" TextWrapping="Wrap" PlaceholderText="Título" Text="" VerticalAlignment="Top" Width="470" Margin="12,11,0,0" Height="32" Grid.Row="1"/>
+        <RichEditBox x:Name="tB_descricao" HorizontalAlignment="Left" Margin="12,12,0,0" Grid.Row="2" PlaceholderText="Descrição" VerticalAlignment="Top" Width="470" Height="278"/>
+        <RichEditBox x:Name="tB_exigencias" HorizontalAlignment="Left" Margin="12,12,0,0" Grid.Row="2" PlaceholderText="Exigências" VerticalAlignment="Top" Width="482" Height="278" Grid.Column="1"/>
+        <RichEditBox x:Name="tB_beneficios" Grid.Column="1" HorizontalAlignment="Left" Margin="12,11,0,0" PlaceholderText="Benefícios" VerticalAlignment="Top" Width="482" Height="210" Grid.Row="1"/>
+        <TextBox x:Name="tB_salario" HorizontalAlignment="Left" Margin="12,68,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" PlaceholderText="Salário/Valor" VerticalAlignment="Top" Height="32" Width="470"/>
+        <Button x:Name="btn_salvar" Content="Salvar" Grid.Column="1" HorizontalAlignment="Left" Margin="33,324,0,0" Grid.Row="2" VerticalAlignment="Top" Width="175" Height="32"/>
+        <Button x:Name="btn_cancelar" Content="Cancelar" Grid.Column="1" HorizontalAlignment="Stretch" Margin="243,324,222,0" Grid.Row="2" VerticalAlignment="Top" Height="32"/>
+        <ComboBox x:Name="comboBox" PlaceholderText="Horario" HorizontalAlignment="Left" Margin="12,127,0,0" Grid.Row="1" VerticalAlignment="Top" Width="470" Height="32">
+            <ComboBoxItem Content="Manhã"/>
+            <ComboBoxItem Content="Tarde"/>
+            <ComboBoxItem Content="Noite"/>
+        </ComboBox>
+        <StackPanel Orientation="Horizontal" Margin="12,179,158,23" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+            <TextBlock x:Name="tB_tipo" HorizontalAlignment="Left" Margin="4,7,2,0" TextWrapping="Wrap" Text="Tipo:" VerticalAlignment="Top" Height="27"/>
+            <RadioButton x:Name="rB_forma1" Content="Formal" HorizontalAlignment="Left" Margin="2,2,2,0" VerticalAlignment="Top" GroupName="tb_forinfor"/>
+            <RadioButton x:Name="rB_informal" Content="Informal" HorizontalAlignment="Left" Margin="2,2,2,0" VerticalAlignment="Top" GroupName="tb_forinfor" Width="108"/>
+        </StackPanel>
+        <TextBlock x:Name="Título" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Cadastro de Anúncio" VerticalAlignment="Center" FontSize="50" Margin="20" Grid.Column="0" Grid.ColumnSpan="2" Width="461" Height="75"/>
+
+    </Grid>
+</Page>
