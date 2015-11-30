@@ -6,11 +6,28 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
+    <Page.Resources>
+        <Style TargetType="Button" >
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Width" Value=" 250"/>
+            <Setter Property="FontSize" Value="30"/>
+        </Style>
+        <Style TargetType="TextBox" >
+            <Setter Property="Background" Value="LightBlue"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="PasswordBox" >
+            <Setter Property="Background" Value="LightBlue"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Page.Resources>
+    
     <Grid Margin="-5,18,5,-18">
         <Grid.Background>
             <ImageBrush ImageSource="Assets/BackGround.png"/>
         </Grid.Background>
+         
         <Grid.RowDefinitions>
             <RowDefinition Height="163*"/>
             <RowDefinition Height="68*"/>
@@ -23,7 +40,7 @@
         </Grid.RowDefinitions>
         <TextBox x:Name="Tb_login" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" PlaceholderText="Digite seu Login." FontSize="30"  Width="368" />
         <PasswordBox x:Name="Tb_senha" HorizontalAlignment="Center"  Grid.Row="3" VerticalAlignment="Center" Width="368" PlaceholderText="Digite sua Senha." FontSize="30" />
-        <Button x:Name="Logar" Content="Logar" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Width="250" FontSize="30" Click="Logar_Click"/>
+        <Button x:Name="Logar" Content="Logar" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Click="Logar_Click"/>
         <Button x:Name="Cadastrar" Content="Cadastrar-se" HorizontalAlignment="Center" Grid.Row="5" Grid.RowSpan="2" VerticalAlignment="Center" FontSize="30" Click="Cadastrar_Click" />
 
     </Grid>

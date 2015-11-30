@@ -22,8 +22,8 @@ namespace MapaDeTrabalhos.viewModel
                 ImageSourceUri = new Uri("ms-appx:///Assets/MapMarcation.png", UriKind.RelativeOrAbsolute),
                 Location = new Geopoint(new BasicGeoposition()
                 {
-                    Latitude = center.Latitude + 0.005,
-                    Longitude = center.Longitude - 0.005
+                    Latitude = center.Latitude + 0.012,
+                    Longitude = center.Longitude - 0.040
                 })
             });
             pois.Add(new PontoNoMapa()
@@ -83,7 +83,7 @@ namespace MapaDeTrabalhos.viewModel
                 Location = new Geopoint(new BasicGeoposition()
                 {
                     Latitude = center.Latitude - 0.020,
-                    Longitude = center.Longitude + 0.019
+                    Longitude = center.Longitude + 0.049
                 })
             });
             pois.Add(new PontoNoMapa()
@@ -104,6 +104,86 @@ namespace MapaDeTrabalhos.viewModel
                 {
                     Latitude = center.Latitude - 0.001,
                     Longitude = center.Longitude + 0.001
+                })
+            });
+            pois.Add(new PontoNoMapa()
+            {
+                DisplayName = "Marceneiro",
+                ImageSourceUri = new Uri("ms-appx:///Assets/MapMarcation.png", UriKind.RelativeOrAbsolute),
+                Location = new Geopoint(new BasicGeoposition()
+                {
+                    Latitude = center.Latitude - 0.031,
+                    Longitude = center.Longitude + 0.011
+                })
+            });
+            pois.Add(new PontoNoMapa()
+            {
+                DisplayName = "Vendedor",
+                ImageSourceUri = new Uri("ms-appx:///Assets/MapMarcation.png", UriKind.RelativeOrAbsolute),
+                Location = new Geopoint(new BasicGeoposition()
+                {
+                    Latitude = center.Latitude - 0.011,
+                    Longitude = center.Longitude + 0.031
+                })
+            });
+            pois.Add(new PontoNoMapa()
+            {
+                DisplayName = "Motorista de ônibus",
+                ImageSourceUri = new Uri("ms-appx:///Assets/MapMarcation.png", UriKind.RelativeOrAbsolute),
+                Location = new Geopoint(new BasicGeoposition()
+                {
+                    Latitude = center.Latitude - 0.021,
+                    Longitude = center.Longitude + 0.021
+                })
+            });
+            pois.Add(new PontoNoMapa()
+            {
+                DisplayName = "Garçom",
+                ImageSourceUri = new Uri("ms-appx:///Assets/MapMarcation.png", UriKind.RelativeOrAbsolute),
+                Location = new Geopoint(new BasicGeoposition()
+                {
+                    Latitude = center.Latitude - 0.031,
+                    Longitude = center.Longitude + 0.041
+                })
+            });
+            pois.Add(new PontoNoMapa()
+            {
+                DisplayName = "Pedreiro",
+                ImageSourceUri = new Uri("ms-appx:///Assets/MapMarcation2.png", UriKind.RelativeOrAbsolute),
+                Location = new Geopoint(new BasicGeoposition()
+                {
+                    Latitude = center.Latitude - 0.015,
+                    Longitude = center.Longitude + 0.015
+                })
+            });
+            pois.Add(new PontoNoMapa()
+            {
+                DisplayName = "Eletricista",
+                ImageSourceUri = new Uri("ms-appx:///Assets/MapMarcation2.png", UriKind.RelativeOrAbsolute),
+                Location = new Geopoint(new BasicGeoposition()
+                {
+                    Latitude = center.Latitude - 0.040,
+                    Longitude = center.Longitude + 0.020
+                })
+            });
+            pois.Add(new PontoNoMapa()
+            {
+                DisplayName = "Bábá",
+                ImageSourceUri = new Uri("ms-appx:///Assets/MapMarcation2.png", UriKind.RelativeOrAbsolute),
+                Location = new Geopoint(new BasicGeoposition()
+                {
+                    Latitude = center.Latitude - 0.007,
+                    Longitude = center.Longitude + 0.007
+                })
+            });
+            pois.Add(new PontoNoMapa()
+            {
+                DisplayName = "Atendente",
+                ImageSourceUri = new Uri("ms-appx:///Assets/MapMarcation.png", UriKind.RelativeOrAbsolute),
+                Location = new Geopoint(new BasicGeoposition()
+                {
+                    Latitude = center.Latitude - 0.030,
+                    Longitude = center.Longitude + 0.030
                 })
             });
             return pois;
