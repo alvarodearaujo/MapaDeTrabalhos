@@ -9,43 +9,71 @@
     mc:Ignorable="d">
 
     <Grid x:Name="mainGrid">
-        <Maps:MapControl x:Name="MapControl" ZoomInteractionMode="GestureAndControl" TiltInteractionMode="GestureAndControl" MapServiceToken="MRloZpnmUHMi3Pxfxqiu~3GxKNXkE0kCpOtyIm7Znmg~AsDsy7g_IcxGbAj66qCMZNDWLCFUDu0ktXOLTmW9CvaZzD9iAAgCGVuIB7WjzUsA" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
-            <Maps:MapItemsControl x:Name="MapItems">
-                <Maps:MapItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Button  x:Name="mapItemButton" Click="mapItemButton_Click" Background="Transparent">
-                            <StackPanel>
-                                <Border Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                                    <TextBlock Text="{Binding DisplayName}"/>
-                                </Border>
-                                <Image Source="{Binding ImageSourceUri}"
+        <SplitView x:Name="MySplitView" DisplayMode="CompactOverlay"  IsPaneOpen="False" 
+               CompactPaneLength="50" OpenPaneLength="150">
+            <SplitView.Pane>
+                <StackPanel Background="Gray">
+                    <Button x:Name="Menu" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
+                    Width="50" Height="50" Background="Transparent" Click="Menu_Click"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="MenuButton1" FontFamily="Segoe MDL2 Assets" Content="&#xE825;"
+                    Width="50" Height="50" Background="Transparent"/>
+                        <TextBlock Text="Button 1" FontSize="18" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="MenuButton2" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;"
+                        Width="50" Height="50" Background="Transparent"/>
+                        <TextBlock Text="Button 2" FontSize="18" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="MenuButton3" FontFamily="Segoe MDL2 Assets" Content="&#xE1D6;"
+                        Width="50" Height="50" Background="Transparent"/>
+                        <TextBlock Text="Button 3" FontSize="18" VerticalAlignment="Center" />
+                    </StackPanel>
+                </StackPanel>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Grid>
+                    <Maps:MapControl x:Name="MapControl" ZoomInteractionMode="GestureAndControl" TiltInteractionMode="GestureAndControl" MapServiceToken="MRloZpnmUHMi3Pxfxqiu~3GxKNXkE0kCpOtyIm7Znmg~AsDsy7g_IcxGbAj66qCMZNDWLCFUDu0ktXOLTmW9CvaZzD9iAAgCGVuIB7WjzUsA" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+                        <Maps:MapItemsControl x:Name="MapItems">
+                            <Maps:MapItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button  x:Name="mapItemButton" Click="mapItemButton_Click" Background="Transparent">
+                                        <StackPanel>
+                                            <Border Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                                                <TextBlock Text="{Binding DisplayName}"/>
+                                            </Border>
+                                            <Image Source="{Binding ImageSourceUri}"
                                                Maps:MapControl.Location="{Binding Location}" 
                                                >
-                                    <Image.Transitions>
-                                        <TransitionCollection>
-                                            <EntranceThemeTransition/>
-                                        </TransitionCollection>
-                                    </Image.Transitions>
-                                </Image>
-                            </StackPanel>
-                        </Button>
-                    </DataTemplate>
-                </Maps:MapItemsControl.ItemTemplate>
-            </Maps:MapItemsControl>
-        </Maps:MapControl>
+                                                <Image.Transitions>
+                                                    <TransitionCollection>
+                                                        <EntranceThemeTransition/>
+                                                    </TransitionCollection>
+                                                </Image.Transitions>
+                                            </Image>
+                                        </StackPanel>
+                                    </Button>
+                                </DataTemplate>
+                            </Maps:MapItemsControl.ItemTemplate>
+                        </Maps:MapItemsControl>
+                    </Maps:MapControl>
 
-        <ContentDialog x:Name="AnuncioDialog"
+                    <ContentDialog x:Name="AnuncioDialog"
                         VerticalAlignment="Stretch"
                         Title="Título do Anuncio"
                         PrimaryButtonText="Indicar-se"
                         SecondaryButtonText="Voltar"
                         MaxWidth="{Binding ActualWidth, ElementName=pageRoot}">
-            <StackPanel>
-                <TextBlock x:Name="Tb_DescricaoAnuncio" Text="Descrição do Anuncio." TextWrapping="Wrap" />
-                <TextBlock x:Name="Tb_ValorAnuncio" Text="Valor do Anuncio." TextWrapping="Wrap" />
-                <TextBlock x:Name="Tb_RequesitosAnuncio" Text="Requesitos do Anuncio. alkfjsalkfjsalkfjlsakjflask jfaslkfj alskfj aslkfjalsfkj aslkfjaslkfj alskjfals fkjsalkfj aslk laksjf laksjf laksjfals kfjaklsfjaklsj klasjflkas jflkasjflkasjf" TextWrapping="Wrap" />
-            </StackPanel>
+                        <StackPanel>
+                            <TextBlock x:Name="Tb_DescricaoAnuncio" Text="Descrição do Anuncio." TextWrapping="Wrap" />
+                            <TextBlock x:Name="Tb_ValorAnuncio" Text="Valor do Anuncio." TextWrapping="Wrap" />
+                            <TextBlock x:Name="Tb_RequesitosAnuncio" Text="Requesitos do Anuncio. alkfjsalkfjsalkfjlsakjflask jfaslkfj alskfj aslkfjalsfkj aslkfjaslkfj alskjfals fkjsalkfj aslk laksjf laksjf laksjfals kfjaklsfjaklsj klasjflkas jflkasjflkasjf" TextWrapping="Wrap" />
+                        </StackPanel>
 
-        </ContentDialog>
+                    </ContentDialog>
+                </Grid>
+            </SplitView.Content>
+        </SplitView>
     </Grid>
 </Page>

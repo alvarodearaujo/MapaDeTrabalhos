@@ -1,4 +1,5 @@
 ﻿using MapaDeTrabalhos.Model;
+using Microsoft.WindowsAzure.MobileServices;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,6 +30,16 @@ namespace MapaDeTrabalhos
     {
         private byte[] CurrentImage { get; set; }
 
+        private Endereco pessoa;
+        private IMobileServiceTable<Curriculo> CurriculoTable = App.MobileService.GetTable<Curriculo>();
+        private IMobileServiceTable<ExperienciaProfissional> ExperienciaTable = App.MobileService.GetTable<ExperienciaProfissional>();
+        private IMobileServiceTable<Idioma> IdiomaTable = App.MobileService.GetTable<Idioma>();
+        private IMobileServiceTable<FormacaoAcademica> FormacaoTable = App.MobileService.GetTable<FormacaoAcademica>();
+
+        List<ExperienciaProfissional> listaExperiencias;
+        List<Idioma> listaIdiomas;
+        List<FormacaoAcademica> listaFormacao;
+
         private Curriculo curriculo;
         string statusCurso = "";
         string statusExperiencia = "";
@@ -43,9 +54,13 @@ namespace MapaDeTrabalhos
         {
             this.InitializeComponent();
             curriculo = new Curriculo();
+
+            listaExperiencias = new List<ExperienciaProfissional>();
+            listaFormacao = new List<FormacaoAcademica>();
+            listaIdiomas = new List<Idioma>();
         }
 
-        private void Salvar_Click(object sender, RoutedEventArgs e)
+        private async void Salvar_Click(object sender, RoutedEventArgs e)
         {
             //Fazer as validações 
             curriculo.valorMaiorSalario = maiorValorSalario.Text;
@@ -89,16 +104,16 @@ namespace MapaDeTrabalhos
             {
                 curriculo.veiculoProprio.Add("Outro veículo");
             }
-
-            //Fazer a função de salvar no banco
+            curriculo.Foto = CurrentImage;
+            await CurriculoTable.InsertAsync(curriculo);
 
             Frame.Navigate(typeof(MapaPage));
         }
 
-
-
-
-
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            //pessoa = (Pessoa)e.Parameter;
+        }
 
         private async void AdicionarFormacao_Click(object sender, RoutedEventArgs e)
         {
@@ -126,8 +141,9 @@ namespace MapaDeTrabalhos
                 form.anoInicial = anoInicial.Text;
                 form.mesFinal = mesFinal.Text;
                 form.mesInicial = mesInicial.Text;
-
-                // Fazer o processo de salvar no Banco
+                await FormacaoTable.InsertAsync(form);
+                listaFormacao.Add(form);
+                Lv_formacao.ItemsSource = listaFormacao;
                 form = new FormacaoAcademica();
             }
         }
@@ -147,7 +163,9 @@ namespace MapaDeTrabalhos
                 expe.mesInicial = mesInicialExperiencia.Text;
                 expe.mesFinal = mesFinal.Text;
 
-                //fazer o processo pra salvar no BD
+                await ExperienciaTable.InsertAsync(expe);
+                listaExperiencias.Add(expe);
+                Lv_experiencia.ItemsSource = listaExperiencias;
                 expe = new ExperienciaProfissional();
             }
         }
@@ -163,8 +181,10 @@ namespace MapaDeTrabalhos
                 {
                     idi.nomeIdioma = Tb_nomeIdioma.Text;
                 }
-                //Fazer a parada pra salvar no banco
 
+                await IdiomaTable.InsertAsync(idi);
+                listaIdiomas.Add(idi);
+                Lv_idioma.ItemsSource = listaIdiomas;
                 idi = new Idioma();
             }
         }
@@ -235,8 +255,6 @@ namespace MapaDeTrabalhos
             }
         }
 
-
-   
         private async void image_Tapped(object sender, TappedRoutedEventArgs e)
         {
             try
@@ -316,13 +334,44 @@ namespace MapaDeTrabalhos
             ComboBoxItem item = cb.SelectedItem as ComboBoxItem;
             string valorSelecionado = item.Content.ToString();
             form.nivelCurso = valorSelecionado;
+            if (valorSelecionado.Equals("Ensino Fundamental (1° Grau)"))
+            {
+                Cb_NomeDoCurso.ItemsSource = "Ensino Fundamental(1° Grau)";
+            }
+            else if (valorSelecionado.Equals("Ensino Médio (2° Grau)"))
+            {
+                Cb_NomeDoCurso.ItemsSource = "Ensino Médio (2° Grau)";
+            }
+            else if (valorSelecionado.Equals("Curso Extra-Curricular / Profissionalizante"))
+            {
+                Cb_NomeDoCurso.ItemsSource = Cursos.listarExtraCurriculares();
+            }
+            else if (valorSelecionado.Equals("Curso Técnico"))
+            {
+                Cb_NomeDoCurso.ItemsSource = Cursos.listaTecnicos();
+            }
+            else if (valorSelecionado.Equals("Ensino Superior"))
+            {
+                Cb_NomeDoCurso.ItemsSource = Cursos.listarSuperior();
+            }
+            else if (valorSelecionado.Equals("Pós Graduação / Especialização / MBA"))
+            {
+                Cb_NomeDoCurso.ItemsSource = Cursos.listarPos();
+            }
+            else if (valorSelecionado.Equals("Pós Graduação / Mestrado"))
+            {
+                Cb_NomeDoCurso.ItemsSource = Cursos.listarMestrado();
+            }
+            else if (valorSelecionado.Equals("Pós Graduação / Doutorado"))
+            {
+                Cb_NomeDoCurso.ItemsSource = Cursos.listarDoutorado();
+            }
+
         }
 
         private void Cb_NomeDoCurso_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBox cb = ((ComboBox)sender);
-            ComboBoxItem item = cb.SelectedItem as ComboBoxItem;
-            string valorSelecionado = item.Content.ToString();
+            string valorSelecionado = Cb_NomeDoCurso.SelectedValue.ToString();
             form.nomeCurso = valorSelecionado;
         }
 

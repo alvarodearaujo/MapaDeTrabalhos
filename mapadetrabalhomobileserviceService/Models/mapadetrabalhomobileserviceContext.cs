@@ -38,23 +38,21 @@ namespace mapadetrabalhomobileserviceService.Models
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
         }
 
+        public System.Data.Entity.DbSet<Pessoa> Pessoas { get; set; }
+
         public System.Data.Entity.DbSet<Anuncio> AnuncioFormals { get; set; }
 
         public System.Data.Entity.DbSet<Endereco> Enderecoes { get; set; }
 
-        public System.Data.Entity.DbSet<Pessoa> Pessoas { get; set; }
-
         public System.Data.Entity.DbSet<Usuario> Usuarios { get; set; }
 
-        public System.Data.Entity.DbSet<mapadetrabalhomobileserviceService.DataObjects.Anuncio> Anuncios { get; set; }
+        public System.Data.Entity.DbSet<Curriculo> Curriculoes { get; set; }
 
-        public System.Data.Entity.DbSet<mapadetrabalhomobileserviceService.DataObjects.Curriculo> Curriculoes { get; set; }
+        public System.Data.Entity.DbSet<ExperienciaProfissional> ExperienciaProfissionals { get; set; }
 
-        public System.Data.Entity.DbSet<mapadetrabalhomobileserviceService.DataObjects.ExperienciaProfissional> ExperienciaProfissionals { get; set; }
+        public System.Data.Entity.DbSet<FormacaoAcademica> FormacaoAcademicas { get; set; }
 
-        public System.Data.Entity.DbSet<mapadetrabalhomobileserviceService.DataObjects.FormacaoAcademica> FormacaoAcademicas { get; set; }
-
-        public System.Data.Entity.DbSet<mapadetrabalhomobileserviceService.DataObjects.Idioma> Idiomas { get; set; }
+        public System.Data.Entity.DbSet<Idioma> Idiomas { get; set; }
     }
 
 }

@@ -42,14 +42,10 @@ namespace MapaDeTrabalhos
             pessoa = new Pessoa();
             endereco = new Endereco();
             usuario = new Usuario();
-            this.Carregar();
+            this.pessoa.sexo = "Masculino";
+            this.pessoa.isPessoaFisica = true;
             
-        }
-
-        public async void Carregar()
-        {
-            var itens = await PessoaTable.ToCollectionAsync<Pessoa>();
-            List<Pessoa> pessoas = itens.ToList();
+            
         }
 
         private async void Salvar_Click(object sender, RoutedEventArgs e)
@@ -86,46 +82,48 @@ namespace MapaDeTrabalhos
 
             string addressToGeocode = endereco.Rua + ", " + endereco.numero + ", " + endereco.bairro + ", " + endereco.cidade +" - " + endereco.estado;
 
-            //// Nearby location to use as a query hint.
-            //BasicGeoposition queryHint = new BasicGeoposition();
-            //queryHint.Latitude = -8.05665;
-            //queryHint.Longitude = -34.898441;
-            //Geopoint hintPoint = new Geopoint(queryHint);
+            // Nearby location to use as a query hint.
+            BasicGeoposition queryHint = new BasicGeoposition();
+            queryHint.Latitude = -8.05665;
+            queryHint.Longitude = -34.898441;
+            Geopoint hintPoint = new Geopoint(queryHint);
 
-            //// Geocode the specified address, using the specified reference point
-            //// as a query hint. Return no more than 3 results.
-            //MapLocationFinderResult result = await MapLocationFinder.FindLocationsAsync(addressToGeocode, hintPoint, 3);
+            // Geocode the specified address, using the specified reference point
+            // as a query hint. Return no more than 3 results.
+            MapLocationFinderResult result = await MapLocationFinder.FindLocationsAsync(addressToGeocode, hintPoint, 3);
 
-            ////Setting position default to Derby - Recife
-            //BasicGeoposition cityPosition = new BasicGeoposition() { Latitude = -8.05665, Longitude = -34.898441 };
-            //Geopoint cityCenter = new Geopoint(cityPosition);
-            //// If the query returns results, display the coordinates
-            // of the first result.
-            //if (result.Status == MapLocationFinderStatus.Success)
-            //{
-            //    pessoa.endereco.latitude = result.Locations[0].Point.Position.Latitude;
-            //    pessoa.endereco.longitude = result.Locations[0].Point.Position.Longitude;
-            //}
+            //Setting position default to Derby - Recife
+            BasicGeoposition cityPosition = new BasicGeoposition() { Latitude = -8.05665, Longitude = -34.898441 };
+            Geopoint cityCenter = new Geopoint(cityPosition);
+
+            // If the query returns results, display the coordinates  of the first result.
+            if (result.Status == MapLocationFinderStatus.Success)
+            {
+               endereco.latitude = result.Locations[0].Point.Position.Latitude;
+               endereco.longitude = result.Locations[0].Point.Position.Longitude;
+            }
 
             ////Salvando Pessoa
             await PessoaTable.InsertAsync(pessoa);
+
                   endereco.PessoaId = pessoa.Id;
             await EnderecoTable.InsertAsync(endereco);
-            
 
-            //Fazer as paradas para salvar endereço e usuário
+                   usuario.PessoaId = pessoa.Id;
+            await UsuarioTable.InsertAsync(usuario);
+                        //Fazer as paradas para salvar endereço e usuário
 
 
             //Direcionamento de Página
             var resulta = await CadastroDialog.ShowAsync();
-            string resutado = "" + resulta;
-            if (resutado.Equals("Primary"))
+            string resultado = "" + resulta;
+            if (resultado.Equals("Primary"))
             {
-                Frame.Navigate(typeof(CurriculoPage));
+                Frame.Navigate(typeof(CurriculoPage), pessoa);
             }
             else
             {
-                Frame.Navigate(typeof(MapaPage));
+                Frame.Navigate(typeof(MapaPage), pessoa);
             }
 
 
@@ -159,13 +157,12 @@ namespace MapaDeTrabalhos
                 Tb_cpfOrCnpj.PlaceholderText = "CNPJ:";
                 Tb_site.Visibility = Visibility.Visible;
                 this.pessoa.isPessoaFisica = false;
-                //Fazer a Ideia do CNPJ
+               
             }
 
 
 
         }
-        //Setando o Estado
         private void Cb_estados_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 

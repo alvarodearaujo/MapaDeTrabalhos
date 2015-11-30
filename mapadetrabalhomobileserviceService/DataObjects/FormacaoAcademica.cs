@@ -9,6 +9,8 @@ namespace mapadetrabalhomobileserviceService.DataObjects
 {
     public class FormacaoAcademica : EntityData
     {
+        public string CurriculoId { get; set; }
+
         [ForeignKey("CurriculoId")]
         public virtual Curriculo curriculo { get; set; }
 

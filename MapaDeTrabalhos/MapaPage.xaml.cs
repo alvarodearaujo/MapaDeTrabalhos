@@ -18,6 +18,7 @@ using Windows.UI.Core;
 using Windows.Services.Maps;
 using MapaDeTrabalhos.viewModel;
 using MapaDeTrabalhos.Model;
+using Microsoft.WindowsAzure.MobileServices;
 
 
 
@@ -31,22 +32,36 @@ namespace MapaDeTrabalhos
     /// </summary>
     public sealed partial class MapaPage : Page
     {
-        PontosNoMapaManeger poiManager;        
+
+        private IMobileServiceTable<Endereco> EnderecoTable = App.MobileService.GetTable<Endereco>();
+        private PontosNoMapaManeger poiManager;
+        private Pessoa pessoa;
+        private Endereco endereco;    
 
         public MapaPage()
         {
             this.InitializeComponent();
             poiManager = new PontosNoMapaManeger();
-
+            endereco = new Endereco();
+            pessoa = new Pessoa();
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // Make the funcion to take the address of the user.
+            pessoa = (Pessoa)e.Parameter;
+
+            var itens = await EnderecoTable.ToCollectionAsync<Endereco>();
+            List<Endereco> enderecos = itens.ToList();
+            foreach (Endereco end in enderecos)
+            {
+                if (pessoa.Id.Equals(end.PessoaId)) {
+                    endereco = end;
+                }
+            }
 
 
             // Specify the location address
-            string addressToGeocode = "Rua oitenta e dois, caetés 3, abreu e lima - Pernambuco";
+            string addressToGeocode = endereco.Rua+", " + endereco.numero  +", "+ endereco.bairro + ", " + endereco.cidade +" - "+ endereco.estado;
 
             // Nearby location to use as a query hint.
             BasicGeoposition queryHint = new BasicGeoposition();
@@ -84,11 +99,18 @@ namespace MapaDeTrabalhos
 
             var buttonSender = sender as Button;
             var result = await AnuncioDialog.ShowAsync();
-
-            //fazer o tratamento para quando o cara quiser indicar-se a vaga.
+            string resultado = "" + result;
+            if (resultado.Equals("Primary"))
+            {
+                //fazer o tratamento para quando o cara quiser indicar-se a vaga.
+            }
+            
         }
-        
 
+        private void Menu_Click(object sender, RoutedEventArgs e)
+        {
+            MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
+        }
 
     }
 }

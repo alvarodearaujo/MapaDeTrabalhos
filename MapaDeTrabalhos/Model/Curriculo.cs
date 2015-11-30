@@ -31,5 +31,14 @@ namespace MapaDeTrabalhos.Model
 
         [JsonProperty(PropertyName = "valorMaiorSalario")]
         public string valorMaiorSalario { get; set; }
+
+        [JsonProperty(PropertyName = "foto")]
+        public byte[] Foto { get; set; }
+
+        public Curriculo()
+        {
+            this.habilitacao = new List<string>();
+            this.veiculoProprio = new List<string>();
+        }
     }
 }

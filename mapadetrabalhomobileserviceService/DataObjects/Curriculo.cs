@@ -26,5 +26,7 @@ namespace mapadetrabalhomobileserviceService.DataObjects
 
         public string valorMaiorSalario { get; set; }
 
+        public byte[] Foto { get; set; }
+
     }
 }

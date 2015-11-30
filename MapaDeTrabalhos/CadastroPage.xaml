@@ -38,15 +38,15 @@
 
         <TextBox x:Name="Tb_nome" HorizontalAlignment="Left" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Nome:"  Width="550" Grid.Column="1" Margin="0,4" />
         <TextBox x:Name="Tb_cpfOrCnpj" HorizontalAlignment="Left" Grid.Row="4" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="CPF:"  Width="550" Grid.Column="1" Margin="0,4" />
-
+        <TextBox x:Name="Tb_email" HorizontalAlignment="Left" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Email:"  Width="550" InputScope="EmailSmtpAddress" Grid.Column="1" Margin="0,4"/>
+        
         <StackPanel x:Name="Sp_sexo" HorizontalAlignment="Left" Height="60" Grid.Row="6" VerticalAlignment="Center" Width="550" Orientation="Horizontal" Visibility="Visible" Grid.Column="1" >
             <RadioButton x:Name="Rb_masc" Content="Masculino"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="200" GroupName="Sexo" IsChecked="True" Checked="Rb_masc_Checked"/>
             <RadioButton x:Name="Rb_femi" Content="Feminino"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="200" GroupName="Sexo"  Checked="Rb_femi_Checked"/>
         </StackPanel>
 
-
-        <TextBox x:Name="Tb_site" HorizontalAlignment="Left" Grid.Row="6" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Site:"  Width="550" Visibility="Collapsed" Grid.ColumnSpan="2" Margin="0,30"/>
-        <TextBox x:Name="Tb_email" HorizontalAlignment="Left" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Email:"  Width="550" InputScope="EmailSmtpAddress" Grid.Column="1" Margin="0,4"/>
+        <TextBox x:Name="Tb_site" HorizontalAlignment="Left" Height="60" Grid.Row="6" VerticalAlignment="Center" Width="550" Visibility="Collapsed" Grid.Column="1" FontSize="30" PlaceholderText="Site:" />
+       
         <TextBox x:Name="Tb_dataNascimento" HorizontalAlignment="Left" Grid.Row="7" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Data de Nascimento:"  Width="550" InputScope="CurrencyAmountAndSymbol" Grid.Column="1" Margin="0,4"/>
         <TextBox x:Name="Tb_telefone" HorizontalAlignment="Left" Grid.Row="8" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Telefone para contato:"  Width="550" InputScope="NameOrPhoneNumber" Grid.Column="1" Margin="0,4"/>
         <TextBox x:Name="Tb_celular" HorizontalAlignment="Left" Grid.Row="9" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Telefone celular para contato:"  Width="550" Grid.Column="1" Margin="0,4" />

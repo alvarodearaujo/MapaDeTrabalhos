@@ -32,20 +32,20 @@
         <TextBlock x:Name="Formacao" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="Formação Acadêmica" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
         <StackPanel x:Name="Sp_formacao"  HorizontalAlignment="Center" Height="140" Grid.Row="3" Grid.RowSpan="2" VerticalAlignment="Center" Width="640">
             <Button x:Name="AdicionarFormacao" Content="Adicionar Formação" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AdicionarFormacao_Click"/>
-            <ListView x:Name="Lv_formacao" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="105"/>
+            <ListView x:Name="Lv_formacao" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="105" DisplayMemberPath="nomeCurso" FontSize="20" />
 
         </StackPanel>
 
         <TextBlock x:Name="Experiencia" HorizontalAlignment="Center" Grid.Row="5" TextWrapping="Wrap" Text="Experiência Profissional" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
         <StackPanel x:Name="Sp_experiencia"  HorizontalAlignment="Center" Height="140" Grid.Row="6" Grid.RowSpan="2" VerticalAlignment="Center" Width="640">
             <Button x:Name="AdicionarExperiencia" Content="Adicionar Experiência" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AdicionarExperiencia_Click"/>
-            <ListView x:Name="Lv_experiencia" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="105"/>
+            <ListView x:Name="Lv_experiencia" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="105" DisplayMemberPath="nomeFuncao" FontSize="20"/>
         </StackPanel>
 
         <TextBlock x:Name="Idioma" HorizontalAlignment="Center" Grid.Row="8" TextWrapping="Wrap" Text="Idiomas" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
         <StackPanel x:Name="Sp_idioma"  HorizontalAlignment="Center" Height="140" Grid.Row="9" Grid.RowSpan="2" VerticalAlignment="Center" Width="640">
             <Button x:Name="AdicionarIdioma" Content="Adicionar Idioma" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AdicionarIdioma_Click"/>
-            <ListView x:Name="Lv_idioma" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="105"/>
+            <ListView x:Name="Lv_idioma" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="105" DisplayMemberPath="nomeIdioma" FontSize="20"/>
         </StackPanel>
 
         <TextBlock x:Name="InformacoesComplementares" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="Informações Complementares" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
@@ -119,9 +119,7 @@
                 <StackPanel x:Name="Sp_nomeCurso" HorizontalAlignment="Stretch" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
                     <TextBlock Text="Nome do curso: "  FontStyle="Italic" VerticalAlignment="Center" FontSize="15" Margin="2"></TextBlock>
                     <ComboBox x:Name="Cb_NomeDoCurso" Width="400" Height="50" HorizontalAlignment="Stretch" SelectionChanged="Cb_NomeDoCurso_SelectionChanged" >
-                        <ComboBox.Items>
-                            <ComboBoxItem Content="Tem que fazer o bind para quando selecionar cada item acima"/>
-                        </ComboBox.Items>
+                        
                     </ComboBox>
                 </StackPanel>
 
