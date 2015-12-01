@@ -517,6 +517,7 @@
                             <ComboBoxItem Content="Oceanografia" />
                             <ComboBoxItem Content="Odontologia" />
                             <ComboBoxItem Content="Outras Engenharias" />
+                            <ComboBoxItem Content="Outra Área de Trabalho" />
                             <ComboBoxItem Content="Paisagismo" />
                             <ComboBoxItem Content="Pedagogia" />
                             <ComboBoxItem Content="Pedagogia - Educação infantil" />

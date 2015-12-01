@@ -10,25 +10,46 @@
 
     <Grid x:Name="mainGrid">
         <SplitView x:Name="MySplitView" DisplayMode="CompactOverlay"  IsPaneOpen="False" 
-               CompactPaneLength="50" OpenPaneLength="150">
+               CompactPaneLength="50" OpenPaneLength="190">
             <SplitView.Pane>
                 <StackPanel Background="Gray">
                     <Button x:Name="Menu" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
                     Width="50" Height="50" Background="Transparent" Click="Menu_Click"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Button x:Name="MenuButton1" FontFamily="Segoe MDL2 Assets" Content="&#xE825;"
-                    Width="50" Height="50" Background="Transparent"/>
-                        <TextBlock Text="Button 1" FontSize="18" VerticalAlignment="Center" />
+                   
+                    <StackPanel Orientation="Horizontal" x:Name="Sp_Anuncio">
+                        <Button x:Name="AnuncioBotao" FontFamily="Segoe MDL2 Assets" Content="&#xE196;"
+                        Width="50" Height="50" Background="Transparent" Click="AnuncioBotao_Click" />
+                        <TextBlock Text="Novo Anúncio" FontSize="18" VerticalAlignment="Center" />
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Button x:Name="MenuButton2" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;"
-                        Width="50" Height="50" Background="Transparent"/>
-                        <TextBlock Text="Button 2" FontSize="18" VerticalAlignment="Center" />
+                    <StackPanel Orientation="Horizontal" x:Name="Sp_FinalizarAnuncio">
+                        <Button x:Name="FinalizarAnuncioBotao" FontFamily="Segoe MDL2 Assets" Content="&#xE139;"
+                        Width="50" Height="50" Background="Transparent" Tapped="FinalizarAnuncioBotao_Click"  />
+                        <TextBlock Text="Finalizar Anuncio" FontSize="18" VerticalAlignment="Center" />
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Button x:Name="MenuButton3" FontFamily="Segoe MDL2 Assets" Content="&#xE1D6;"
-                        Width="50" Height="50" Background="Transparent"/>
-                        <TextBlock Text="Button 3" FontSize="18" VerticalAlignment="Center" />
+                    <StackPanel Orientation="Horizontal" x:Name="Sp_Filtro">
+                        <Button x:Name="FiltroBotao" FontFamily="Segoe MDL2 Assets" Content="&#xE1C4;"
+                    Width="50" Height="50" Background="Transparent" Tapped="FiltroBotao_Tapped" />
+                        <TextBlock Text="Filtros" FontSize="18" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" x:Name="Sp_TipoTrabalho">
+                        <Button x:Name="TipoTrabalhoButao" FontFamily="Segoe MDL2 Assets" Content="&#xE16E;"
+                    Width="50" Height="50" Background="Transparent" Tapped="TipoTrabalhoButao_Tapped" />
+                        <TextBlock Text="Tipo de Trabalho" FontSize="18" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" x:Name="Sp_Cadastro">
+                        <Button x:Name="MeuCadastroBotao" FontFamily="Segoe MDL2 Assets" Content="&#xE13D;"
+                    Width="50" Height="50" Background="Transparent" Tapped="MeuCadastroBotao_Tapped" />
+                        <TextBlock Text="Meu Cadastro" FontSize="18" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" x:Name="Sp_Currículo" Visibility="Visible">
+                        <Button x:Name="CurriculoBotao" FontFamily="Segoe MDL2 Assets" Content="&#xE156;"
+                        Width="50" Height="50" Background="Transparent" Tapped="CurriculoBotao_Click" />
+                        <TextBlock Text="Currículo" FontSize="18" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" x:Name="Sp_Logout" >
+                        <Button x:Name="LogoutBotao" FontFamily="Segoe MDL2 Assets" Content="&#xE10A;"
+                        Width="50" Height="50" Background="Transparent" Tapped="LogoutBotao_Tapped" />
+                        <TextBlock Text="Desconectar" FontSize="18" VerticalAlignment="Center" />
                     </StackPanel>
                 </StackPanel>
             </SplitView.Pane>
@@ -61,17 +82,166 @@
 
                     <ContentDialog x:Name="AnuncioDialog"
                         VerticalAlignment="Stretch"
-                        Title="Título do Anuncio"
+                        Title="Detalhes do Anuncio"
                         PrimaryButtonText="Indicar-se"
                         SecondaryButtonText="Voltar"
                         MaxWidth="{Binding ActualWidth, ElementName=pageRoot}">
                         <StackPanel>
-                            <TextBlock x:Name="Tb_DescricaoAnuncio" Text="Descrição do Anuncio." TextWrapping="Wrap" />
-                            <TextBlock x:Name="Tb_ValorAnuncio" Text="Valor do Anuncio." TextWrapping="Wrap" />
-                            <TextBlock x:Name="Tb_RequesitosAnuncio" Text="Requesitos do Anuncio. alkfjsalkfjsalkfjlsakjflask jfaslkfj alskfj aslkfjalsfkj aslkfjaslkfj alskjfals fkjsalkfj aslk laksjf laksjf laksjfals kfjaklsfjaklsj klasjflkas jflkasjflkasjf" TextWrapping="Wrap" />
+                            <TextBlock x:Name="Tb_TituloAnuncio"  FontSize="25" TextWrapping="Wrap" />
+                            <TextBlock x:Name="Tb_DescricaoAnuncio" FontSize="20"  TextWrapping="Wrap" />
+                            <TextBlock x:Name="Tb_ValorAnuncio" FontSize="20" TextWrapping="Wrap" />
+                            <TextBlock x:Name="Tb_RequesitosAnuncio" FontSize="20" TextWrapping="Wrap" />
                         </StackPanel>
-
                     </ContentDialog>
+
+                    <ContentDialog x:Name="FiltroDialog"
+                        VerticalAlignment="Stretch"
+                        Title="Filtro por área"
+                        PrimaryButtonText="Ok"
+                        MaxWidth="{Binding ActualWidth, ElementName=pageRoot}">
+                        <StackPanel Margin="10">
+                            <ComboBox x:Name="Cb_areas" SelectionChanged="Cb_areas_SelectionChanged" PlaceholderText="Selecione o Filtro" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="20" Width="400" Grid.Column="1" Grid.Row="3" Height="35">
+                                <ComboBox.Items>
+                                    <ComboBoxItem Content="Todas as áreas" />
+                                    <ComboBoxItem Content="Administração - Comércio exterior" />
+                                    <ComboBoxItem Content="Administração e direção de empresas" />
+                                    <ComboBoxItem Content="Administração hoteleira" />
+                                    <ComboBoxItem Content="Administração - Marketing" />
+                                    <ComboBoxItem Content="Administração turística" />
+                                    <ComboBoxItem Content="Agronomia" />
+                                    <ComboBoxItem Content="Antropologia social e cultural" />
+                                    <ComboBoxItem Content="Arqueologia" />
+                                    <ComboBoxItem Content="Arquitetura e urbanismo" />
+                                    <ComboBoxItem Content="Arquivologia" />
+                                    <ComboBoxItem Content="Auditoria e censura jurada de contas" />
+                                    <ComboBoxItem Content="Aviação comercial. Piloto comercial" />
+                                    <ComboBoxItem Content="Biblioteconomia e documentação" />
+                                    <ComboBoxItem Content="Biologia" />
+                                    <ComboBoxItem Content="Bioquímica" />
+                                    <ComboBoxItem Content="Ciências ambientais" />
+                                    <ComboBoxItem Content="Ciências atuariais e financeiras" />
+                                    <ComboBoxItem Content="Ciências contábeis" />
+                                    <ComboBoxItem Content="Ciências da computação" />
+                                    <ComboBoxItem Content="Ciências do trabalho" />
+                                    <ComboBoxItem Content="Ciências econômicas e empresariais" />
+                                    <ComboBoxItem Content="Ciências religiosas" />
+                                    <ComboBoxItem Content="Ciências sanitárias" />
+                                    <ComboBoxItem Content="Ciências sociais e políticas" />
+                                    <ComboBoxItem Content="Ciências sociais e políticas" />
+                                    <ComboBoxItem Content="Cinema" />
+                                    <ComboBoxItem Content="Comunicação audiovisual" />
+                                    <ComboBoxItem Content="Comunicação social - Jornalismo" />
+                                    <ComboBoxItem Content="Comunicação social - Publicidade e propaganda" />
+                                    <ComboBoxItem Content="Comunicação social - Relações públicas" />
+                                    <ComboBoxItem Content="Dança" />
+                                    <ComboBoxItem Content="Desenho gráfico" />
+                                    <ComboBoxItem Content="Desenho industrial" />
+                                    <ComboBoxItem Content="Direito" />
+                                    <ComboBoxItem Content="Direito ambiental" />
+                                    <ComboBoxItem Content="Direito internacional" />
+                                    <ComboBoxItem Content="Economia" />
+                                    <ComboBoxItem Content="Educação artística - Artes cênicas" />
+                                    <ComboBoxItem Content="Educação artística - Artes plásticas" />
+                                    <ComboBoxItem Content="Educação artística - Desenho" />
+                                    <ComboBoxItem Content="Educação física" />
+                                    <ComboBoxItem Content="Educação social" />
+                                    <ComboBoxItem Content="Enfermagem e obstetrícia" />
+                                    <ComboBoxItem Content="Engenharia aeronáutica" />
+                                    <ComboBoxItem Content="Engenharia agronômica" />
+                                    <ComboBoxItem Content="Engenharia ambiental" />
+                                    <ComboBoxItem Content="Engenharia cartográfica" />
+                                    <ComboBoxItem Content="Engenharia civil" />
+                                    <ComboBoxItem Content="Engenharia de alimentos" />
+                                    <ComboBoxItem Content="Engenharia de computação" />
+                                    <ComboBoxItem Content="Engenharia de produção/industrial" />
+                                    <ComboBoxItem Content="Engenharia de telecomunicações" />
+                                    <ComboBoxItem Content="Engenharia elétrica/eletrônica" />
+                                    <ComboBoxItem Content="Engenharia mecânica/mecatrônica" />
+                                    <ComboBoxItem Content="Engenharia organizacional" />
+                                    <ComboBoxItem Content="Engenharia química" />
+                                    <ComboBoxItem Content="Engenharia técnica agrícola" />
+                                    <ComboBoxItem Content="Engenharia técnica de desenho industrial" />
+                                    <ComboBoxItem Content="Engenharia técnica de obras públicas" />
+                                    <ComboBoxItem Content="Enologia e viticultura" />
+                                    <ComboBoxItem Content="Esporte e turismo" />
+                                    <ComboBoxItem Content="Estatística" />
+                                    <ComboBoxItem Content="Estudos da Ásia Oriental" />
+                                    <ComboBoxItem Content="Estudos internacionais e inter-culturais" />
+                                    <ComboBoxItem Content="Filosofia" />
+                                    <ComboBoxItem Content="Física" />
+                                    <ComboBoxItem Content="Fisioterapia" />
+                                    <ComboBoxItem Content="Fonoaudiologia" />
+                                    <ComboBoxItem Content="Fotografia e criação digital" />
+                                    <ComboBoxItem Content="Geografia" />
+                                    <ComboBoxItem Content="Gestão e administração pública" />
+                                    <ComboBoxItem Content="História" />
+                                    <ComboBoxItem Content="História da arte" />
+                                    <ComboBoxItem Content="História e ciências da música" />
+                                    <ComboBoxItem Content="Indústria farmacêutica" />
+                                    <ComboBoxItem Content="Investigação privada" />
+                                    <ComboBoxItem Content="Letras - Alemão " />
+                                    <ComboBoxItem Content="Letras - Árabe" />
+                                    <ComboBoxItem Content="Letras clássicas" />
+                                    <ComboBoxItem Content="Letras - Espanhol" />
+                                    <ComboBoxItem Content="Letras - Francês" />
+                                    <ComboBoxItem Content="Letras - Inglês" />
+                                    <ComboBoxItem Content="Letras - Italiano" />
+                                    <ComboBoxItem Content="Letras - Línguas e culturas românicas" />
+                                    <ComboBoxItem Content="Letras - Literatura e língua portuguesa" />
+                                    <ComboBoxItem Content="Lingüística" />
+                                    <ComboBoxItem Content="Logística" />
+                                    <ComboBoxItem Content="Máquinas navais" />
+                                    <ComboBoxItem Content="Matemática" />
+                                    <ComboBoxItem Content="Medicina" />
+                                    <ComboBoxItem Content="Meteorologia e climatologia" />
+                                    <ComboBoxItem Content="Náutica e transporte marítimo" />
+                                    <ComboBoxItem Content="Nutrição humana e dietética" />
+                                    <ComboBoxItem Content="Oceanografia" />
+                                    <ComboBoxItem Content="Odontologia" />
+                                    <ComboBoxItem Content="Outras Engenharias" />
+                                    <ComboBoxItem Content="Paisagismo" />
+                                    <ComboBoxItem Content="Pedagogia" />
+                                    <ComboBoxItem Content="Pedagogia - Educação infantil" />
+                                    <ComboBoxItem Content="Pedagogia - Educação Música" />
+                                    <ComboBoxItem Content="Pedagogia - Educação primária" />
+                                    <ComboBoxItem Content="Pedagogia - Educação secundária" />
+                                    <ComboBoxItem Content="Pedagogia especial" />
+                                    <ComboBoxItem Content="Pedagogia - Língua estrangeira" />
+                                    <ComboBoxItem Content="Piloto de transporte linha aérea" />
+                                    <ComboBoxItem Content="Prevenção e segurança do trabalho" />
+                                    <ComboBoxItem Content="Prevenção e segurança integral" />
+                                    <ComboBoxItem Content="Psicologia" />
+                                    <ComboBoxItem Content="Psicopedagogia" />
+                                    <ComboBoxItem Content="Química" />
+                                    <ComboBoxItem Content="Recursos Humanos" />
+                                    <ComboBoxItem Content="Secretariado executivo e bilíngue" />
+                                    <ComboBoxItem Content="Serviço social" />
+                                    <ComboBoxItem Content="Sociologia" />
+                                    <ComboBoxItem Content="Teatro" />
+                                    <ComboBoxItem Content="Tecnologia ambiental" />
+                                    <ComboBoxItem Content="Tecnologia da informação" />
+                                    <ComboBoxItem Content="Terapia ocupacional" />
+                                    <ComboBoxItem Content="Tradução e interpretação" />
+                                    <ComboBoxItem Content="Turismo" />
+                                    <ComboBoxItem Content="Veterinária" />
+                                    <ComboBoxItem Content="Zootécnia" />
+                                </ComboBox.Items>
+                            </ComboBox>
+                        </StackPanel>
+                    </ContentDialog>
+
+                    <ContentDialog x:Name="TipoDialog"
+                        VerticalAlignment="Stretch"
+                        Title="Tipo de Trabalho"
+                        PrimaryButtonText="Ok"
+                        MaxWidth="{Binding ActualWidth, ElementName=pageRoot}">
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <RadioButton x:Name="Rb_Todos" Content="Todos os tipos." GroupName="Rb_tipo" IsChecked="True" Margin="3"></RadioButton>
+                            <RadioButton x:Name="Rb_Formal" Content="Apenas formais." GroupName="Rb_tipo" Margin="3"></RadioButton>
+                            <RadioButton x:Name="Rb_Informal" Content="Apenas informais." GroupName="Rb_tipo" Margin="3"></RadioButton>
+                        </StackPanel>
+                    </ContentDialog>
+
                 </Grid>
             </SplitView.Content>
         </SplitView>

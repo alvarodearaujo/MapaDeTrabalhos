@@ -30,7 +30,7 @@ namespace MapaDeTrabalhos
     {
         private byte[] CurrentImage { get; set; }
 
-        private Endereco pessoa;
+        private Pessoa pessoa;
         private IMobileServiceTable<Curriculo> CurriculoTable = App.MobileService.GetTable<Curriculo>();
         private IMobileServiceTable<ExperienciaProfissional> ExperienciaTable = App.MobileService.GetTable<ExperienciaProfissional>();
         private IMobileServiceTable<Idioma> IdiomaTable = App.MobileService.GetTable<Idioma>();
@@ -112,7 +112,7 @@ namespace MapaDeTrabalhos
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //pessoa = (Pessoa)e.Parameter;
+            pessoa = (Pessoa)e.Parameter;
         }
 
         private async void AdicionarFormacao_Click(object sender, RoutedEventArgs e)
@@ -382,8 +382,6 @@ namespace MapaDeTrabalhos
             string valorSelecionado = item.Content.ToString();
             form.estado = valorSelecionado;
         }
-
-
 
         private void Cb_NivelCargo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

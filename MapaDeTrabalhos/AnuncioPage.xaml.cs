@@ -27,8 +27,11 @@ namespace MapaDeTrabalhos
     {
 
         private Anuncio anuncio;
+        private Pessoa pessoa;
+        private Endereco endereco;
 
         private IMobileServiceTable<Anuncio> AnuncioTable = App.MobileService.GetTable<Anuncio>();
+        private IMobileServiceTable<Endereco> EnderecoTable = App.MobileService.GetTable<Endereco>();
 
         public AnuncioPage()
         {
@@ -43,16 +46,48 @@ namespace MapaDeTrabalhos
             anuncio.beneficios = tB_beneficios.Text;
             anuncio.exigencias = tB_exigencias.Text;
             anuncio.descricao = tB_descricao.Text;
+            anuncio.isAberto = true;
 
-            if (rB_formal.IsChecked == true)
+            anuncio.PessoaId = pessoa.Id;
+
+            anuncio.latitude = endereco.latitude;
+            anuncio.longitude = endereco.longitude;
+
+            if (pessoa.isPessoaFisica == true)
+            {
+                anuncio.isFormal = false;
+            }
+            else
             {
                 anuncio.isFormal = true;
             }
-            if (rB_informal.IsChecked == true)
-            {
-                anuncio.isAberto = true;
-            }
+
             await AnuncioTable.InsertAsync(anuncio);
+
+            Frame.Navigate(typeof(MapaPage), pessoa);
+        }
+
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            pessoa = (Pessoa)e.Parameter;
+            var itens = await EnderecoTable.ToCollectionAsync<Endereco>();
+            List<Endereco> enderecos = itens.ToList();
+            foreach (Endereco end in enderecos)
+            {
+                if (pessoa.Id.Equals(end.PessoaId))
+                {
+                    endereco = end;
+                }
+            }
+
+            if (pessoa.isPessoaFisica)
+            {
+                tB_salario.PlaceholderText = "Valor Proposto:";
+            }
+            else
+            {
+                tB_salario.PlaceholderText = "Salário para a vaga:";
+            }
         }
 
         private void cB_horario_SelectionChanged(object sender, SelectionChangedEventArgs e)

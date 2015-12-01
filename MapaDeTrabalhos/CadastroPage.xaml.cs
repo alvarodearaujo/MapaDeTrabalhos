@@ -44,8 +44,6 @@ namespace MapaDeTrabalhos
             usuario = new Usuario();
             this.pessoa.sexo = "Masculino";
             this.pessoa.isPessoaFisica = true;
-            
-            
         }
 
         private async void Salvar_Click(object sender, RoutedEventArgs e)
@@ -66,6 +64,15 @@ namespace MapaDeTrabalhos
 
             pessoa.site = Tb_site.Text;
 
+            if(Rb_fisica.IsChecked == true)
+            {
+                pessoa.isPessoaFisica = true;
+            }
+            else
+            {
+                pessoa.isPessoaFisica = false;
+            }
+
             usuario.Senha = Pb_senha.Password;
 
             usuario.Login = Tb_usuario.Text;
@@ -77,6 +84,7 @@ namespace MapaDeTrabalhos
             endereco.bairro = Tb_bairro.Text;
             
             endereco.cidade = Tb_cidade.Text;
+
 
             //Pegando as posições geograficas 
 
@@ -111,24 +119,32 @@ namespace MapaDeTrabalhos
 
                    usuario.PessoaId = pessoa.Id;
             await UsuarioTable.InsertAsync(usuario);
-                        //Fazer as paradas para salvar endereço e usuário
+            //Fazer as paradas para salvar endereço e usuário
 
 
             //Direcionamento de Página
-            var resulta = await CadastroDialog.ShowAsync();
-            string resultado = "" + resulta;
-            if (resultado.Equals("Primary"))
+            if (Rb_fisica.IsChecked == true)
             {
-                Frame.Navigate(typeof(CurriculoPage), pessoa);
+                var resulta = await CadastroDialog.ShowAsync();
+                string resultado = "" + resulta;
+                if (resultado.Equals("Primary"))
+                {
+                    Frame.Navigate(typeof(CurriculoPage), pessoa);
+                }
+                else
+                {
+                    Frame.Navigate(typeof(MapaPage), pessoa);
+                }
+
             }
             else
             {
                 Frame.Navigate(typeof(MapaPage), pessoa);
             }
+           
 
 
         }
-
 
         private void Rb_fisica_Checked(object sender, RoutedEventArgs e)
         {
@@ -140,7 +156,6 @@ namespace MapaDeTrabalhos
                 Tb_nome.PlaceholderText = "Nome:";
                 Tb_cpfOrCnpj.PlaceholderText = "CPF:";
                 Tb_site.Visibility = Visibility.Collapsed;
-                this.pessoa.isPessoaFisica = true;
             }
 
 
@@ -156,13 +171,12 @@ namespace MapaDeTrabalhos
                 Tb_nome.PlaceholderText = "Razão social:";
                 Tb_cpfOrCnpj.PlaceholderText = "CNPJ:";
                 Tb_site.Visibility = Visibility.Visible;
-                this.pessoa.isPessoaFisica = false;
-               
             }
 
 
 
         }
+
         private void Cb_estados_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -172,7 +186,6 @@ namespace MapaDeTrabalhos
             endereco.estado = valorSelecionado;
 
         }
-
 
         private void Rb_masc_Checked(object sender, RoutedEventArgs e)
         {
