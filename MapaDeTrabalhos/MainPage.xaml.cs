@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -34,7 +35,23 @@ namespace MapaDeTrabalhos
         public MainPage()
         {
             this.InitializeComponent();
+            Window.Current.SizeChanged += Current_SizeChanged;
             pessoa = new Pessoa();
+        }
+        private void Current_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
+        {
+            if (e.Size.Width >= 720)
+            {
+                VisualStateManager.GoToState(this, "WideState", false);
+            }
+            else if (e.Size.Height > e.Size.Width)
+            {
+                VisualStateManager.GoToState(this, "PortraitState", false);
+            }
+            else
+            {
+                VisualStateManager.GoToState(this, "DefaultState", false);
+            }
         }
 
         private void Cadastrar_Click(object sender, RoutedEventArgs e)
@@ -46,7 +63,7 @@ namespace MapaDeTrabalhos
         {
             string login = Tb_login.Text;
             string senha = Tb_senha.Password;
-
+            carregar.Visibility = Visibility.Visible;
             var itens = await UsuarioTable.ToCollectionAsync<Usuario>();
             List<Usuario> usuarios = itens.ToList();
 
@@ -70,12 +87,13 @@ namespace MapaDeTrabalhos
                                 Frame.Navigate(typeof(MapaPage), person);
                                 break;
                             }
-                            
+
                         }
                     }
                 }
             }
 
+            carregar.Visibility = Visibility.Collapsed;
             if (achouUsuario == true && achouSenha == false)
             {
                 dialog.Content = "Senha Incorreta!";
@@ -86,7 +104,7 @@ namespace MapaDeTrabalhos
                 dialog.Content = "Usuário não encontrado!";
                 await dialog.ShowAsync();
             }
-           
+
 
         }
     }

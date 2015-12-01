@@ -36,7 +36,23 @@ namespace MapaDeTrabalhos
         public AnuncioPage()
         {
             this.InitializeComponent();
+            Window.Current.SizeChanged += Current_SizeChanged;
             anuncio = new Anuncio();
+        }
+        private void Current_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
+        {
+            if (e.Size.Width >= 720)
+            {
+                VisualStateManager.GoToState(this, "WideState", false);
+            }
+            else if (e.Size.Height > e.Size.Width)
+            {
+                VisualStateManager.GoToState(this, "PortraitState", false);
+            }
+            else
+            {
+                VisualStateManager.GoToState(this, "DefaultState", false);
+            }
         }
 
         private async void btn_salvar_Click(object sender, RoutedEventArgs e)

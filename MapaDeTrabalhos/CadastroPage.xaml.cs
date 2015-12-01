@@ -9,6 +9,7 @@ using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Services.Maps;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -39,12 +40,43 @@ namespace MapaDeTrabalhos
         public CadastroPage()
         {
             this.InitializeComponent();
+            Window.Current.SizeChanged += Current_SizeChanged;
+
             pessoa = new Pessoa();
             endereco = new Endereco();
             usuario = new Usuario();
             this.pessoa.sexo = "Masculino";
             this.pessoa.isPessoaFisica = true;
         }
+
+
+        private void Current_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
+        {
+            if (e.Size.Width >= 720)
+            {
+                VisualStateManager.GoToState(this, "WideState", false);
+            }
+            else if (e.Size.Width < 720)
+            {
+                VisualStateManager.GoToState(this, "PortraitState", false);
+            }
+            else
+            {
+                VisualStateManager.GoToState(this, "DefaultState", false);
+            }
+        }
+
+        private void OnBackRequested(object sender, BackRequestedEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            if (rootFrame.CanGoBack)
+            {
+                e.Handled = true;
+                rootFrame.GoBack();
+            }
+        }
+
 
         private async void Salvar_Click(object sender, RoutedEventArgs e)
         {

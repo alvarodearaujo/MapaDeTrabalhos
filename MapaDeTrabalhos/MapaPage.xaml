@@ -55,6 +55,7 @@
             </SplitView.Pane>
             <SplitView.Content>
                 <Grid>
+                    <ProgressRing x:Name="carregar" Width="70" Height="70" Visibility="Collapsed" IsActive="True" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     <Maps:MapControl x:Name="MapControl" ZoomInteractionMode="GestureAndControl" TiltInteractionMode="GestureAndControl" MapServiceToken="MRloZpnmUHMi3Pxfxqiu~3GxKNXkE0kCpOtyIm7Znmg~AsDsy7g_IcxGbAj66qCMZNDWLCFUDu0ktXOLTmW9CvaZzD9iAAgCGVuIB7WjzUsA" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
                         <Maps:MapItemsControl x:Name="MapItems">
                             <Maps:MapItemsControl.ItemTemplate>
@@ -82,7 +83,7 @@
 
                     <ContentDialog x:Name="AnuncioDialog"
                         VerticalAlignment="Stretch"
-                        Title="Detalhes do Anuncio"
+                        Title="Detalhes do Anúncio"
                         PrimaryButtonText="Indicar-se"
                         SecondaryButtonText="Voltar"
                         MaxWidth="{Binding ActualWidth, ElementName=pageRoot}">

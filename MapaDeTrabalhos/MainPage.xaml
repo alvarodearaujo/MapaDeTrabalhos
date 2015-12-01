@@ -6,6 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+
+
     <Page.Resources>
         <Style TargetType="Button" >
             <Setter Property="Background" Value="DarkGray"/>
@@ -22,12 +24,37 @@
             <Setter Property="Foreground" Value="White"/>
         </Style>
     </Page.Resources>
-    
-    <Grid Margin="-5,18,5,-18">
+
+    <Grid Margin="-5,18,5,-18" x:Name="MainGrid">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="ImageBack.ImageSource"
+                            Value="Assets/BackGround.png" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="ImageBack.ImageSource"
+                            Value="Assets/BackGroundLittle.png" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.Background>
-            <ImageBrush ImageSource="Assets/BackGround.png"/>
+            <ImageBrush x:Name="ImageBack"/>
         </Grid.Background>
-         
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="163*"/>
             <RowDefinition Height="68*"/>
@@ -38,7 +65,8 @@
             <RowDefinition Height="75*"/>
             <RowDefinition Height="124*"/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="Tb_login" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" PlaceholderText="Digite seu Login." FontSize="30"  Width="368" />
+        <ProgressRing x:Name="carregar" Width="70" Height="70" Visibility="Collapsed" IsActive="True" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <TextBox x:Name="Tb_login" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" PlaceholderText="Digite seu Login." FontSize="30"  Width="368"/>
         <PasswordBox x:Name="Tb_senha" HorizontalAlignment="Center"  Grid.Row="3" VerticalAlignment="Center" Width="368" PlaceholderText="Digite sua Senha." FontSize="30" />
         <Button x:Name="Logar" Content="Logar" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Click="Logar_Click"/>
         <Button x:Name="Cadastrar" Content="Cadastrar-se" HorizontalAlignment="Center" Grid.Row="5" Grid.RowSpan="2" VerticalAlignment="Center" FontSize="30" Click="Cadastrar_Click" />

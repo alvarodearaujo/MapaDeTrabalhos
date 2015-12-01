@@ -19,6 +19,7 @@ using Windows.Services.Maps;
 using MapaDeTrabalhos.viewModel;
 using MapaDeTrabalhos.Model;
 using Microsoft.WindowsAzure.MobileServices;
+using Windows.UI.Popups;
 
 
 
@@ -120,7 +121,10 @@ namespace MapaDeTrabalhos
             string resultado = "" + result;
             if (resultado.Equals("Primary"))
             {
-                //fazer o tratamento para quando o cara quiser indicar-se a vaga.
+                MessageDialog md = new MessageDialog("");
+                md.Title = "Desculpe!";
+                md.Content = "Função ainda não implementada";
+                await md.ShowAsync();
             }
 
         }
@@ -151,6 +155,7 @@ namespace MapaDeTrabalhos
             ComboBoxItem item = cb.SelectedItem as ComboBoxItem;
             string valorSelecionado = item.Content.ToString();
 
+            carregar.Visibility = Visibility.Visible;
             var itens = await AnuncioTable.ToCollectionAsync<Anuncio>();
             List<Anuncio> anuncios = itens.ToList();
 
@@ -163,12 +168,14 @@ namespace MapaDeTrabalhos
             {
                 MapItems.ItemsSource = poiManager.ListarAnunciosFiltro(valorSelecionado, anuncios);
             }
+            carregar.Visibility = Visibility.Collapsed;
         }
 
         private async void TipoTrabalhoButao_Tapped(object sender, TappedRoutedEventArgs e)
         {
             await TipoDialog.ShowAsync();
 
+            carregar.Visibility = Visibility.Visible;
             var itens = await AnuncioTable.ToCollectionAsync<Anuncio>();
             List<Anuncio> anuncios = itens.ToList();
 
@@ -184,14 +191,8 @@ namespace MapaDeTrabalhos
             {
                 MapItems.ItemsSource = poiManager.ListarAnunciosInformal(anuncios);
             }
+            carregar.Visibility = Visibility.Collapsed;
         }
-
-
-        private void FinalizarAnuncioBotao_Click(object sender, RoutedEventArgs e)
-        {
-            //Fazer a função pra mostra na tela a lista dos anuncios do cara pra depois direcionar pra tela de Anuncios
-        }
-
 
         private void MeuCadastroBotao_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -206,6 +207,14 @@ namespace MapaDeTrabalhos
         private void LogoutBotao_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Frame.Navigate(typeof(MainPage));
+        }
+
+        private async void FinalizarAnuncioBotao_Click(object sender, TappedRoutedEventArgs e)
+        {
+            MessageDialog md = new MessageDialog("");
+            md.Title = "Desculpe!";
+            md.Content = "Função ainda não implementada";
+            await md.ShowAsync();
         }
     }
 }

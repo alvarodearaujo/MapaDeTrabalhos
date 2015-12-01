@@ -10,89 +10,104 @@
 
 
     <Grid Background="LightGray">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="640*"/>
-            <ColumnDefinition Width="640*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-        </Grid.RowDefinitions>
-        <TextBlock x:Name="Titulo" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="Cadastro de Currículo" VerticalAlignment="Center" FontSize="40"/>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600" />
+                    </VisualState.StateTriggers>
 
-        <TextBlock x:Name="Formacao" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="Formação Acadêmica" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
-        <StackPanel x:Name="Sp_formacao"  HorizontalAlignment="Center" Height="140" Grid.Row="3" Grid.RowSpan="2" VerticalAlignment="Center" Width="640">
-            <Button x:Name="AdicionarFormacao" Content="Adicionar Formação" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AdicionarFormacao_Click"/>
-            <ListView x:Name="Lv_formacao" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="105" DisplayMemberPath="nomeCurso" FontSize="20" />
+                    <VisualState.Setters>
+                        <Setter Target="Sp_master.Orientation"  Value="Horizontal" />
+                    </VisualState.Setters>
+                </VisualState>
 
-        </StackPanel>
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
 
-        <TextBlock x:Name="Experiencia" HorizontalAlignment="Center" Grid.Row="5" TextWrapping="Wrap" Text="Experiência Profissional" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
-        <StackPanel x:Name="Sp_experiencia"  HorizontalAlignment="Center" Height="140" Grid.Row="6" Grid.RowSpan="2" VerticalAlignment="Center" Width="640">
-            <Button x:Name="AdicionarExperiencia" Content="Adicionar Experiência" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AdicionarExperiencia_Click"/>
-            <ListView x:Name="Lv_experiencia" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="105" DisplayMemberPath="nomeFuncao" FontSize="20"/>
-        </StackPanel>
+                    <VisualState.Setters>
+                        <Setter Target="Sp_master.Orientation"  Value="Vertical" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <ScrollViewer>
+            <StackPanel x:Name="Sp_page">
+                <TextBlock x:Name="Titulo" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="Cadastro de Currículo" VerticalAlignment="Center" FontSize="40" Margin="5"/>
 
-        <TextBlock x:Name="Idioma" HorizontalAlignment="Center" Grid.Row="8" TextWrapping="Wrap" Text="Idiomas" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
-        <StackPanel x:Name="Sp_idioma"  HorizontalAlignment="Center" Height="140" Grid.Row="9" Grid.RowSpan="2" VerticalAlignment="Center" Width="640">
-            <Button x:Name="AdicionarIdioma" Content="Adicionar Idioma" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AdicionarIdioma_Click"/>
-            <ListView x:Name="Lv_idioma" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="105" DisplayMemberPath="nomeIdioma" FontSize="20"/>
-        </StackPanel>
+                <StackPanel x:Name="Sp_master" Orientation="Horizontal" Margin="2">
+                    <StackPanel x:Name="Sp_first" Margin="2">
+                        <TextBlock x:Name="Formacao" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="Formação Acadêmica" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
+                        <StackPanel x:Name="Sp_formacao"  HorizontalAlignment="Center" Height="140" Grid.Row="3" Grid.RowSpan="2" VerticalAlignment="Center" Width="640">
+                            <Button x:Name="AdicionarFormacao" Content="Adicionar Formação" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AdicionarFormacao_Click"/>
+                            <ListView x:Name="Lv_formacao" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="105" DisplayMemberPath="nomeCurso" FontSize="20" />
 
-        <TextBlock x:Name="InformacoesComplementares" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="Informações Complementares" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
-        <StackPanel x:Name="Sp_habilitacao"  Grid.Column="1" HorizontalAlignment="Right" Height="60"  Grid.Row="3" Grid.RowSpan="1" VerticalAlignment="Center" Width="640" Orientation="Horizontal">
-            <TextBlock Text="Habilitação:" TextAlignment="Left" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-            <CheckBox x:Name="HabilitacaoA" Content="A" FontSize="20" Width="46" Height="32" Margin="0,14"></CheckBox>
-            <CheckBox x:Name="HabilitacaoB" Content="B" FontSize="20" Width="10"></CheckBox>
-            <CheckBox x:Name="HabilitacaoC" Content="C" FontSize="20" Width="10"></CheckBox>
-            <CheckBox x:Name="HabilitacaoD" Content="D" FontSize="20" Width="10"></CheckBox>
-            <CheckBox x:Name="HabilitacaoE" Content="E" FontSize="20" Width="5"></CheckBox>
-        </StackPanel>
+                        </StackPanel>
 
-        <StackPanel x:Name="Sp_veiculo" Grid.Column="1" HorizontalAlignment="Right" Height="60"  Grid.Row="4" Grid.RowSpan="1" VerticalAlignment="Center" Width="640" Orientation="Horizontal">
-            <TextBlock Text="Veiculo Próprio:" TextAlignment="Left" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-            <CheckBox x:Name="Caminhao" Content="Caminhão" FontSize="20" Width="46" Height="32" Margin="0,14" ></CheckBox>
-            <CheckBox x:Name="Carro" Content="Carro" FontSize="20" Width="56" Margin="0,15,0,13"></CheckBox>
-            <CheckBox x:Name="Moto" Content="Moto" FontSize="20" Width="80" Margin="0,14"></CheckBox>
-            <CheckBox x:Name="Outros" Content="Outros" FontSize="20" Width="10"></CheckBox>
-        </StackPanel>
+                        <TextBlock x:Name="Experiencia" HorizontalAlignment="Center" Grid.Row="5" TextWrapping="Wrap" Text="Experiência Profissional" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
+                        <StackPanel x:Name="Sp_experiencia"  HorizontalAlignment="Center" Height="140" Grid.Row="6" Grid.RowSpan="2" VerticalAlignment="Center" Width="640">
+                            <Button x:Name="AdicionarExperiencia" Content="Adicionar Experiência" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AdicionarExperiencia_Click"/>
+                            <ListView x:Name="Lv_experiencia" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="105" DisplayMemberPath="nomeFuncao" FontSize="20"/>
+                        </StackPanel>
 
-        <StackPanel x:Name="Sp_viajar" Grid.Column="1" HorizontalAlignment="Right" Height="60"  Grid.Row="5" Grid.RowSpan="1" VerticalAlignment="Center" Width="640" Orientation="Horizontal">
-            <TextBlock Text="Disponibilidade para viajar? " TextAlignment="Left" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-            <RadioButton x:Name="Rb_viajarSim" Content="Sim" Click="Rb_viajarSim_Click" />
-            <RadioButton x:Name="Rb_viajarNao" Content="Nao" Click="Rb_viajarNao_Click" />
-        </StackPanel>
+                        <TextBlock x:Name="Idioma" HorizontalAlignment="Center" Grid.Row="8" TextWrapping="Wrap" Text="Idiomas" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
+                        <StackPanel x:Name="Sp_idioma"  HorizontalAlignment="Center" Height="140" Grid.Row="9" Grid.RowSpan="2" VerticalAlignment="Center" Width="640">
+                            <Button x:Name="AdicionarIdioma" Content="Adicionar Idioma" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AdicionarIdioma_Click"/>
+                            <ListView x:Name="Lv_idioma" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="105" DisplayMemberPath="nomeIdioma" FontSize="20"/>
+                        </StackPanel>
 
-        <StackPanel x:Name="Sp_mudarResidencia" Grid.Column="1" HorizontalAlignment="Right" Height="60"  Grid.Row="6" Grid.RowSpan="1" VerticalAlignment="Center" Width="640" Orientation="Horizontal">
-            <TextBlock Text="Disponibilidade para mudar de residência? " TextAlignment="Left" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-            <RadioButton x:Name="Rb_mudarSim" Content="Sim" Click="Rb_mudarSim_Click" />
-            <RadioButton x:Name="Rb_mudarNao" Content="Nao" Click="Rb_mudarNao_Click" />
-        </StackPanel>
+                    </StackPanel>
+                    <StackPanel x:Name="Sp_second" Margin="2">
+                        <TextBlock x:Name="InformacoesComplementares" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="Informações Complementares" VerticalAlignment="Center" FontSize="30" FontStyle="Italic"/>
+                        <StackPanel x:Name="Sp_habilitacao"  Grid.Column="1" HorizontalAlignment="Right" Height="60"  Grid.Row="3" Grid.RowSpan="1" VerticalAlignment="Center" Width="640" Orientation="Horizontal">
+                            <TextBlock Text="Habilitação:" TextAlignment="Left" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <CheckBox x:Name="HabilitacaoA" Content="A" FontSize="20" Width="46" Height="32" Margin="0,14"></CheckBox>
+                            <CheckBox x:Name="HabilitacaoB" Content="B" FontSize="20" Width="10"></CheckBox>
+                            <CheckBox x:Name="HabilitacaoC" Content="C" FontSize="20" Width="10"></CheckBox>
+                            <CheckBox x:Name="HabilitacaoD" Content="D" FontSize="20" Width="10"></CheckBox>
+                            <CheckBox x:Name="HabilitacaoE" Content="E" FontSize="20" Width="5"></CheckBox>
+                        </StackPanel>
 
-        <StackPanel x:Name="Sp_salario" Grid.Column="1" HorizontalAlignment="Right" Height="60"  Grid.Row="7" Grid.RowSpan="1" VerticalAlignment="Center" Width="640" Orientation="Horizontal">
-            <TextBlock Text="Pretensão salarial mensal entre: " TextAlignment="Left" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"></TextBlock>
-            <TextBox x:Name="menorValorSalario" FontSize="20" VerticalAlignment="Center" Width="30"></TextBox>
-            <TextBlock Text="  à  " TextAlignment="Left" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"></TextBlock>
-            <TextBox x:Name="maiorValorSalario" FontSize="20" VerticalAlignment="Center" Width="30"></TextBox>
-        </StackPanel>
+                        <StackPanel x:Name="Sp_veiculo" Grid.Column="1" HorizontalAlignment="Right" Height="60"  Grid.Row="4" Grid.RowSpan="1" VerticalAlignment="Center" Width="640" Orientation="Horizontal">
+                            <TextBlock Text="Veiculo Próprio:" TextAlignment="Left" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <CheckBox x:Name="Caminhao" Content="Caminhão" FontSize="20" Width="46" Height="32" Margin="0,14" ></CheckBox>
+                            <CheckBox x:Name="Carro" Content="Carro" FontSize="20" Width="56" Margin="0,15,0,13"></CheckBox>
+                            <CheckBox x:Name="Moto" Content="Moto" FontSize="20" Width="80" Margin="0,14"></CheckBox>
+                            <CheckBox x:Name="Outros" Content="Outros" FontSize="20" Width="10"></CheckBox>
+                        </StackPanel>
 
-        <Border HorizontalAlignment="Center" Width="141" CornerRadius="60" Tapped="image_Tapped" Grid.Column="1" Grid.Row="8" RenderTransformOrigin="0.338,1.014" Grid.RowSpan="2">
-            <Border.Background>
-                <ImageBrush x:Name="imgPhoto" Stretch="UniformToFill" ImageSource="{Binding Foto,  FallbackValue='Assets/default.gif'}" />
-            </Border.Background>
-        </Border>
+                        <StackPanel x:Name="Sp_viajar" Grid.Column="1" HorizontalAlignment="Right" Height="60"  Grid.Row="5" Grid.RowSpan="1" VerticalAlignment="Center" Width="640" Orientation="Horizontal">
+                            <TextBlock Text="Disponibilidade para viajar? " TextAlignment="Left" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <RadioButton x:Name="Rb_viajarSim" Content="Sim" Click="Rb_viajarSim_Click" />
+                            <RadioButton x:Name="Rb_viajarNao" Content="Nao" Click="Rb_viajarNao_Click" />
+                        </StackPanel>
 
-        <Button x:Name="Salvar" Content="Salvar" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="10" Grid.RowSpan="2" VerticalAlignment="Center" FontSize="30" Click="Salvar_Click"/>
+                        <StackPanel x:Name="Sp_mudarResidencia" Grid.Column="1" HorizontalAlignment="Right" Height="60"  Grid.Row="6" Grid.RowSpan="1" VerticalAlignment="Center" Width="640" Orientation="Horizontal">
+                            <TextBlock Text="Disponibilidade para mudar de residência? " TextAlignment="Left" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <RadioButton x:Name="Rb_mudarSim" Content="Sim" Click="Rb_mudarSim_Click" />
+                            <RadioButton x:Name="Rb_mudarNao" Content="Nao" Click="Rb_mudarNao_Click" />
+                        </StackPanel>
 
+                        <StackPanel x:Name="Sp_salario" Grid.Column="1" HorizontalAlignment="Right" Height="60"  Grid.Row="7" Grid.RowSpan="1" VerticalAlignment="Center" Width="640" Orientation="Horizontal">
+                            <TextBlock Text="Pretensão salarial mensal entre: " TextAlignment="Left" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"></TextBlock>
+                            <TextBox x:Name="menorValorSalario" FontSize="20" VerticalAlignment="Center" Width="30"></TextBox>
+                            <TextBlock Text="  à  " TextAlignment="Left" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"></TextBlock>
+                            <TextBox x:Name="maiorValorSalario" FontSize="20" VerticalAlignment="Center" Width="30"></TextBox>
+                        </StackPanel>
+
+                        <Border HorizontalAlignment="Center" Width="141" Height="200" CornerRadius="60" Tapped="image_Tapped" RenderTransformOrigin="0.338,1.014">
+                            <Border.Background>
+                                <ImageBrush x:Name="imgPhoto" Stretch="UniformToFill" ImageSource="{Binding Foto,  FallbackValue='Assets/default.gif'}" />
+                            </Border.Background>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+                <Button x:Name="Salvar" Content="Salvar"  HorizontalAlignment="Center" Grid.Row="10" Grid.RowSpan="2" VerticalAlignment="Center" FontSize="30" Click="Salvar_Click" Margin="5"/>
+
+            </StackPanel>
+        </ScrollViewer>
         <ContentDialog x:Name="FormacaoDialog"
                         VerticalAlignment="Stretch"
                         Title="Adicionar Formação Academica" 
@@ -119,7 +134,7 @@
                 <StackPanel x:Name="Sp_nomeCurso" HorizontalAlignment="Stretch" VerticalAlignment="Center" Orientation="Horizontal" Margin="2">
                     <TextBlock Text="Nome do curso: "  FontStyle="Italic" VerticalAlignment="Center" FontSize="15" Margin="2"></TextBlock>
                     <ComboBox x:Name="Cb_NomeDoCurso" Width="400" Height="50" HorizontalAlignment="Stretch" SelectionChanged="Cb_NomeDoCurso_SelectionChanged" >
-                        
+
                     </ComboBox>
                 </StackPanel>
 

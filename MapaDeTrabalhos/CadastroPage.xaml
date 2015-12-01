@@ -7,96 +7,108 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="LightGray">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="21*"/>
-            <ColumnDefinition Width="619*"/>
-            <ColumnDefinition Width="603*"/>
-            <ColumnDefinition Width="37*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="60*"/>
-            <RowDefinition Height="60*"/>
-            <RowDefinition Height="60*"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="60*"/>
-        </Grid.RowDefinitions>
-        <TextBlock x:Name="Título" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Cadastro de Usuário" VerticalAlignment="Center" FontSize="50" Grid.ColumnSpan="2" Margin="395,4,378.667,4"/>
+    <Grid Background="LightGray" Name="MainGrid">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600" />
+                    </VisualState.StateTriggers>
 
-        <TextBlock x:Name="Pessoa" HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="1" Text="Dados do cadastro" VerticalAlignment="Center" FontSize="30" FontStyle="Italic" Margin="184,18,204,17"/>
+                    <VisualState.Setters>
+                        <Setter Target="Sp_master.Orientation"  Value="Horizontal" />
+                    </VisualState.Setters>
+                </VisualState>
 
-        <StackPanel x:Name="Sp_tipoPessoa" HorizontalAlignment="Left" Height="60" Grid.Row="2" VerticalAlignment="Center" Width="550" Orientation="Horizontal" Grid.Column="1" Margin="0,8,0,7">
-            <RadioButton x:Name="Rb_fisica" Content="Pessoa Física"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="250" GroupName="tP_Pessoa" IsChecked="True" Checked="Rb_fisica_Checked" />
-            <RadioButton x:Name="Rb_juridica" Content="Pessoa Juridica"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="250" GroupName="tP_Pessoa" Checked="Rb_juridica_Checked" />
-        </StackPanel>
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
 
-        <TextBox x:Name="Tb_nome" HorizontalAlignment="Left" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Nome:"  Width="550" Grid.Column="1" Margin="0,4" />
-        <TextBox x:Name="Tb_cpfOrCnpj" HorizontalAlignment="Left" Grid.Row="4" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="CPF:"  Width="550" Grid.Column="1" Margin="0,4" />
-        <TextBox x:Name="Tb_email" HorizontalAlignment="Left" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Email:"  Width="550" InputScope="EmailSmtpAddress" Grid.Column="1" Margin="0,4"/>
-        
-        <StackPanel x:Name="Sp_sexo" HorizontalAlignment="Left" Height="60" Grid.Row="6" VerticalAlignment="Center" Width="550" Orientation="Horizontal" Visibility="Visible" Grid.Column="1" >
-            <RadioButton x:Name="Rb_masc" Content="Masculino"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="200" GroupName="Sexo" IsChecked="True" Checked="Rb_masc_Checked"/>
-            <RadioButton x:Name="Rb_femi" Content="Feminino"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="200" GroupName="Sexo"  Checked="Rb_femi_Checked"/>
-        </StackPanel>
+                    <VisualState.Setters>
+                        <Setter Target="Sp_master.Orientation"  Value="Vertical" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <ScrollViewer>
+            <StackPanel x:Name="Sp_page">
+                <TextBlock x:Name="Título" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Cadastro de Usuário" VerticalAlignment="Center" FontSize="50" Margin="5"/>
 
-        <TextBox x:Name="Tb_site" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Center" Width="550" Visibility="Collapsed" Grid.Column="1" FontSize="30" PlaceholderText="Site:" />
-       
-        <TextBox x:Name="Tb_dataNascimento" HorizontalAlignment="Left" Grid.Row="7" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Data de Nascimento:"  Width="550" InputScope="CurrencyAmountAndSymbol" Grid.Column="1" Margin="0,4"/>
-        <TextBox x:Name="Tb_telefone" HorizontalAlignment="Left" Grid.Row="8" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Telefone para contato:"  Width="550" InputScope="NameOrPhoneNumber" Grid.Column="1" Margin="0,4"/>
-        <TextBox x:Name="Tb_celular" HorizontalAlignment="Left" Grid.Row="9" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Telefone celular para contato:"  Width="550" Grid.Column="1" Margin="0,4" />
-        <Image x:Name="image" HorizontalAlignment="Center" Height="110" Grid.Row="8" Grid.RowSpan="2" VerticalAlignment="Center" Width="100" Grid.Column="1" Margin="249,5,270,5"/>
+                <StackPanel x:Name="Sp_master" Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
+                    <StackPanel x:Name="Sp_first"  Grid.Row="1" Grid.Column="1" Grid.RowSpan="9">
+                        
+                        <TextBlock x:Name="Pessoa" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="1" Text="Dados do cadastro" VerticalAlignment="Center" FontSize="30" FontStyle="Italic" Margin="3"/>
 
+                        <StackPanel x:Name="Sp_tipoPessoa"  HorizontalAlignment="Left" Height="60" Grid.Row="6" VerticalAlignment="Center" Width="450" Orientation="Horizontal">
+                        <RadioButton x:Name="Rb_fisica" Content="Física"   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="200" GroupName="tP_Pessoa" IsChecked="True" Checked="Rb_fisica_Checked" Margin="4"/>
+                        <RadioButton x:Name="Rb_juridica" Content="Juridica"   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="200" GroupName="tP_Pessoa" Checked="Rb_juridica_Checked" Margin="4"/>
+                        </StackPanel>
 
-        <TextBlock x:Name="Endereco" HorizontalAlignment="Left"  Grid.Row="1" Grid.Column="2" TextWrapping="Wrap" Text="Dados de Endereço" VerticalAlignment="Center" FontSize="30" FontStyle="Italic" Margin="197,18,158.667,17"/>
-        <TextBox x:Name="Tb_rua" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="2" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Nome da rua:"  Width="550" Margin="0,12,0,11" />
-        <TextBox x:Name="Tb_numero" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="2" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Numero:"  Width="550" Margin="0,4" />
-        <TextBox x:Name="Tb_bairro" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="2" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Bairro:"  Width="550" Margin="0,4" />
-        <TextBox x:Name="Tb_cidade" HorizontalAlignment="Left" Grid.Row="5" Grid.Column="2" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Cidade:"  Width="550" Margin="0,4" />
-        <ComboBox x:Name="Cb_estados" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" Width="550" Height="50" PlaceholderText="Estado" FontSize="30" SelectionChanged="Cb_estados_SelectionChanged" Margin="0,5" >
-            <ComboBox.Items>
-                <ComboBoxItem Content="Acre"/>
-                <ComboBoxItem Content="Alagoas"/>
-                <ComboBoxItem Content="Amapá"/>
-                <ComboBoxItem Content="Amazonas"/>
-                <ComboBoxItem Content="Bahia"/>
-                <ComboBoxItem Content="Ceará"/>
-                <ComboBoxItem Content="Distrito Federal"/>
-                <ComboBoxItem Content="Espírito Santo"/>
-                <ComboBoxItem Content="Goiás"/>
-                <ComboBoxItem Content= "Maranhão"/>
-                <ComboBoxItem Content="Mato Grosso"/>
-                <ComboBoxItem Content="Mato Grosso do Sul"/>
-                <ComboBoxItem Content="Minas Gerais"/>
-                <ComboBoxItem Content="Pará"/>
-                <ComboBoxItem Content="Paraíba"/>
-                <ComboBoxItem Content="Paraná"/>
-                <ComboBoxItem Content="Pernambuco"/>
-                <ComboBoxItem Content="Piauí"/>
-                <ComboBoxItem Content="Rio de Janeiro"/>
-                <ComboBoxItem Content="Rio Grande do Norte"/>
-                <ComboBoxItem Content="Rio Grande do Sul"/>
-                <ComboBoxItem Content="Rondônia"/>
-                <ComboBoxItem Content="Roraima"/>
-                <ComboBoxItem Content="Santa Catarina"/>
-                <ComboBoxItem Content="São Paulo"/>
-                <ComboBoxItem Content="Sergipe"/>
-                <ComboBoxItem Content="Tocantins"/>
-            </ComboBox.Items>
-        </ComboBox>
+                        <TextBox x:Name="Tb_nome" HorizontalAlignment="Left" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Nome:"  Width="450" Grid.Column="1" Margin="4" />
+                        <TextBox x:Name="Tb_cpfOrCnpj" HorizontalAlignment="Left" Grid.Row="4" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="CPF:"  Width="450" Grid.Column="1" Margin="4" />
+                        <TextBox x:Name="Tb_email" HorizontalAlignment="Left" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Email:"  Width="450" InputScope="EmailSmtpAddress" Grid.Column="1" Margin="4"/>
 
-        <TextBlock x:Name="Acesso" HorizontalAlignment="Left"  Grid.Row="7" Grid.Column="2" TextWrapping="Wrap" Text="Dados do usuário do Sistema" VerticalAlignment="Center" FontSize="30" FontStyle="Italic" Margin="123,10,85.667,10"/>
-        <TextBox x:Name="Tb_usuario" HorizontalAlignment="Left" Grid.Row="8" Grid.Column="2" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Usuário:"  Width="550" Margin="0,4" />
-        <PasswordBox x:Name="Pb_senha" HorizontalAlignment="Left" Grid.Row="9" Grid.Column="2"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Senha:"  Width="550" Margin="0,4" />
+                        <StackPanel x:Name="Sp_sexo" HorizontalAlignment="Left" Height="60" Grid.Row="6" VerticalAlignment="Center" Width="450" Orientation="Horizontal" Visibility="Visible" Grid.Column="1" >
+                            <RadioButton x:Name="Rb_masc" Content="Masculino"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="200" GroupName="Sexo" IsChecked="True" Checked="Rb_masc_Checked"/>
+                            <RadioButton x:Name="Rb_femi" Content="Feminino"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Width="200" GroupName="Sexo"  Checked="Rb_femi_Checked"/>
+                        </StackPanel>
 
-        <Button x:Name="Salvar" Content="Salvar" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="2" FontSize="30" Click="Salvar_Click" Margin="570,12,552.667,11"></Button>
+                        <TextBox x:Name="Tb_site" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Center" Width="450" Visibility="Collapsed" Grid.Column="1" FontSize="30" PlaceholderText="Site:" />
 
+                        <TextBox x:Name="Tb_dataNascimento" HorizontalAlignment="Left" Grid.Row="7" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Data de Nascimento:"  Width="450" InputScope="CurrencyAmountAndSymbol" Grid.Column="1" Margin="0,4"/>
+                        <TextBox x:Name="Tb_telefone" HorizontalAlignment="Left" Grid.Row="8" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Telefone para contato:"  Width="450" InputScope="NameOrPhoneNumber" Grid.Column="1" Margin="0,4"/>
+                        <TextBox x:Name="Tb_celular" HorizontalAlignment="Left" Grid.Row="9" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Telefone celular para contato:"  Width="450" Grid.Column="1" Margin="0,4" />
+                    </StackPanel>
 
+                    <StackPanel x:Name="Sp_second"  Grid.Row="1" Grid.Column="2" Grid.RowSpan="9">
+                        <TextBlock x:Name="Endereco" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Dados de Endereço" VerticalAlignment="Center" FontSize="30" FontStyle="Italic" Margin="3"/>
+                        
+                        <TextBox x:Name="Tb_rua" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="2" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Nome da rua:"  Width="450" Margin="0,4"/>
+                        <TextBox x:Name="Tb_numero" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="2" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Numero:"  Width="450" Margin="0,4" />
+                        <TextBox x:Name="Tb_bairro" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="2" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Bairro:"  Width="450" Margin="0,4" />
+                        <TextBox x:Name="Tb_cidade" HorizontalAlignment="Left" Grid.Row="5" Grid.Column="2" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Cidade:"  Width="450" Margin="0,4" />
+                        <ComboBox x:Name="Cb_estados" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" Width="450" Height="50" PlaceholderText="Estado" FontSize="30" SelectionChanged="Cb_estados_SelectionChanged" Margin="0,5" >
+                            <ComboBox.Items>
+                                <ComboBoxItem Content="Acre"/>
+                                <ComboBoxItem Content="Alagoas"/>
+                                <ComboBoxItem Content="Amapá"/>
+                                <ComboBoxItem Content="Amazonas"/>
+                                <ComboBoxItem Content="Bahia"/>
+                                <ComboBoxItem Content="Ceará"/>
+                                <ComboBoxItem Content="Distrito Federal"/>
+                                <ComboBoxItem Content="Espírito Santo"/>
+                                <ComboBoxItem Content="Goiás"/>
+                                <ComboBoxItem Content= "Maranhão"/>
+                                <ComboBoxItem Content="Mato Grosso"/>
+                                <ComboBoxItem Content="Mato Grosso do Sul"/>
+                                <ComboBoxItem Content="Minas Gerais"/>
+                                <ComboBoxItem Content="Pará"/>
+                                <ComboBoxItem Content="Paraíba"/>
+                                <ComboBoxItem Content="Paraná"/>
+                                <ComboBoxItem Content="Pernambuco"/>
+                                <ComboBoxItem Content="Piauí"/>
+                                <ComboBoxItem Content="Rio de Janeiro"/>
+                                <ComboBoxItem Content="Rio Grande do Norte"/>
+                                <ComboBoxItem Content="Rio Grande do Sul"/>
+                                <ComboBoxItem Content="Rondônia"/>
+                                <ComboBoxItem Content="Roraima"/>
+                                <ComboBoxItem Content="Santa Catarina"/>
+                                <ComboBoxItem Content="São Paulo"/>
+                                <ComboBoxItem Content="Sergipe"/>
+                                <ComboBoxItem Content="Tocantins"/>
+                            </ComboBox.Items>
+                        </ComboBox>
+
+                        <TextBlock x:Name="Acesso" HorizontalAlignment="Center"  Grid.Row="7" Grid.Column="2" TextWrapping="Wrap" Text="Dados do usuário do Sistema" VerticalAlignment="Center" FontSize="30" FontStyle="Italic" Margin="3"/>
+                        <TextBox x:Name="Tb_usuario" HorizontalAlignment="Left" Grid.Row="8" Grid.Column="2" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Usuário:"  Width="450" Margin="0,4" />
+                        <PasswordBox x:Name="Pb_senha" HorizontalAlignment="Left" Grid.Row="9" Grid.Column="2"  VerticalAlignment="Center" FontSize="30" PlaceholderText="Senha:"  Width="450" Margin="0,4" />
+
+                    </StackPanel>
+                </StackPanel>
+                <Button x:Name="Salvar" Content="Salvar" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="2" FontSize="30" Click="Salvar_Click" Margin="5"></Button>
+            </StackPanel>
+        </ScrollViewer>
 
         <ContentDialog x:Name="CadastroDialog"
                         VerticalAlignment="Stretch"
