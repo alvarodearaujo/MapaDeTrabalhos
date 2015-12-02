@@ -10,6 +10,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Services.Maps;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -33,6 +34,14 @@ namespace MapaDeTrabalhos
 
         private Endereco endereco;
 
+        private bool isEstadoSelecionado = false;
+
+        private bool isCpfValido = false;
+
+        private bool isEmailValido = false;
+
+        MessageDialog md = new MessageDialog("");
+
         private IMobileServiceTable<Pessoa> PessoaTable = App.MobileService.GetTable<Pessoa>();
         private IMobileServiceTable<Usuario> UsuarioTable = App.MobileService.GetTable<Usuario>();
         private IMobileServiceTable<Endereco> EnderecoTable = App.MobileService.GetTable<Endereco>();
@@ -52,17 +61,17 @@ namespace MapaDeTrabalhos
 
         private void Current_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
         {
-            if (e.Size.Width >= 720)
+            if (e.Size.Width >= 960)
             {
                 VisualStateManager.GoToState(this, "WideState", false);
             }
-            else if (e.Size.Width < 720)
+            else if (e.Size.Width < 960 && e.Size.Width > 500)
             {
-                VisualStateManager.GoToState(this, "PortraitState", false);
+                VisualStateManager.GoToState(this, "MediumState", false);
             }
             else
             {
-                VisualStateManager.GoToState(this, "DefaultState", false);
+                VisualStateManager.GoToState(this, "NarrowState", false);
             }
         }
 
@@ -80,103 +89,208 @@ namespace MapaDeTrabalhos
 
         private async void Salvar_Click(object sender, RoutedEventArgs e)
         {
-            ////Fazer o processo pra validar os campos de cadastro e salvar no banco.
-            
-            pessoa.nomeOuRazaoSocial = Tb_nome.Text;
-
-            pessoa.data = Tb_dataNascimento.Text;
-
-            pessoa.cpfOuCnpj = Tb_cpfOrCnpj.Text;
-
-            pessoa.email = Tb_email.Text;
-
-            pessoa.celular = Tb_celular.Text;
-
-            pessoa.telefone = Tb_telefone.Text;
-
-            pessoa.site = Tb_site.Text;
-
-            if(Rb_fisica.IsChecked == true)
+            if (!Tb_nome.Text.Equals(""))
             {
-                pessoa.isPessoaFisica = true;
-            }
-            else
-            {
-                pessoa.isPessoaFisica = false;
-            }
-
-            usuario.Senha = Pb_senha.Password;
-
-            usuario.Login = Tb_usuario.Text;
-
-            endereco.Rua = Tb_rua.Text;
-
-            endereco.numero = Tb_numero.Text;
-
-            endereco.bairro = Tb_bairro.Text;
-            
-            endereco.cidade = Tb_cidade.Text;
-
-
-            //Pegando as posições geograficas 
-
-            string addressToGeocode = endereco.Rua + ", " + endereco.numero + ", " + endereco.bairro + ", " + endereco.cidade +" - " + endereco.estado;
-
-            // Nearby location to use as a query hint.
-            BasicGeoposition queryHint = new BasicGeoposition();
-            queryHint.Latitude = -8.05665;
-            queryHint.Longitude = -34.898441;
-            Geopoint hintPoint = new Geopoint(queryHint);
-
-            // Geocode the specified address, using the specified reference point
-            // as a query hint. Return no more than 3 results.
-            MapLocationFinderResult result = await MapLocationFinder.FindLocationsAsync(addressToGeocode, hintPoint, 3);
-
-            //Setting position default to Derby - Recife
-            BasicGeoposition cityPosition = new BasicGeoposition() { Latitude = -8.05665, Longitude = -34.898441 };
-            Geopoint cityCenter = new Geopoint(cityPosition);
-
-            // If the query returns results, display the coordinates  of the first result.
-            if (result.Status == MapLocationFinderStatus.Success)
-            {
-               endereco.latitude = result.Locations[0].Point.Position.Latitude;
-               endereco.longitude = result.Locations[0].Point.Position.Longitude;
-            }
-
-            ////Salvando Pessoa
-            await PessoaTable.InsertAsync(pessoa);
-
-                  endereco.PessoaId = pessoa.Id;
-            await EnderecoTable.InsertAsync(endereco);
-
-                   usuario.PessoaId = pessoa.Id;
-            await UsuarioTable.InsertAsync(usuario);
-            //Fazer as paradas para salvar endereço e usuário
-
-
-            //Direcionamento de Página
-            if (Rb_fisica.IsChecked == true)
-            {
-                var resulta = await CadastroDialog.ShowAsync();
-                string resultado = "" + resulta;
-                if (resultado.Equals("Primary"))
+                if (isCpfValido)
                 {
-                    Frame.Navigate(typeof(CurriculoPage), pessoa);
+                    if (isEmailValido)
+                    {
+                        if (!Tb_rua.Text.Equals(""))
+                        {
+                            if (!Tb_bairro.Text.Equals(""))
+                            {
+                                if (!Tb_cidade.Text.Equals(""))
+                                {
+                                    if (isEstadoSelecionado)
+                                    {
+                                        if (!Tb_usuario.Text.Equals(""))
+                                        {
+                                            if (!Pb_senha.Password.Equals(""))
+                                            {
+                                                //Pegando as posições geograficas 
+                                                string addressToGeocode = Tb_rua.Text + ", " + Tb_numero + ", " + Tb_bairro + ", " + Tb_cidade + " - " + Cb_estados;
+
+                                                // Nearby location to use as a query hint.
+                                                BasicGeoposition queryHint = new BasicGeoposition();
+                                                queryHint.Latitude = -8.05665;
+                                                queryHint.Longitude = -34.898441;
+                                                Geopoint hintPoint = new Geopoint(queryHint);
+
+                                                // Geocode the specified address, using the specified reference point
+                                                // as a query hint. Return no more than 3 results.
+                                                MapLocationFinderResult result = await MapLocationFinder.FindLocationsAsync(addressToGeocode, hintPoint, 3);
+
+                                                //Setting position default to Derby - Recife
+                                                BasicGeoposition cityPosition = new BasicGeoposition() { Latitude = -8.05665, Longitude = -34.898441 };
+                                                Geopoint cityCenter = new Geopoint(cityPosition);
+
+                                                // If the query returns results, display the coordinates  of the first result.
+                                                if (result.Status == MapLocationFinderStatus.Success)
+                                                {
+                                                    endereco.latitude = result.Locations[0].Point.Position.Latitude;
+                                                    endereco.longitude = result.Locations[0].Point.Position.Longitude;
+
+                                                    pessoa.nomeOuRazaoSocial = Tb_nome.Text;
+
+                                                    pessoa.data = Tb_dataNascimento.Text;
+
+                                                    pessoa.cpfOuCnpj = Tb_cpfOrCnpj.Text;
+
+                                                    pessoa.email = Tb_email.Text;
+
+                                                    pessoa.celular = Tb_celular.Text;
+
+                                                    pessoa.telefone = Tb_telefone.Text;
+
+                                                    pessoa.site = Tb_site.Text;
+
+                                                    if (Rb_fisica.IsChecked == true)
+                                                    {
+                                                        pessoa.isPessoaFisica = true;
+                                                    }
+                                                    else
+                                                    {
+                                                        pessoa.isPessoaFisica = false;
+                                                    }
+
+                                                    usuario.Senha = Pb_senha.Password;
+
+                                                    usuario.Login = Tb_usuario.Text;
+
+                                                    endereco.Rua = Tb_rua.Text;
+
+                                                    endereco.numero = Tb_numero.Text;
+
+                                                    endereco.bairro = Tb_bairro.Text;
+
+                                                    endereco.cidade = Tb_cidade.Text;
+
+
+                                                    ////Salvando Pessoa
+                                                    await PessoaTable.InsertAsync(pessoa);
+
+                                                    endereco.PessoaId = pessoa.Id;
+                                                    await EnderecoTable.InsertAsync(endereco);
+
+                                                    usuario.PessoaId = pessoa.Id;
+                                                    await UsuarioTable.InsertAsync(usuario);
+
+                                                    //Direcionamento de Página
+                                                    if (Rb_fisica.IsChecked == true)
+                                                    {
+                                                        var resulta = await CadastroDialog.ShowAsync();
+                                                        string resultado = "" + resulta;
+                                                        if (resultado.Equals("Primary"))
+                                                        {
+                                                            Frame.Navigate(typeof(CurriculoPage), pessoa);
+                                                        }
+                                                        else
+                                                        {
+                                                            Frame.Navigate(typeof(MapaPage), pessoa);
+                                                        }
+
+                                                    }
+                                                    else
+                                                    {
+                                                        Frame.Navigate(typeof(MapaPage), pessoa);
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    md.Title = "Erro no Endereço!";
+                                                    md.Content = "Não foi possível localizar o endereço no mapa, verifique as informações passadas.";
+                                                    await md.ShowAsync();
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                md.Title = "Campo obrigatório não preechido!";
+                                                md.Content = "Preencha o campo Senha.";
+                                                await md.ShowAsync();
+                                                Pb_senha.PlaceholderText = "*Senha";
+                                            }
+                                        }
+                                        else
+                                        {
+                                            md.Title = "Campo obrigatório não preechido!";
+                                            md.Content = "Preencha o campo Usuário.";
+                                            await md.ShowAsync();
+                                            Tb_usuario.PlaceholderText = "*Usuário";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        md.Title = "Campo obrigatório não preechido!";
+                                        md.Content = "Selecione o estado corretamente.";
+                                        await md.ShowAsync();
+                                        Cb_estados.PlaceholderText = "*Estado";
+                                    }
+                                }
+                                else
+                                {
+                                    md.Title = "Campo obrigatório não preechido!";
+                                    md.Content = "Preencha o campo cidade.";
+                                    await md.ShowAsync();
+                                    Tb_cidade.PlaceholderText = "*Cidade";
+                                }
+                            }
+                            else
+                            {
+                                md.Title = "Campo obrigatório não preechido!";
+                                md.Content = "Preencha o campo bairro.";
+                                await md.ShowAsync();
+                                Tb_bairro.PlaceholderText = "*Bairro";
+                            }
+                        }
+                        else
+                        {
+                            md.Title = "Campo obrigatório não preechido!";
+                            md.Content = "Preencha o campo rua.";
+                            await md.ShowAsync();
+                            Tb_rua.PlaceholderText = "*Rua";
+                        }
+                    }
+                    else
+                    {
+                        md.Title = "Campo obrigatório não preechido!";
+                        md.Content = "Preencha o campo E-mail.";
+                        await md.ShowAsync();
+                        Tb_email.PlaceholderText = "*E-mail";
+                    }
                 }
                 else
                 {
-                    Frame.Navigate(typeof(MapaPage), pessoa);
+                    if (Rb_juridica.IsChecked == false)
+                    {
+                        md.Title = "Campo obrigatório não preechido!";
+                        md.Content = "Preencha o campo CPF.";
+                        await md.ShowAsync();
+                        Tb_cpfOrCnpj.PlaceholderText = "*CPF";
+                    }
+                    else
+                    {
+                        md.Title = "Campo obrigatório não preechido!";
+                        md.Content = "Preencha o campo CNPJ.";
+                        await md.ShowAsync();
+                        Tb_cpfOrCnpj.PlaceholderText = "*CNPJ";
+                    }
                 }
-
             }
             else
             {
-                Frame.Navigate(typeof(MapaPage), pessoa);
+                md.Title = "Campo obrigatório não preechido!";
+                md.Content = "Preencha o campo nome.";
+                await md.ShowAsync();
+                Tb_nome.PlaceholderText = "*Nome";
             }
-           
+
+
 
 
         }
+
 
         private void Rb_fisica_Checked(object sender, RoutedEventArgs e)
         {
@@ -216,6 +330,7 @@ namespace MapaDeTrabalhos
             ComboBoxItem item = cb.SelectedItem as ComboBoxItem;
             string valorSelecionado = item.Content.ToString();
             endereco.estado = valorSelecionado;
+            isEstadoSelecionado = true;
 
         }
 
@@ -234,6 +349,200 @@ namespace MapaDeTrabalhos
                 this.pessoa.sexo = "Feminino";
             }
 
+        }
+
+        public static bool ValidarEmail(string Email)
+        {
+            bool Validar = false;
+            int Analizar = Email.IndexOf("@");
+            if (Analizar > 0)
+            {
+                if (Email.IndexOf("@", Analizar + 1) > 0)
+                {
+                    return Validar;
+                }
+                int i = Email.IndexOf(".", Analizar);
+                if (i - 1 > Analizar)
+                {
+                    if (i + 1 < Email.Length)
+                    {
+                        string r = Email.Substring(i + 1, 1);
+                        if (r != ".")
+                        {
+                            Validar = true;
+                        }
+                    }
+                }
+            }
+            return Validar;
+        }
+
+        public static bool ValidarCnpj(string cnpj)
+        {
+            int[] multiplicador1 = new int[12] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+            int[] multiplicador2 = new int[13] { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+            int soma;
+            int resto;
+            string digito;
+            string tempCnpj;
+            cnpj = cnpj.Trim();
+            cnpj = cnpj.Replace(".", "").Replace("-", "").Replace("/", "");
+            if (cnpj.Length != 14)
+                return false;
+            tempCnpj = cnpj.Substring(0, 12);
+            soma = 0;
+            for (int i = 0; i < 12; i++)
+                soma += int.Parse(tempCnpj[i].ToString()) * multiplicador1[i];
+            resto = (soma % 11);
+            if (resto < 2)
+                resto = 0;
+            else
+                resto = 11 - resto;
+            digito = resto.ToString();
+            tempCnpj = tempCnpj + digito;
+            soma = 0;
+            for (int i = 0; i < 13; i++)
+                soma += int.Parse(tempCnpj[i].ToString()) * multiplicador2[i];
+            resto = (soma % 11);
+            if (resto < 2)
+                resto = 0;
+            else
+                resto = 11 - resto;
+            digito = digito + resto.ToString();
+            return cnpj.EndsWith(digito);
+        }
+
+        public static bool ValidarCpf(string cpf)
+        {
+            int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+            string tempCpf;
+            string digito;
+            int soma;
+            int resto;
+            cpf = cpf.Trim();
+            cpf = cpf.Replace(".", "").Replace("-", "");
+            if (cpf.Length != 11)
+                return false;
+            tempCpf = cpf.Substring(0, 9);
+            soma = 0;
+
+            for (int i = 0; i < 9; i++)
+                soma += int.Parse(tempCpf[i].ToString()) * multiplicador1[i];
+            resto = soma % 11;
+            if (resto < 2)
+                resto = 0;
+            else
+                resto = 11 - resto;
+            digito = resto.ToString();
+            tempCpf = tempCpf + digito;
+            soma = 0;
+            for (int i = 0; i < 10; i++)
+                soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
+            resto = soma % 11;
+            if (resto < 2)
+                resto = 0;
+            else
+                resto = 11 - resto;
+            digito = digito + resto.ToString();
+            return cpf.EndsWith(digito);
+        }
+
+        public static string MascaraCpf(string mCpf)
+        {
+            string result = "";
+
+            if (mCpf.Length == 11)
+            {
+                result = mCpf.Insert(3, ".").Insert(7, ".").Insert(11, "-");
+            }
+            if (mCpf.Length != 11)
+            {
+                result = mCpf;
+            }
+
+
+            return result;
+
+        }
+
+        public static string MascaraCnpj(string mCnpj)
+        {
+            string result = "";
+
+
+            if (mCnpj.Length == 14)
+            {
+                result = mCnpj.Insert(2, ".").Insert(6, ".").Insert(10, "/").Insert(15, "-");
+            }
+
+            if ((mCnpj.Length != 14))
+            {
+                result = mCnpj;
+            }
+
+            return result;
+
+        }
+
+        private async void Tb_cpfOrCnpj_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (!Tb_cpfOrCnpj.Text.Equals(""))
+            {
+                if (Rb_fisica.IsChecked == true)
+                {
+                    bool result = ValidarCpf(Tb_cpfOrCnpj.Text);
+                    if (result == false)
+                    {
+                        md.Title = "Erro na validação!";
+                        md.Content = "CPF inválido.";
+                        await md.ShowAsync();
+                        Tb_cpfOrCnpj.Text = "";
+                        isCpfValido = false;
+                    }
+                    else
+                    {
+                        isCpfValido = true;
+                    }
+
+                }
+                else
+                {
+                    bool result = ValidarCnpj(Tb_cpfOrCnpj.Text);
+                    if (result == false)
+                    {
+                        md.Title = "Erro na validação!";
+                        md.Content = "CNPJ inválido.";
+                        await md.ShowAsync();
+                        Tb_cpfOrCnpj.Text = "";
+                        isCpfValido = false;
+                    }
+                    else
+                    {
+                        isCpfValido = true;
+                    }
+                }
+            }
+        }
+
+        private async void Tb_email_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (!Tb_email.Equals(""))
+            {
+                bool result = ValidarEmail(Tb_email.Text);
+                if (result)
+                {
+                    isEmailValido = true;
+                }
+                else
+                {
+                    md.Title = "Erro na validação!";
+                    md.Content = "Email inválido.";
+                    await md.ShowAsync();
+                    Tb_email.Text = "";
+                    isEmailValido = false;
+                }
+            }
         }
     }
 }
