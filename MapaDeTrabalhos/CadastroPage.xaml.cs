@@ -51,13 +51,19 @@ namespace MapaDeTrabalhos
             this.InitializeComponent();
             Window.Current.SizeChanged += Current_SizeChanged;
 
-            pessoa = new Pessoa();
+            
             endereco = new Endereco();
             usuario = new Usuario();
+            pessoa = new Pessoa();
             this.pessoa.sexo = "Masculino";
             this.pessoa.isPessoaFisica = true;
-        }
 
+            // visibility of the Back button
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+
+        }
 
         private void Current_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
         {
@@ -77,15 +83,29 @@ namespace MapaDeTrabalhos
 
         private void OnBackRequested(object sender, BackRequestedEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-
-            if (rootFrame.CanGoBack)
+            if(pessoa != null && pessoa.Id != null && !pessoa.Id.Equals(""))
             {
-                e.Handled = true;
-                rootFrame.GoBack();
+                Frame.Navigate(typeof(MapaPage), pessoa);
+            }
+            else
+            {
+                Frame.Navigate(typeof(MainPage));
             }
         }
 
+        private void OnNavigated(object sender, NavigationEventArgs e)
+        {
+            // Each time a navigation event occurs, update the Back button's visibility
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                ((Frame)sender).CanGoBack ?
+                AppViewBackButtonVisibility.Visible :
+                AppViewBackButtonVisibility.Collapsed;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            pessoa = (Pessoa)e.Parameter;
+        }
 
         private async void Salvar_Click(object sender, RoutedEventArgs e)
         {
@@ -107,8 +127,9 @@ namespace MapaDeTrabalhos
                                         {
                                             if (!Pb_senha.Password.Equals(""))
                                             {
+                                                carregar.Visibility = Visibility.Visible;
                                                 //Pegando as posições geograficas 
-                                                string addressToGeocode = Tb_rua.Text + ", " + Tb_numero + ", " + Tb_bairro + ", " + Tb_cidade + " - " + Cb_estados;
+                                                string addressToGeocode = Tb_rua.Text + ", " + Tb_numero.Text + ", " + Tb_bairro.Text + ", " + Tb_cidade.Text + " - " + endereco.estado;
 
                                                 // Nearby location to use as a query hint.
                                                 BasicGeoposition queryHint = new BasicGeoposition();
@@ -129,6 +150,29 @@ namespace MapaDeTrabalhos
                                                 {
                                                     endereco.latitude = result.Locations[0].Point.Position.Latitude;
                                                     endereco.longitude = result.Locations[0].Point.Position.Longitude;
+                                                    
+                                                    if(pessoa == null)
+                                                    {
+                                                        pessoa = new Pessoa();
+                                                        if (Rb_fisica.IsChecked == true)
+                                                        {
+                                                            pessoa.isPessoaFisica = true;
+
+                                                            if(Rb_femi.IsChecked == true)
+                                                            {
+                                                                pessoa.sexo = "Feminino";
+                                                            }
+                                                            else
+                                                            {
+                                                                pessoa.sexo = "Masculino";
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            pessoa.isPessoaFisica = false;
+                                                            pessoa.site = Tb_site.Text;
+                                                        }
+                                                    }
 
                                                     pessoa.nomeOuRazaoSocial = Tb_nome.Text;
 
@@ -141,17 +185,6 @@ namespace MapaDeTrabalhos
                                                     pessoa.celular = Tb_celular.Text;
 
                                                     pessoa.telefone = Tb_telefone.Text;
-
-                                                    pessoa.site = Tb_site.Text;
-
-                                                    if (Rb_fisica.IsChecked == true)
-                                                    {
-                                                        pessoa.isPessoaFisica = true;
-                                                    }
-                                                    else
-                                                    {
-                                                        pessoa.isPessoaFisica = false;
-                                                    }
 
                                                     usuario.Senha = Pb_senha.Password;
 
@@ -174,6 +207,8 @@ namespace MapaDeTrabalhos
 
                                                     usuario.PessoaId = pessoa.Id;
                                                     await UsuarioTable.InsertAsync(usuario);
+
+                                                    carregar.Visibility = Visibility.Collapsed;
 
                                                     //Direcionamento de Página
                                                     if (Rb_fisica.IsChecked == true)
@@ -285,12 +320,7 @@ namespace MapaDeTrabalhos
                 await md.ShowAsync();
                 Tb_nome.PlaceholderText = "*Nome";
             }
-
-
-
-
         }
-
 
         private void Rb_fisica_Checked(object sender, RoutedEventArgs e)
         {
@@ -318,9 +348,6 @@ namespace MapaDeTrabalhos
                 Tb_cpfOrCnpj.PlaceholderText = "CNPJ:";
                 Tb_site.Visibility = Visibility.Visible;
             }
-
-
-
         }
 
         private void Cb_estados_SelectionChanged(object sender, SelectionChangedEventArgs e)

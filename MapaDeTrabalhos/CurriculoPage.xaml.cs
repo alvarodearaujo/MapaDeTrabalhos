@@ -9,6 +9,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -55,33 +56,70 @@ namespace MapaDeTrabalhos
             this.InitializeComponent();
             Window.Current.SizeChanged += Current_SizeChanged;
             curriculo = new Curriculo();
+            curriculo.IsDisponivelMudarResidencia = true;
+            curriculo.IsDisponivelViajar = true;
 
             listaExperiencias = new List<ExperienciaProfissional>();
             listaFormacao = new List<FormacaoAcademica>();
             listaIdiomas = new List<Idioma>();
+
+            // visibility of the Back button
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
         }
 
         private void Current_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
         {
-            if (e.Size.Width >= 720)
+            if (e.Size.Width >= 960)
             {
                 VisualStateManager.GoToState(this, "WideState", false);
             }
-            else if (e.Size.Height > e.Size.Width)
+            else if (e.Size.Width < 960 && e.Size.Width > 500)
             {
-                VisualStateManager.GoToState(this, "PortraitState", false);
+                VisualStateManager.GoToState(this, "MediumState", false);
             }
             else
             {
-                VisualStateManager.GoToState(this, "DefaultState", false);
+                VisualStateManager.GoToState(this, "NarrowState", false);
             }
+        }
+
+        private void OnNavigated(object sender, NavigationEventArgs e)
+        {
+            // Each time a navigation event occurs, update the Back button's visibility
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                ((Frame)sender).CanGoBack ?
+                AppViewBackButtonVisibility.Visible :
+                AppViewBackButtonVisibility.Collapsed;
+        }
+
+        private void OnBackRequested(object sender, BackRequestedEventArgs e)
+        {
+            Frame.Navigate(typeof(MapaPage), pessoa);
         }
 
         private async void Salvar_Click(object sender, RoutedEventArgs e)
         {
             //Fazer as validações 
-            curriculo.valorMaiorSalario = maiorValorSalario.Text;
-            curriculo.valorMenorSalario = menorValorSalario.Text;
+            if(Rb_mudarNao.IsChecked == true)
+            {
+                curriculo.IsDisponivelMudarResidencia = false;
+            }
+            else
+            {
+                curriculo.IsDisponivelMudarResidencia = true;
+            }
+
+            if(Rb_viajarNao.IsChecked == true)
+            {
+                curriculo.IsDisponivelViajar = false;
+            }
+            else
+            {
+                curriculo.IsDisponivelViajar = false;
+            }
+
 
             if (HabilitacaoA.IsChecked == true)
             {
@@ -122,9 +160,12 @@ namespace MapaDeTrabalhos
                 curriculo.veiculoProprio.Add("Outro veículo");
             }
             curriculo.Foto = CurrentImage;
-            await CurriculoTable.InsertAsync(curriculo);
 
-            Frame.Navigate(typeof(MapaPage));
+            carregar.Visibility = Visibility.Visible;
+            await CurriculoTable.InsertAsync(curriculo);
+            carregar.Visibility = Visibility.Collapsed;
+
+            Frame.Navigate(typeof(MapaPage), pessoa);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -161,7 +202,10 @@ namespace MapaDeTrabalhos
                 await FormacaoTable.InsertAsync(form);
                 listaFormacao.Add(form);
                 Lv_formacao.ItemsSource = listaFormacao;
+
+                carregar.Visibility = Visibility.Visible;
                 form = new FormacaoAcademica();
+                carregar.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -183,7 +227,10 @@ namespace MapaDeTrabalhos
                 await ExperienciaTable.InsertAsync(expe);
                 listaExperiencias.Add(expe);
                 Lv_experiencia.ItemsSource = listaExperiencias;
+
+                carregar.Visibility = Visibility.Visible;
                 expe = new ExperienciaProfissional();
+                carregar.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -202,7 +249,9 @@ namespace MapaDeTrabalhos
                 await IdiomaTable.InsertAsync(idi);
                 listaIdiomas.Add(idi);
                 Lv_idioma.ItemsSource = listaIdiomas;
+                carregar.Visibility = Visibility.Visible;
                 idi = new Idioma();
+                carregar.Visibility = Visibility.Collapsed;
             }
         }
 

@@ -18,7 +18,7 @@ namespace MapaDeTrabalhos.viewModel
             List<PontoNoMapa> pois = new List<PontoNoMapa>();
             foreach (Anuncio anuncio in anuncios)
             {
-              
+
                 if (anuncio.isAberto)
                 {
                     Uri icon;
@@ -36,7 +36,7 @@ namespace MapaDeTrabalhos.viewModel
                         DisplayName = anuncio.titulo,
                         ImageSourceUri = icon,
                         anuncio = anuncio,
-                        Location = new Geopoint(new BasicGeoposition() 
+                        Location = new Geopoint(new BasicGeoposition()
                         {
                             Latitude = anuncio.latitude,
                             Longitude = anuncio.longitude
@@ -52,40 +52,41 @@ namespace MapaDeTrabalhos.viewModel
             List<PontoNoMapa> pois = new List<PontoNoMapa>();
             foreach (Anuncio anuncio in anuncios)
             {
-
-                if (anuncio.isAberto)
+                if (anuncio.area != null)
                 {
-                    if (anuncio.area.Equals(filtro))
+                    if (anuncio.isAberto)
                     {
-                        Uri icon;
-                        if (anuncio.isFormal)
+                        if (anuncio.area.Equals(filtro))
                         {
-                            icon = new Uri("ms-appx:///Assets/MapMarcation.png", UriKind.RelativeOrAbsolute);
-                        }
-                        else
-                        {
-                            icon = new Uri("ms-appx:///Assets/MapMarcation2.png", UriKind.RelativeOrAbsolute);
-                        }
-                        pois.Add(new PontoNoMapa()
-                        {
-
-                            DisplayName = anuncio.titulo,
-                            ImageSourceUri = icon,
-                            anuncio = anuncio,
-                            Location = new Geopoint(new BasicGeoposition()
+                            Uri icon;
+                            if (anuncio.isFormal)
                             {
-                                Latitude = anuncio.latitude,
-                                Longitude = anuncio.longitude
-                            })
-                        });
+                                icon = new Uri("ms-appx:///Assets/MapMarcation.png", UriKind.RelativeOrAbsolute);
+                            }
+                            else
+                            {
+                                icon = new Uri("ms-appx:///Assets/MapMarcation2.png", UriKind.RelativeOrAbsolute);
+                            }
+                            pois.Add(new PontoNoMapa()
+                            {
+
+                                DisplayName = anuncio.titulo,
+                                ImageSourceUri = icon,
+                                anuncio = anuncio,
+                                Location = new Geopoint(new BasicGeoposition()
+                                {
+                                    Latitude = anuncio.latitude,
+                                    Longitude = anuncio.longitude
+                                })
+                            });
+                        }
                     }
-                    
                 }
             }
             return pois;
         }
 
-        public List<PontoNoMapa> ListarAnunciosFormal( List<Anuncio> anuncios)
+        public List<PontoNoMapa> ListarAnunciosFormal(List<Anuncio> anuncios)
         {
             List<PontoNoMapa> pois = new List<PontoNoMapa>();
             foreach (Anuncio anuncio in anuncios)

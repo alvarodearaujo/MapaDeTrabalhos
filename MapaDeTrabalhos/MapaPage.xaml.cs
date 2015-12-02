@@ -47,17 +47,20 @@ namespace MapaDeTrabalhos
             endereco = new Endereco();
             pessoa = new Pessoa();
 
-            if (!pessoa.isPessoaFisica)
-            {
-                Sp_Currículo.Visibility = Visibility.Collapsed;
-            }
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+
             pessoa = (Pessoa)e.Parameter;
 
+            if (!pessoa.isPessoaFisica)
+            {
+                Sp_Currículo.Visibility = Visibility.Collapsed;
+            }
 
+            carregar.Visibility = Visibility.Visible;
             var itens = await EnderecoTable.ToCollectionAsync<Endereco>();
             List<Endereco> enderecos = itens.ToList();
             foreach (Endereco end in enderecos)
@@ -67,8 +70,6 @@ namespace MapaDeTrabalhos
                     endereco = end;
                 }
             }
-
-
 
             // Specify the location address
             string addressToGeocode = endereco.Rua + ", " + endereco.numero + ", " + endereco.bairro + ", " + endereco.cidade + " - " + endereco.estado;
@@ -104,6 +105,7 @@ namespace MapaDeTrabalhos
             //Marcando os pontos no mapa
 
             MapItems.ItemsSource = poiManager.ListarAnuncios(anuncios);
+            carregar.Visibility = Visibility.Collapsed;
         }
 
         private async void mapItemButton_Click(object sender, RoutedEventArgs e)

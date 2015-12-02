@@ -40,17 +40,17 @@ namespace MapaDeTrabalhos
         }
         private void Current_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
         {
-            if (e.Size.Width >= 720)
+            if (e.Size.Width >= 1200)
             {
                 VisualStateManager.GoToState(this, "WideState", false);
             }
-            else if (e.Size.Height > e.Size.Width)
+            else if (e.Size.Width < 1200 && e.Size.Width > 600)
             {
-                VisualStateManager.GoToState(this, "PortraitState", false);
+                VisualStateManager.GoToState(this, "MediumState", false);
             }
             else
             {
-                VisualStateManager.GoToState(this, "DefaultState", false);
+                VisualStateManager.GoToState(this, "PortraitState", false);
             }
         }
 

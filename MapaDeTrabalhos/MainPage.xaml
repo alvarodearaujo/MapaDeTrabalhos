@@ -16,11 +16,11 @@
             <Setter Property="FontSize" Value="30"/>
         </Style>
         <Style TargetType="TextBox" >
-            <Setter Property="Background" Value="LightBlue"/>
+            <Setter Property="Background" Value="CadetBlue" />
             <Setter Property="Foreground" Value="White"/>
         </Style>
         <Style TargetType="PasswordBox" >
-            <Setter Property="Background" Value="LightBlue"/>
+            <Setter Property="Background" Value="CadetBlue"/>
             <Setter Property="Foreground" Value="White"/>
         </Style>
     </Page.Resources>
@@ -36,6 +36,17 @@
                     <VisualState.Setters>
                         <Setter Target="ImageBack.ImageSource"
                             Value="Assets/BackGround.png" />
+                    </VisualState.Setters>
+                </VisualState>
+                
+                <VisualState x:Name="MediumState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="ImageBack.ImageSource"
+                            Value="Assets/BackGroundMedium.png" />
                     </VisualState.Setters>
                 </VisualState>
 
